@@ -147,37 +147,70 @@ function HandleKeyPress(props) {
 };
 
 function PlayPiano(props) {
-  const [range1, setRange1] = useState(3);
-  const [range2, setRange2] = useState(4);
+  const {range1, setRange1, range2, setRange2, setFirstNote1, setFirstNote2} = useContext(AppContext);
 
   Howler.volume(1.0);
   return (
     <>
-      <HandleKeyPress range1={range1} range2={range2}/>
+      <HandleKeyPress range1={range1} range2={range2} />
       <div className="pianogroup">
-        <PianoSettings/>
-        <div className="piano">
-          <div>
-            <button onClick={()=>{setRange1(range1-1)}} disabled={range1<=1}><MdKeyboardArrowLeft size={100}/></button>
-            <PianoRepresentation/>
-            <button onClick={()=>{setRange1(range1+1)}} disabled={range1>=6}><MdKeyboardArrowRight size={100}/></button>
-          </div>
-          <div>
-            <button onClick={()=>{setRange2(range2-1)}} disabled={range2<=1}><MdKeyboardArrowLeft size={100}/></button>
-            <PianoRepresentation/>
-            <button onClick={()=>{setRange2(range2+1)}} disabled={range2>=6}><MdKeyboardArrowRight size={100}/></button>
-          </div>
-        </div>
-        <div className="row">
-        <h5>Octaves:</h5>
-        <div className="pianospace">
-          <div>{range1}</div>
-          <div>{range2}</div>
-        </div>
-        </div>
+        <PianoSettings />
+        <table>
+          <tr>
+            <td className="firstColumn"></td>
+            <td>
+              <div className="pianoGroup">
+                <button className="arrow" onClick={() => { setRange1(range1 - 1) }} disabled={range1 <= 1}>
+                  <MdKeyboardArrowLeft size={100} />
+                </button>
+                <PianoRepresentation/>
+                <button className="arrow" onClick={() => { if(range1 + 1 == 6) setFirstNote1(0); setRange1(range1 + 1);}} disabled={range1 >= 6}>
+                  <MdKeyboardArrowRight size={100} />
+                </button>
+              </div>
+            </td>
+            <td>
+              <div className="pianoGroup">
+                <button className="arrow" onClick={() => { setRange2(range2 - 1); }} disabled={range2 <= 1}>
+                  <MdKeyboardArrowLeft size={100} />
+                </button>
+                <PianoRepresentation />
+                <button className="arrow"
+                  onClick={() => { if(range2 + 1 == 6) setFirstNote2(0); setRange2(range2 + 1);}} disabled={range2 >= 6}>
+                  <MdKeyboardArrowRight size={100} />
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td className="firstColumn">
+              Octaves:
+            </td>
+            <td>{range1}</td>
+            <td>{range2}</td>
+          </tr>
+        </table>
       </div>
     </>
   );
 }
 
 export default PlayPiano;
+
+
+/*
+
+A# 3
+G# 4
+
+V N 6
+Y N Z
+N E U
+            I
+            E
+X V N 6
+Z
+Y N 6
+C E B
+Y V N
+*/

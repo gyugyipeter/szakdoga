@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { AppContext } from "./AppContext";
+import { MdContentCopy, MdFiberManualRecord, MdClear } from "react-icons/md";
 import "./PianoLogger.css";
 
 function PianoLogger(props) {
@@ -16,7 +17,7 @@ function PianoLogger(props) {
   return (
     <>
       <div className="row">
-        <h5>Log:</h5>
+        Log:
         <div ref={LoggerRef} className="logger">
           {logs.length === 0 ? (
             <div>
@@ -38,10 +39,10 @@ function PianoLogger(props) {
             })
           )}
         </div>
-        <div className="logger-btn">
-          <div className="record-btn"><button onClick={() => setIsRecording(!isRecording)}>record</button></div>
-          <div className="copy-btn"><button onClick={() => saveLogs()}>copy</button></div>
-          <div className="clear-btn"><button onClick={() => clearLogs()}>clear</button></div>
+        <div className="loggerButtonGroup">
+          <div><button className="loggerButton" onClick={() => setIsRecording(!isRecording)}>record <MdFiberManualRecord className={`MdFiberManualRecord ${isRecording?"recording" : ""}`}/></button></div>
+          <div><button className="loggerButton" onClick={() => saveLogs()}>copy <MdContentCopy className="MdContentCopy"/></button></div>
+          <div><button className="loggerButton" onClick={() => clearLogs()}>clear <MdClear className="MdClear"/></button></div>
         </div>
       </div>
     </>
