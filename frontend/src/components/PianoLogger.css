@@ -1,5 +1,5 @@
 .logger {
-  margin-left: auto;
+  margin-left: 15%;
   margin-right: auto;
   margin-top: 1%;
   padding: 0.3rem 1rem;
@@ -7,7 +7,9 @@
   max-width: 60vw;
   width: 60vw;
   overflow: auto;
-  border: 1px solid black;
+  border-radius: 0.25rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .logger::-webkit-scrollbar {
@@ -49,6 +51,40 @@
   background-color: rgba(189, 189, 189, 0.521);
 }
 
-.logger-btn {
+.loggerButtonGroup {
   margin-right: 10rem;
+  margin-left: 1rem;
+}
+
+.loggerButton {
+  color: #fff;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #60a3bc;
+  padding: 0.45rem;
+  border-radius: 0.5rem;
+  display: inline-block;
+  transition: all 0.4s ease 0s;
+  border: 0;
+  width: 110%;
+}
+
+.MdFiberManualRecord.recording {
+  color: red;
+}
+
+.loggerButton:hover .MdClear{
+  color: red;
+}
+
+.loggerButton:hover {
+  text-shadow: 0px 0px 6px rgba(255, 255, 255, 1);
+  cursor: pointer;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 2rem;
 }

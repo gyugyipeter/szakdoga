@@ -1,6 +1,7 @@
 import React from "react";
 import PianoLogger from "./PianoLogger";
 import PlayPiano from "./PlayPiano";
+import "./PianoBody.css"
 
 function PianoBody(props) {
   return (

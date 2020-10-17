@@ -1,0 +1,25 @@
+table {
+  width: 100%;
+  text-align: center;
+  border-collapse:separate; 
+  border-spacing: 0 1em;
+}
+
+tr {
+  width: 40%;
+  vertical-align: inherit;
+}
+
+.firstColumn {
+  width: 20%;
+  text-align: left;
+}
+
+.pianotr {
+  margin-top: 3rem;
+}
+
+.pianoGroup {
+  display: flex;
+  align-items: center;
+}
