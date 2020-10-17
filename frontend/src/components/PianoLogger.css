@@ -1,0 +1,54 @@
+.logger {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1%;
+  padding: 0.3rem 1rem;
+  display: flex;
+  max-width: 60vw;
+  width: 60vw;
+  overflow: auto;
+  border: 1px solid black;
+}
+
+.logger::-webkit-scrollbar {
+  height: 10px;
+}
+
+.logger::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.logger::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+.logger::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.log {
+  cursor: pointer;
+  padding: 0.2rem 1rem;
+  text-align: center;
+  margin-right: 0.6rem;
+  border-radius: 8px;
+  transition-property: transform, box-shadow, opacity;
+  transition-duration: 0.235s;
+}
+
+.log:hover,
+.log:focus {
+  box-shadow: 3px 3px 6px 1px rgba(0, 0, 0, 0.75);
+  transform: translateY(-0.1rem);
+}
+
+.log:active {
+  box-shadow: none;
+  transform: translateY(0);
+  opacity: 60%;
+  background-color: rgba(189, 189, 189, 0.521);
+}
+
+.logger-btn {
+  margin-right: 10rem;
+}

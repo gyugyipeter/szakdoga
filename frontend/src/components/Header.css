@@ -1,0 +1,107 @@
+.header {
+  display: flex;
+  width: 100%;
+  background-color: #343a40;
+  justify-content: space-between;
+  font-family: "Muli";
+}
+
+.title {
+  margin-left: 1rem;
+  color: white;
+  font-family: "Judson", serif;
+}
+
+.login {
+  position: relative;
+  align-self: center;
+}
+
+.login-btn {
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-right: 2rem;
+  background-color:#007bff;
+  color: white;
+  border-radius: 0.3rem;
+  padding: 0.8rem 1rem;
+  outline: none;
+  border: none;
+}
+
+.login-form {
+  display: none;
+  right: 2rem;
+  top: 4rem;
+  position: absolute;
+  padding: 1.3rem 2rem;
+  background-color: white;
+  border-radius: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.form-wrapper {
+  margin-bottom: 10px;
+}
+
+.form-wrapper label {
+  margin-bottom: 8px;
+  display: block;
+}
+
+.form-control {
+  border: 1px solid #ccc;
+  display: block;
+  height: 30px;
+  border-radius: 20px;
+  padding: 0.3rem;
+  outline: none;
+  font-size: medium;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.form-buttons button {
+  border: none;
+  outline: none;
+  width: 80px;
+  height: 40px;
+  margin: auto;
+  cursor: pointer;
+  display: flex;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #fff;
+  text-transform: uppercase;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  position: relative;
+  transition-property: color;
+  transition-duration: 0.5s;
+}
+
+.login-button {
+  background: #47cf73;
+}
+
+.login-btn svg {
+  height: 1rem;
+}
+
+.register-button {
+  background: #ae3c33;
+}
+
+.show {
+  display: flex;
+}

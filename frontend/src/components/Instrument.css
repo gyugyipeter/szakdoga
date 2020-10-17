@@ -1,0 +1,41 @@
+.instrument {
+  margin-left: 0.5%;
+  user-select: none;
+}
+
+.instrument button {
+  background: none;
+  border: 0;
+  outline: 0;
+}
+
+.instrument button:not(:disabled) svg :hover {
+  color: limegreen;
+  cursor: pointer;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.pianospace {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.piano {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2%;
+}
+
+.piano div {
+    display: flex;
+}
+
+.instrument h5 {
+    font-size: large;
+}
