@@ -70,10 +70,12 @@
 }
 
 .MdFiberManualRecord.recording {
-  color: red;
+  animation-name: recording;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
 }
 
-.loggerButton:hover .MdClear{
+.loggerButton:hover .MdClear {
   color: red;
 }
 
@@ -87,4 +89,16 @@
   flex-direction: row;
   align-items: center;
   margin-bottom: 2rem;
+}
+
+@keyframes recording {
+  0% {
+    color: red;
+  }
+  50% {
+    color: white;
+  }
+  100% {
+    color: red;
+  }
 }

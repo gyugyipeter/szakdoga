@@ -22,7 +22,7 @@
   margin: 0.5rem;
 }
 
-.arrow:hover {
+.arrow:not(:disabled):hover {
   background-color: rgba(95, 95, 95, 0.15);
   color: whitesmoke;
   cursor: pointer;
