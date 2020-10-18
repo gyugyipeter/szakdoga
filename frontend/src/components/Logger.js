@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { AppContext } from "./AppContext";
 import { MdContentCopy, MdFiberManualRecord, MdClear } from "react-icons/md";
-import "./PianoLogger.css";
+import "./Logger.css";
 
-function PianoLogger(props) {
+function Logger(props) {
   const {
     logs,
     LoggerRef,
@@ -20,10 +20,8 @@ function PianoLogger(props) {
         Log:
         <div ref={LoggerRef} className="logger">
           {logs.length === 0 ? (
-            <div>
-              <div>empty</div>
-              <div>log</div>
-            </div>
+            <>
+            </>
           ) : (
             logs.map((log) => {
               return (
@@ -49,4 +47,4 @@ function PianoLogger(props) {
   );
 }
 
-export default PianoLogger;
+export default Logger;

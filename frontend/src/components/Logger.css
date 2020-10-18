@@ -5,6 +5,7 @@
   padding: 0.3rem 1rem;
   display: flex;
   max-width: 60vw;
+  min-height: 5rem;
   width: 60vw;
   overflow: auto;
   border-radius: 0.25rem;

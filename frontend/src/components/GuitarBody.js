@@ -1,5 +1,5 @@
 import React from "react";
-import GuitarSettings from "./GuitarSettings";
+import Logger from "./Logger";
 import PlayGuitar from "./PlayGuitar";
 
 function GuitarBody(props) {
@@ -8,7 +8,7 @@ function GuitarBody(props) {
       <div className="card card-stats">
         <div className="card-header">
           <div>
-            <GuitarSettings/>
+            <Logger/>
           </div>
           <div>
             <div>

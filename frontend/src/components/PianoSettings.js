@@ -14,13 +14,12 @@ function PianoSettings(props) {
           <div className="pianospace">
             <td>
               <select
-                matnativecontrol="true"
                 defaultValue={0}
                 required
                 onChange={(e) => setFirstNote1(parseInt(e.target.value))}
-                disabled={range1 == 6}
+                disabled={range1 === 6}
               >
-                <option selected={range1 == 6} value={0}>C</option>
+                <option selected={range1 === 6} value={0}>C</option>
                 <option value={1}>C#/Db</option>
                 <option value={2}>D</option>
                 <option value={3}>D#/Eb</option>
@@ -36,13 +35,12 @@ function PianoSettings(props) {
             </td>
             <td>
               <select
-                matnativecontrol="true"
                 defaultValue={0}
                 required
                 onChange={(e) => setFirstNote2(parseInt(e.target.value))}
-                disabled={range2 == 6}
+                disabled={range2 === 6}
               >
-                <option selected={range2 == 6} value={0}>
+                <option selected={range2 === 6} value={0}>
                   C
                 </option>
                 <option value={1}>C#/Db</option>

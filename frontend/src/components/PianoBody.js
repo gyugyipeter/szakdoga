@@ -1,5 +1,5 @@
 import React from "react";
-import PianoLogger from "./PianoLogger";
+import Logger from "./Logger";
 import PlayPiano from "./PlayPiano";
 import "./PianoBody.css"
 
@@ -8,7 +8,7 @@ function PianoBody(props) {
     <>
         <div>
           <div>
-            <PianoLogger/>
+            <Logger/>
           </div>
           <div>
             <div>

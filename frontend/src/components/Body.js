@@ -46,7 +46,7 @@ function Body(props) {
           </Switch>
         </div>
       </div>
-      <Redirect exact from="/" to="piano" />
+      <Redirect exact from="/" to="guitar" />
     </Router>
   );
 }

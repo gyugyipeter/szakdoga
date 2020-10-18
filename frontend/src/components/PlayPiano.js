@@ -1,4 +1,4 @@
-import React, {useState, useContext} from "react";
+import React, {useContext} from "react";
 import { Howl, Howler } from "howler";
 import { getPiano } from "../domain/NoteFilePairs";
 import KeyboardEventHandler from "react-keyboard-event-handler";
@@ -164,7 +164,7 @@ function PlayPiano(props) {
                   <MdKeyboardArrowLeft size={100} />
                 </button>
                 <PianoRepresentation/>
-                <button className="arrow" onClick={() => { if(range1 + 1 == 6) setFirstNote1(0); setRange1(range1 + 1);}} disabled={range1 >= 6}>
+                <button className="arrow" onClick={() => { if(range1 + 1 === 6) setFirstNote1(0); setRange1(range1 + 1);}} disabled={range1 >= 6}>
                   <MdKeyboardArrowRight size={100} />
                 </button>
               </div>
@@ -176,7 +176,7 @@ function PlayPiano(props) {
                 </button>
                 <PianoRepresentation />
                 <button className="arrow"
-                  onClick={() => { if(range2 + 1 == 6) setFirstNote2(0); setRange2(range2 + 1);}} disabled={range2 >= 6}>
+                  onClick={() => { if(range2 + 1 === 6) setFirstNote2(0); setRange2(range2 + 1);}} disabled={range2 >= 6}>
                   <MdKeyboardArrowRight size={100} />
                 </button>
               </div>

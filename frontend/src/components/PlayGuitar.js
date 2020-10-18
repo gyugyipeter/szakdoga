@@ -1,8 +1,8 @@
 import React from "react";
 import { Howl, Howler } from "howler";
 import KeyboardEventHandler from "react-keyboard-event-handler";
-import { /*getDistortedGuitar,*/ getCleanGuitar } from "../domain/NoteFilePairs";
-import GuitarPic from "../pics/Strat-Neck-Style-HNK12R22F-Top.jpg";
+import { getDistortedGuitar, getCleanGuitar } from "../domain/NoteFilePairs";
+import GuitarSettings from "./GuitarSettings";
 
 const PlaySound = (src) => {
   const sound = new Howl({
@@ -64,29 +64,9 @@ function PlayGuitar(props) {
   Howler.volume(0.1);
   return (
     <><HandleKeyPress />
-      <img alt="guitar" src={GuitarPic} height="200" width="1000"/>
+      <GuitarSettings />
     </>
   );
 }
 
 export default PlayGuitar;
-
-//qwer
-//ase
-//eyx
-//cwer
-//s
-//cer
-//vyb
-//we
-
-//qwer
-//ase
-//eyx
-//t
-//y
-//cwer
-//s
-//cer
-//vyb
-//we
