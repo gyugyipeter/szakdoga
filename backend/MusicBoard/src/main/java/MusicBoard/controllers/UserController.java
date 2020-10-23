@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import com.google.common.collect.Lists;
 
 import MusicBoard.entities.User;
-import MusicBoard.entities.wrapper.Instruments;
 import MusicBoard.entities.wrapper.Users;
 import MusicBoard.repositories.UserRepository;
 
@@ -36,7 +35,7 @@ public class UserController {
     public ResponseEntity<Users> getAll(){
         final List<User> result = Lists.newArrayList();
         userRepository.findAll().iterator().forEachRemaining(result::add);
-        return new ResponseEntity(Instruments.of(result), HttpStatus.OK);
+        return new ResponseEntity(/*Instruments.of(result), */HttpStatus.OK);
     }
     
     @PostMapping("")

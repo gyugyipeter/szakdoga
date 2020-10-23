@@ -7,9 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 
-import MusicBoard.entities.Instrument;
-import MusicBoard.entities.Instrument.InstrumentType;
-import MusicBoard.entities.wrapper.Instruments;
 import musicboard.api.test.instrument.core.AbstractInstrumentApiTest;
 
 public final class InstrumentApiIdMappingTests extends AbstractInstrumentApiTest {

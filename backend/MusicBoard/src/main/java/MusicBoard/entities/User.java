@@ -27,12 +27,6 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode
 public class User extends BaseEntity implements Serializable {
 
-	public enum Role {
-		ROLE_ADMIN,
-		ROLE_USER,
-		ROLE_GUEST
-	}
-
     @Column
     @NotNull
     private String userName;
@@ -40,26 +34,10 @@ public class User extends BaseEntity implements Serializable {
     @Column
     @NotNull
     private String password;
-
-    @Column
-    @NotNull
-    private String firstName;
-
-    @Column
-    @NotNull
-    private String lastName;
-
-    @Column
-    @NotNull
-    private String email;
-
-    @Column
-    @Enumerated(EnumType.STRING)
-    private Role role;
     
-    @JsonIgnore
+    /*@JsonIgnore
     @ManyToMany(targetEntity = Instrument.class, mappedBy = "users")
-    private List<Instrument> instruments;
+    private List<Instrument> instruments;*/
     
     public static User.Builder builder() {
     	return new User.Builder();
@@ -68,11 +46,7 @@ public class User extends BaseEntity implements Serializable {
     public static class Builder {
     	private String userName;
         private String password;
-        private String firstName;
-        private String lastName;
-        private String email;
-        private Role role = User.Role.ROLE_USER;
-        private List<Instrument> instruments = new ArrayList<Instrument>();
+        //private List<Instrument> instruments = new ArrayList<Instrument>();
         
         public Builder userName(final String userName) {
         	this.userName = userName;
@@ -83,34 +57,14 @@ public class User extends BaseEntity implements Serializable {
         	this.password = password;
         	return this;
         }
-        
-        public Builder firstName(final String firstName) {
-        	this.firstName = firstName;
-        	return this;
-        }
-        
-        public Builder lastName(final String lastName) {
-        	this.lastName = lastName;
-        	return this;
-        }
-        
-        public Builder email(final String email) {
-        	this.email = email;
-        	return this;
-        }
-        
-        public Builder role(final User.Role role) {
-        	this.role = role;
-        	return this;
-        }
-        
-        public Builder instruments(final List<Instrument> instruments) {
+
+        /*public Builder instruments(final List<Instrument> instruments) {
         	this.instruments = instruments;
         	return this;
-        }
+        }*/
         
         public User build() {
-        	return new User(userName, password, firstName, lastName, email, role, instruments);
+        	return new User(userName, password/*, instruments*/);
         }
     }
 }

@@ -2,9 +2,6 @@ package musicboard.api.test.instrument.core;
 
 import org.springframework.http.ResponseEntity;
 
-import MusicBoard.entities.Instrument;
-import MusicBoard.entities.Instrument.InstrumentType;
-import MusicBoard.entities.wrapper.Instruments;
 import musicboard.api.test.core.BaseApiTest;
 
 public abstract class AbstractInstrumentApiTest extends BaseApiTest {
