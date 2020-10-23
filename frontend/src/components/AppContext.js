@@ -1,5 +1,8 @@
 import React, { createContext, useState, useRef } from "react";
 import Copy from "copy-to-clipboard";
+import { Howl } from "howler";
+
+import { getPiano } from "../domain/NoteFilePairs";
 
 export const AppContext = createContext();
 
@@ -12,10 +15,15 @@ function AppContextProvider(props) {
   const [firstNote1, setFirstNote1] = useState(0);
   const [firstNote2, setFirstNote2] = useState(0);
   const [isKeyEventsDisabled, setIsKeyEventsDisabled] = useState(false);
+  const [startRecording, setStartRecording] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const addLog = (log) => {
     if (isRecording) {
-      setLogs([...logs, { ...log, id: Date.now() + log.key }]);
+      if(logs.length === 0) {
+        setStartRecording(Date.now());
+      }
+      setLogs([...logs, { ...log, id: Date.now() + log.key, timing: Date.now() - (startRecording ?? Date.now()) }]);
       if (LoggerRef != null)
         LoggerRef.current.scrollLeft = LoggerRef.current.scrollWidth;
     }
@@ -27,6 +35,7 @@ function AppContextProvider(props) {
 
   const clearLogs = () => {
     setLogs([]);
+    setStartRecording(null);
   };
 
   const saveLogs = () => {
@@ -35,6 +44,27 @@ function AppContextProvider(props) {
       clipboard += e.note + " - " + e.key + "\n";
     });
     Copy(clipboard);
+  }
+
+  const PlaySound = (src) => {
+    const sound = new Howl({
+      src,
+    });
+    sound.play();
+  };
+
+  const playLogs = () => {
+    if(!isPlaying && logs.length !== 0) {
+      setIsPlaying(true);
+      logs.forEach((log, index)=>{
+        setTimeout(()=>{
+          if(index === logs.length - 1)
+          setIsPlaying(false);
+          PlaySound(getPiano().get(log.note));
+        },
+        log.timing)
+      })
+    }
   }
 
   return (
@@ -48,6 +78,8 @@ function AppContextProvider(props) {
         isKeyEventsDisabled,
         range1,
         range2,
+        startRecording,
+        isPlaying,
         setLogs,
         addLog,
         removeLog,
@@ -58,7 +90,9 @@ function AppContextProvider(props) {
         setFirstNote2,
         setIsKeyEventsDisabled,
         setRange1,
-        setRange2
+        setRange2,
+        PlaySound,
+        playLogs
       }}
     >
       {props.children}

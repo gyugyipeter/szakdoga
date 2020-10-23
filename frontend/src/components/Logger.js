@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { AppContext } from "./AppContext";
 import { MdContentCopy, MdFiberManualRecord, MdClear } from "react-icons/md";
+import { BsPlay, BsPlayFill } from "react-icons/bs";
 import "./Logger.css";
 
 function Logger(props) {
@@ -10,8 +11,10 @@ function Logger(props) {
     removeLog,
     isRecording,
     setIsRecording,
+    isPlaying,
     clearLogs,
     saveLogs,
+    playLogs,
   } = useContext(AppContext);
 
   return (
@@ -38,9 +41,10 @@ function Logger(props) {
           )}
         </div>
         <div className="loggerButtonGroup">
-          <div><button className="loggerButton" onClick={() => setIsRecording(!isRecording)}>record <MdFiberManualRecord className={`MdFiberManualRecord ${isRecording?"recording" : ""}`}/></button></div>
+          <div><button className="loggerButton" onClick={() => setIsRecording(!isRecording)} disabled={isPlaying} >record <MdFiberManualRecord className={`MdFiberManualRecord ${isRecording?"recording" : ""}`}/></button></div>
           <div><button className="loggerButton" onClick={() => saveLogs()}>copy <MdContentCopy className="MdContentCopy"/></button></div>
           <div><button className="loggerButton" onClick={() => clearLogs()}>clear <MdClear className="MdClear"/></button></div>
+          <div><button className="loggerButton" onClick={() => playLogs()}  disabled={isRecording} >play {isPlaying ? <BsPlayFill/> : <BsPlay/> } </button></div>
         </div>
       </div>
     </>

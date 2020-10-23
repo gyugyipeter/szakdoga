@@ -85,6 +85,10 @@
   cursor: pointer;
 }
 
+.loggerButton:disabled {
+  background: #60a3bc8e;
+}
+
 .row {
   display: flex;
   flex-direction: row;

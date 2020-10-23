@@ -3,8 +3,7 @@ import {
   BrowserRouter as Router,
   Route,
   Link,
-  Switch,
-  Redirect,
+  Switch
 } from "react-router-dom";
 import { CgPiano } from "react-icons/cg";
 import { FaGuitar, FaDrum } from "react-icons/fa";
@@ -40,13 +39,12 @@ function Body(props) {
         </nav>
         <div className="instrument">
           <Switch>
-            <Route path="/guitar" exact component={Guitarbody} />
+            <Route path={["/","/guitar"]} exact component={Guitarbody} />
             <Route path="/piano" exact component={Pianobody} />
             <Route path="/drum" exact component={Drumbody} />
           </Switch>
         </div>
       </div>
-      <Redirect exact from="/" to="guitar" />
     </Router>
   );
 }
