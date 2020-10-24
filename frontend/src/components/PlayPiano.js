@@ -15,10 +15,11 @@ function HandleKeyPress(props) {
     addLog,
     firstNote1,
     firstNote2,
+    range1,
+    range2,
     isKeyEventsDisabled,
     PlaySound,
   } = useContext(AppContext);
-  const { range1, range2 } = props;
 
   function chooseNote1(index) {
     if (index < 12) return notes[index] + range1;
@@ -43,8 +44,7 @@ function HandleKeyPress(props) {
     <KeyboardEventHandler
       handleFocusableElements
       isDisabled={isKeyEventsDisabled}
-      handleKeys={["q", "w", "e", "r", "t", "z", "u", "i", "o", "a", "s", "d", "f", "g", "h", "j", "k", "l",
-      "y", "x", "c", "v", "b", "n", "m", "1", "2", "3", "4", "5", "6", "7", "8", "9"]}
+      handleKeys={["alphanumeric"]}
       onKeyEvent={(key, e) => {
         switch (key) {
           //low
@@ -230,7 +230,7 @@ function PlayPiano(props) {
   Howler.volume(1.0);
   return (
     <>
-      <HandleKeyPress range1={range1} range2={range2} />
+      <HandleKeyPress />
       <div className="pianogroup">
         <PianoSettings />
         <table>

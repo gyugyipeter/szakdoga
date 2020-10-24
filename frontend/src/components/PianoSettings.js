@@ -13,12 +13,11 @@ function PianoSettings(props) {
         <tbody>
           <tr>
             <td className="firstColumn">Starting Notes:</td>
-            <div className="pianospace">
-              <td>
+            <td className="pianospace">
+              <div>
                 <select
-                  defaultValue={0}
                   required
-                  onChange={(e) => setFirstNote1(parseInt(e.target.value))}
+                  onChange={(e) => { setFirstNote1(parseInt(e.target.value)); e.target.blur();}}
                   disabled={range1 === 6}
                 >
                   <option selected={range1 === 6} value={0}>C</option>
@@ -34,12 +33,11 @@ function PianoSettings(props) {
                   <option value={10}>A#/Bb</option>
                   <option value={11}>B</option>
                 </select>
-              </td>
-              <td>
+              </div>
+              <div>
                 <select
-                  defaultValue={0}
                   required
-                  onChange={(e) => setFirstNote2(parseInt(e.target.value))}
+                  onChange={(e) => { setFirstNote2(parseInt(e.target.value)); e.target.blur();}}
                   disabled={range2 === 6}
                 >
                   <option selected={range2 === 6} value={0}>C</option>
@@ -55,8 +53,8 @@ function PianoSettings(props) {
                   <option value={10}>A#/Bb</option>
                   <option value={11}>B</option>
                 </select>
-              </td>
-            </div>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>

@@ -13,9 +13,24 @@
   width: 100%;
 }
 
+.guitarSettings {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.selectGroup {
+  display: flex;
+}
+
+.selectGroup select {
+  margin-left: 5%;
+  width: auto;
+}
+
 .arrow {
   background: none;
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  border: 0;
   border-radius: 100%;
   padding: 0;
   height: fit-content;
@@ -23,8 +38,8 @@
 }
 
 .arrow:not(:disabled):hover {
-  background-color: rgba(95, 95, 95, 0.15);
-  color: whitesmoke;
+  background-color: rgba(70, 70, 70, 0.15);
+  color: white;
   cursor: pointer;
 }
 
