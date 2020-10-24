@@ -1,7 +1,6 @@
 import React, { createContext, useState, useRef } from "react";
 import Copy from "copy-to-clipboard";
 import { Howl } from "howler";
-
 import { getPiano } from "../domain/NoteFilePairs";
 
 export const AppContext = createContext();

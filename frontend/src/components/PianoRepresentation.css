@@ -1,0 +1,60 @@
+.pianoBody {
+  display: flex;
+}
+
+.pianoKey {
+  position: relative;
+  padding: 1px;
+  border: 0.5px solid black;
+  border-radius: 0 0 0.4rem 0.4rem;
+  transition: box-shadow 0.125s ease, border-width 0.125s ease;
+  box-sizing: border-box;
+}
+.blackButtonBox {
+  width: 0;
+  margin: 0;
+  position: relative;
+}
+.whiteButton {
+  height: 12rem;
+  width: 3rem;
+  box-shadow: 0rem 0.3rem 0.3rem -0.05rem rgba(0, 0, 0, 0.63);
+  padding-top: 7rem;
+}
+.blackButton {
+  box-sizing: border-box;
+  z-index: 1;
+  height: 6.5rem;
+  width: 2rem;
+  background-color: #383838;
+  position: absolute;
+  left: -1rem;
+  box-shadow: 0.375rem 0rem 0.4375rem -0.0625rem rgba(0, 0, 0, 0.63);
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 0.3rem solid #6e6e6e;
+  color: white;
+  padding-top: 3rem;
+}
+.whiteButton.pressed {
+  box-shadow: 0rem 0.12rem 0.15rem 0rem rgba(0, 0, 0, 0.63);
+  font-size: 2.3rem;
+  color: red;
+}
+.blackButton.pressed {
+  box-shadow: 0.25rem 0rem 0.18rem 0rem rgba(0, 0, 0, 0.63);
+  border-bottom-width: 0.15rem;
+  font-size: 1.5rem;
+  color: red;
+}
+
+.whiteButton.pressed::before {
+  left: 50%;
+  transform: translateX(-0.5rem);
+}
+.blackButton.pressed::before {
+  transform: translateX(-0.5rem);
+}
+.next-whiteButton-pressed {
+  box-shadow: 2px 0px 1.5px 0px rgba(0, 0, 0, 0.63);
+}
