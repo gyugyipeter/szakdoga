@@ -23,17 +23,17 @@ function Body(props) {
           <ul>
             <li>
               <Link to="/piano">
-                <CgPiano className="sidebarIcon" /> Piano
+                <CgPiano className="sidebarIcon" /> <span>Piano</span>
               </Link>
             </li>
             <li>
               <Link to="/guitar">
-                <FaGuitar className="sidebarIcon" /> Guitar
+                <FaGuitar className="sidebarIcon" /> <span>Guitar</span>
               </Link>
             </li>
             <li>
               <Link to="/bass">
-                <GiGuitar className="sidebarIcon" /> Bass
+                <GiGuitar className="sidebarIcon" /> <span>Bass</span>
               </Link>
             </li>
           </ul>

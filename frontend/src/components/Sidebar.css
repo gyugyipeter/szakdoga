@@ -1,7 +1,6 @@
 .sidebar {
   margin: 0;
   padding: 0;
-  min-width: 9.6rem;
   margin-bottom: -5000px;
   padding-bottom: 5000px;
   overflow: hidden;
@@ -61,4 +60,11 @@
   display: grid;
   grid-template-columns: 10% auto;
   font-size: 1.3rem;
+}
+
+@media screen and (max-width: 650px) {
+  .sidebar ul li span,
+  .sidebarHeader {
+    display: none;
+  }
 }
