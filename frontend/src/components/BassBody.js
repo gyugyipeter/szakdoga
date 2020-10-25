@@ -1,18 +1,18 @@
 import React from "react";
-import DrumSettings from "./DrumSettings";
-import PlayDrum from "./PlayDrum";
+import BassSettings from "./BassSettings";
+import PlayBass from "./PlayBass";
 
-function DrumBody(props) {
+function BassBody(props) {
   return (
     <>
       <div className="card card-stats">
         <div className="card-header">
           <div>
-            <DrumSettings/>
+            <BassSettings/>
           </div>
           <div>
             <div>
-              <PlayDrum/>
+              <PlayBass/>
             </div>
           </div>
         </div>
@@ -21,4 +21,4 @@ function DrumBody(props) {
   );
 }
 
-export default DrumBody;
+export default BassBody;

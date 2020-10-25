@@ -6,11 +6,12 @@ import {
   Switch
 } from "react-router-dom";
 import { CgPiano } from "react-icons/cg";
-import { FaGuitar, FaDrum } from "react-icons/fa";
+import { FaGuitar } from "react-icons/fa";
+import { GiGuitar } from "react-icons/gi";
 
 import Guitarbody from "./GuitarBody";
 import Pianobody from "./PianoBody";
-import Drumbody from "./DrumBody";
+import Bassbody from "./BassBody";
 import "./Sidebar.css";
 
 function Body(props) {
@@ -21,18 +22,18 @@ function Body(props) {
           <span className="sidebarHeader">Instruments</span>
           <ul>
             <li>
-              <Link to="/guitar">
-                <FaGuitar className="sidebarIcon" /> Guitar
-              </Link>
-            </li>
-            <li>
               <Link to="/piano">
                 <CgPiano className="sidebarIcon" /> Piano
               </Link>
             </li>
             <li>
-              <Link to="/drum">
-                <FaDrum className="sidebarIcon" /> Drum
+              <Link to="/guitar">
+                <FaGuitar className="sidebarIcon" /> Guitar
+              </Link>
+            </li>
+            <li>
+              <Link to="/bass">
+                <GiGuitar className="sidebarIcon" /> Bass
               </Link>
             </li>
           </ul>
@@ -41,7 +42,7 @@ function Body(props) {
           <Switch>
             <Route path={["/","/guitar"]} exact component={Guitarbody} />
             <Route path="/piano" exact component={Pianobody} />
-            <Route path="/drum" exact component={Drumbody} />
+            <Route path="/bass" exact component={Bassbody} />
           </Switch>
         </div>
       </div>
