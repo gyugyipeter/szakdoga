@@ -1,14 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Howler } from "howler";
-import { getPiano } from "../../domain/NoteFilePairs";
+import { getPiano, getNotes } from "../../domain/NoteFilePairs";
 import KeyboardEventHandler from "react-keyboard-event-handler";
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
 import { AppContext } from "../AppContext";
 import PianoRepresentation from "./PianoRepresentation";
 import PianoSettings from "./PianoSettings";
 import "../Instrument.css";
-
-const notes = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"];
 
 function HandleKeyPress(props) {
   const {
@@ -22,13 +20,13 @@ function HandleKeyPress(props) {
   } = useContext(AppContext);
 
   function chooseNote1(index) {
-    if (index < 12) return notes[index] + range1;
-    else return notes[index % 12] + (range1 + 1);
+    if (index < 12) return getNotes()[index] + range1;
+    else return getNotes()[index % 12] + (range1 + 1);
   }
 
   function chooseNote2(index) {
-    if (index < 12) return notes[index] + range2;
-    else return notes[index % 12] + (range2 + 1);
+    if (index < 12) return getNotes()[index] + range2;
+    else return getNotes()[index % 12] + (range2 + 1);
   }
 
   function keyDownEvent(indexToAdd, keyPressed, querySelector, event, whichFirstNote, whichFunction) {
@@ -227,6 +225,7 @@ function PlayPiano(props) {
     firstNote2
   } = useContext(AppContext);
 
+  useEffect(() => {Howler.stop()}, [])  
   Howler.volume(1.0);
   return (
     <>

@@ -1,36 +1,43 @@
 import React, { useContext } from "react";
 import { AppContext } from "../AppContext";
-import "./GuitarNeck.css";
+import { getNotesForTuning } from "../../domain/GuitarTunings";
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
+import { getNotes } from "../../domain/NoteFilePairs";
+import "./GuitarNeck.css";
 //import { FaCircle } from "react-icons/fa";
-
-const notes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
 function String(props) {
   const {ids, stringID } = props;
+  const { guitarTuning, setGuitarTuning } = useContext(AppContext);
 
   return (
     <tr>
       <td className="tuningColumn">
-        <button className="tunerArrow" >
+        <button className="tunerArrow"
+        onClick={() => {
+          setGuitarTuning("Custom");
+        }}>
           <MdKeyboardArrowLeft />
         </button>
       </td>
-      <td className="tuningColumn">{notes[4]}</td>
+      <td className="tuningColumn">{getNotesForTuning(guitarTuning)[stringID.charAt(stringID.length - 1) - 1]}</td>
       <td className="tuningColumn">
-        <button className="tunerArrow">
+        <button className="tunerArrow"
+        onClick={() => {
+          setGuitarTuning("Custom");
+        }}>
           <MdKeyboardArrowRight />
         </button>
       </td>
-      <td className={`nullfret ${stringID}`} id={ids[0]}> {notes[4]} </td>
-      <td className={stringID} id={ids[1]}> {notes[5]} </td>
-      <td className={stringID} id={ids[2]}> {notes[6]} </td>
-      <td className={stringID} id={ids[3]}> {notes[7]} </td>
-      <td className={stringID} id={ids[4]}> {notes[8]} </td>
-      <td className={stringID} id={ids[5]}> {notes[9]} </td>
-      <td className={stringID} id={ids[6]}> {notes[10]} </td>
-      <td className={stringID} id={ids[7]}> {notes[11]} </td>
-      <td className={stringID} id={ids[8]}> {notes[0]} </td>
+      <td className={`nullfret ${stringID}`} id={ids[0]}> {getNotes()[4]} </td>
+      <td className={stringID} id={ids[1]}> {getNotes()[5]} </td>
+      <td className={stringID} id={ids[2]}> {getNotes()[6]} </td>
+      <td className={stringID} id={ids[3]}> {getNotes()[7]} </td>
+      <td className={stringID} id={ids[4]}> {getNotes()[8]} </td>
+      <td className={stringID} id={ids[5]}> {getNotes()[9]} </td>
+      <td className={stringID} id={ids[6]}> {getNotes()[10]} </td>
+      <td className={stringID} id={ids[7]}> {getNotes()[11]} </td>
+      <td className={stringID} id={ids[8]}> {getNotes()[0]} </td>
     </tr>
   );
 }

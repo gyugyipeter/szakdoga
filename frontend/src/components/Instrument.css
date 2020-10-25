@@ -99,12 +99,3 @@ select:disabled:hover,
 .select-css[aria-disabled="true"] {
   border-color: #aaa;
 }
-
-.guitarNeckPosition {
-  display: flex;
-  align-items: baseline;
-}
-
-.guitarNeckPositionArrow {
-  
-}

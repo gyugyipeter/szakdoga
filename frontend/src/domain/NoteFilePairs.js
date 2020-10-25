@@ -20,6 +20,7 @@ distortedGuitarSounds.forEach(audioFile => {
     distortedGuitar.set(audioFile.substring(14,audioFile.indexOf('.')), audioFile);
 });
 
+const notes = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"];
 
 export function getCleanGuitar() {
     return cleanGuitar;
@@ -31,4 +32,8 @@ export function getDistortedGuitar() {
 
 export function getPiano() {
     return piano;
+}
+
+export function getNotes() {
+    return notes;
 }

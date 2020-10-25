@@ -1,16 +1,14 @@
 .guitarTable {
-  margin: 5%;
-  margin-top: 3%;
-  width: 90%;
+  width: 100%;
   border-spacing: 0;
-  background-color: #2d3748;
+  background-color: #271c16;
   color: white;
   border-collapse: collapse;
 }
 
 .tuningColumn {
   width: 1%;
-  background-color: rgb(59, 59, 59);
+  background-color:#11100e;
 }
 
 .string1,
@@ -26,67 +24,67 @@
 
 .string1 {
   background: linear-gradient(
-    #2d3748 0%,
-    #2d3748 34%,
+    #271c16 0%,
+    #271c16 34%,
     white 50%,
-    #2d3748 66%,
-    #2d3748 100%
+    #271c16 66%,
+    #271c16 100%
   );
 }
 
 .string2 {
   background: linear-gradient(
-    #2d3748 0%,
-    #2d3748 37%,
+    #271c16 0%,
+    #271c16 37%,
     white 50%,
-    #2d3748 63%,
-    #2d3748 100%
+    #271c16 63%,
+    #271c16 100%
   );
 }
 
 .string3 {
   background: linear-gradient(
-    #2d3748 0%,
-    #2d3748 40%,
+    #271c16 0%,
+    #271c16 40%,
     white 50%,
-    #2d3748 60%,
-    #2d3748 100%
+    #271c16 60%,
+    #271c16 100%
   );
 }
 
 .string4 {
   background: linear-gradient(
-    #2d3748 0%,
-    #2d3748 43%,
+    #271c16 0%,
+    #271c16 43%,
     white 50%,
-    #2d3748 57%,
-    #2d3748 100%
+    #271c16 57%,
+    #271c16 100%
   );
 }
 
 .string5 {
   background: linear-gradient(
-    #2d3748 0%,
-    #2d3748 46%,
+    #271c16 0%,
+    #271c16 46%,
     white 50%,
-    #2d3748 54%,
-    #2d3748 100%
+    #271c16 54%,
+    #271c16 100%
   );
 }
 
 .string6 {
   background: linear-gradient(
-    #2d3748 0%,
-    #2d3748 47%,
+    #271c16 0%,
+    #271c16 47%,
     white 50%,
-    #2d3748 53%,
-    #2d3748 100%
+    #271c16 53%,
+    #271c16 100%
   );
 }
 
 .nullfret {
   width: 1.2%;
-  background: #2d3748;
+  background: #271c16;
 }
 
 .nullheader {
@@ -94,8 +92,7 @@
 }
 
 .fretNumbers {
-  border-bottom: 0.1rem solid white;
-  background-color: rgb(59, 59, 59);
+  background-color:#11100e;
 }
 
 .tunerArrow {
@@ -122,4 +119,47 @@
   border-radius: 100%;
   width: 0.1rem;
   height: 0.1rem;
+}
+
+.guitarNeckPosition {
+  display: flex;
+  margin-top: 3%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 95%;
+}
+
+.guitarNeckPosition button {
+  background-color:#11100e;
+  border: none;
+  color: white;
+}
+
+.guitarNeckPositionArrow {
+  height: 2.32rem;
+  margin-left: 0.1rem;
+  margin-right: 0.1rem;
+}
+
+.leftNeckArrow {
+  margin-right: -3rem;
+  z-index: 1;
+}
+
+.rightNeckArrow {
+  margin-left: -3rem;
+}
+
+.guitarNeckPosition button svg {
+  width: 2rem;
+  height: 1.5rem;
+}
+
+.guitarNeckPosition button:hover {
+  cursor: pointer;
+}
+
+.guitarNeckPosition button:disabled {
+  color: #11100e;
+  cursor: default;
 }

@@ -1,7 +1,6 @@
 import React, { createContext, useState, useRef } from "react";
 import Copy from "copy-to-clipboard";
 import { Howl } from "howler";
-import { getPiano } from "../domain/NoteFilePairs";
 
 export const AppContext = createContext();
 
@@ -18,6 +17,7 @@ function AppContextProvider(props) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [firstFretPos, setFirstFretPos] = useState(1);
   const [guitarSound, setGuitarSound] = useState("clean");
+  const [guitarTuning, setGuitarTuning] = useState("Standard");
 
   const addLog = (log) => {
     if (isRecording) {
@@ -54,14 +54,14 @@ function AppContextProvider(props) {
     sound.play();
   };
 
-  const playLogs = () => {
+  const playLogs = (whichInstrument) => {
     if(!isPlaying && logs.length !== 0) {
       setIsPlaying(true);
       logs.forEach((log, index)=>{
         setTimeout(()=>{
           if(index === logs.length - 1)
           setIsPlaying(false);
-          PlaySound(getPiano().get(log.note));
+          PlaySound(whichInstrument().get(log.note));
         },
         log.timing)
       })
@@ -83,6 +83,7 @@ function AppContextProvider(props) {
         isPlaying,
         firstFretPos,
         guitarSound,
+        guitarTuning,
         setLogs,
         addLog,
         removeLog,
@@ -97,7 +98,8 @@ function AppContextProvider(props) {
         PlaySound,
         playLogs,
         setFirstFretPos,
-        setGuitarSound
+        setGuitarSound,
+        setGuitarTuning
       }}
     >
       {props.children}

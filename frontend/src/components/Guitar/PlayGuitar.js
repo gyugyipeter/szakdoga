@@ -1,13 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { AppContext } from "../AppContext";
 import { Howler } from "howler";
 import KeyboardEventHandler from "react-keyboard-event-handler";
-import { getDistortedGuitar, getCleanGuitar } from "../../domain/NoteFilePairs";
+import { getDistortedGuitar, getCleanGuitar, getNotes } from "../../domain/NoteFilePairs";
 import GuitarSettings from "./GuitarSettings";
 import GuitarNeck from "./GuitarNeck";
 import { AiOutlineArrowLeft, AiOutlineArrowRight} from "react-icons/ai";
-
-const notes = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"];
 
 function HandleKeyPress(props) {
   const {
@@ -20,20 +18,22 @@ function HandleKeyPress(props) {
   } = useContext(AppContext);
 
   function chooseNote(index) {
-    if (index < 12) return notes[index] + range1;
-    else return notes[index % 12] + (range1 + 1);
+    if (index < 12) return getNotes()[index] + range1;
+    else return getNotes()[index % 12] + (range1 + 1);
   }
 
-  function keyDownEvent(indexToAdd, keyPressed, querySelector, event, whichFirstNote, whichFunction) {
+  function keyDownEvent(indexToAdd, keyPressed, querySelector, event, whichFirstNote) {
     if (!event.repeat) {
-        addLog({ note: whichFunction(whichFirstNote + indexToAdd), key: keyPressed });
+        addLog({ note: chooseNote(whichFirstNote + indexToAdd), key: keyPressed });
         if(guitarSound === "clean")
-          PlaySound(getCleanGuitar().get(whichFunction(whichFirstNote + indexToAdd)));
+          PlaySound(getCleanGuitar().get(chooseNote(whichFirstNote + indexToAdd)));
         if(guitarSound === "distorted")
-          PlaySound(getDistortedGuitar().get(whichFunction(whichFirstNote + indexToAdd)));
+          PlaySound(getDistortedGuitar().get(chooseNote(whichFirstNote + indexToAdd)));
         document.querySelector(querySelector).classList.add("pressed");
     }
   }
+
+  useEffect(() => {Howler.stop()}, [])
 
   return (
     <>
@@ -44,13 +44,13 @@ function HandleKeyPress(props) {
       onKeyEvent={(key, e) => {
         switch (key) {
           case "y":
-            keyDownEvent(0, "y", "#string1Note1", e, firstNote1, chooseNote);
-            break;
-          case "s":
-            keyDownEvent(1, "s", "#string1Note2", e, firstNote1, chooseNote);
+            keyDownEvent(0, "y", "#string1Note1", e, firstNote1);
             break;
           case "x":
-            keyDownEvent(2, "x", "#string1Note3", e, firstNote1, chooseNote);
+            keyDownEvent(1, "s", "#string1Note2", e, firstNote1);
+            break;
+          case "c":
+            keyDownEvent(2, "x", "#string1Note3", e, firstNote1);
             break;
           default:
         }
@@ -67,10 +67,10 @@ function HandleKeyPress(props) {
           case "y":
             document.querySelector("#string1Note1").classList.remove("pressed");
             break;
-          case "s":
+          case "x":
             document.querySelector("#string1Note2").classList.remove("pressed");
             break;
-          case "x":
+          case "c":
             document.querySelector("#string1Note3").classList.remove("pressed");
             break;
           default:
@@ -84,13 +84,14 @@ function HandleKeyPress(props) {
 function PlayGuitar(props) {
   const { firstFretPos, setFirstFretPos } = useContext(AppContext);
   Howler.volume(0.1);
+
   return (
     <>
       <HandleKeyPress />
       <GuitarSettings />
       <div className="guitarNeckPosition">
         <button
-          className="guitarNeckPositionArrow"
+          className="guitarNeckPositionArrow leftNeckArrow"
           disabled= {firstFretPos === 1}
           onClick={() => {
             setFirstFretPos(firstFretPos - 1);
@@ -100,7 +101,7 @@ function PlayGuitar(props) {
         </button>
         <GuitarNeck />
         <button
-          className="guitarNeckPositionArrow"
+          className="guitarNeckPositionArrow rightNeckArrow"
           disabled= {firstFretPos === 15}
           onClick={() => {
             setFirstFretPos(firstFretPos + 1);
