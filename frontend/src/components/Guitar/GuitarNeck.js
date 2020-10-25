@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { AppContext } from "./AppContext";
+import { AppContext } from "../AppContext";
 import "./GuitarNeck.css";
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
 //import { FaCircle } from "react-icons/fa";

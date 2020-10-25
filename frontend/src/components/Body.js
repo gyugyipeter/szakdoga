@@ -9,9 +9,9 @@ import { CgPiano } from "react-icons/cg";
 import { FaGuitar } from "react-icons/fa";
 import { GiGuitar } from "react-icons/gi";
 
-import Guitarbody from "./GuitarBody";
-import Pianobody from "./PianoBody";
-import Bassbody from "./BassBody";
+import Guitarbody from "./Guitar/GuitarBody";
+import Pianobody from "./Piano/PianoBody";
+import Bassbody from "./Bass/BassBody";
 import "./Sidebar.css";
 
 function Body(props) {

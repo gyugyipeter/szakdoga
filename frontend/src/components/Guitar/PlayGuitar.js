@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { AppContext } from "./AppContext";
+import { AppContext } from "../AppContext";
 import { Howler } from "howler";
 import KeyboardEventHandler from "react-keyboard-event-handler";
-import { getDistortedGuitar, getCleanGuitar } from "../domain/NoteFilePairs";
+import { getDistortedGuitar, getCleanGuitar } from "../../domain/NoteFilePairs";
 import GuitarSettings from "./GuitarSettings";
 import GuitarNeck from "./GuitarNeck";
 import { AiOutlineArrowLeft, AiOutlineArrowRight} from "react-icons/ai";

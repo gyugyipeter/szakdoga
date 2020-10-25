@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import { Howler } from "howler";
-import { getPiano } from "../domain/NoteFilePairs";
+import { getPiano } from "../../domain/NoteFilePairs";
 import KeyboardEventHandler from "react-keyboard-event-handler";
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
-import { AppContext } from "./AppContext";
+import { AppContext } from "../AppContext";
 import PianoRepresentation from "./PianoRepresentation";
 import PianoSettings from "./PianoSettings";
-import "./Instrument.css";
+import "../Instrument.css";
 
 const notes = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"];
 

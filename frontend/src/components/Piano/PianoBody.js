@@ -1,5 +1,5 @@
 import React from "react";
-import Logger from "./Logger";
+import Logger from "../Logger";
 import PlayPiano from "./PlayPiano";
 import "./PianoBody.css";
 

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { AppContext } from "./AppContext";
-import "./Instrument.css";
+import { AppContext } from "../AppContext";
+import "../Instrument.css";
 
 function PianoSettings(props) {
   const { setFirstNote1, setFirstNote2, range1, range2 } = useContext(
