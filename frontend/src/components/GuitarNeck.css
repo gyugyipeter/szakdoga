@@ -1,0 +1,125 @@
+.guitarTable {
+  margin: 5%;
+  margin-top: 3%;
+  width: 90%;
+  border-spacing: 0;
+  background-color: #2d3748;
+  color: white;
+  border-collapse: collapse;
+}
+
+.tuningColumn {
+  width: 1%;
+  background-color: rgb(59, 59, 59);
+}
+
+.string1,
+.string2,
+.string3,
+.string4,
+.string5,
+.string6 {
+  border-left: 0.2rem solid white;
+  width: 8.5%;
+  content-visibility: hidden;
+}
+
+.string1 {
+  background: linear-gradient(
+    #2d3748 0%,
+    #2d3748 34%,
+    white 50%,
+    #2d3748 66%,
+    #2d3748 100%
+  );
+}
+
+.string2 {
+  background: linear-gradient(
+    #2d3748 0%,
+    #2d3748 37%,
+    white 50%,
+    #2d3748 63%,
+    #2d3748 100%
+  );
+}
+
+.string3 {
+  background: linear-gradient(
+    #2d3748 0%,
+    #2d3748 40%,
+    white 50%,
+    #2d3748 60%,
+    #2d3748 100%
+  );
+}
+
+.string4 {
+  background: linear-gradient(
+    #2d3748 0%,
+    #2d3748 43%,
+    white 50%,
+    #2d3748 57%,
+    #2d3748 100%
+  );
+}
+
+.string5 {
+  background: linear-gradient(
+    #2d3748 0%,
+    #2d3748 46%,
+    white 50%,
+    #2d3748 54%,
+    #2d3748 100%
+  );
+}
+
+.string6 {
+  background: linear-gradient(
+    #2d3748 0%,
+    #2d3748 47%,
+    white 50%,
+    #2d3748 53%,
+    #2d3748 100%
+  );
+}
+
+.nullfret {
+  width: 1.2%;
+  background: #2d3748;
+}
+
+.nullheader {
+  width: 1.2%;
+}
+
+.fretNumbers {
+  border-bottom: 0.1rem solid white;
+  background-color: rgb(59, 59, 59);
+}
+
+.tunerArrow {
+  background: none;
+  border: 0;
+  color: white;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: sub;
+}
+
+.tunerArrow:hover {
+  cursor: pointer;
+}
+
+.string1.pressed,
+.string2.pressed,
+.string3.pressed,
+.string4.pressed,
+.string5.pressed,
+.string6.pressed {
+  content-visibility: visible;
+  background: rgb(124, 108, 194);
+  border-radius: 100%;
+  width: 0.1rem;
+  height: 0.1rem;
+}

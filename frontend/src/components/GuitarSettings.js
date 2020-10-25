@@ -1,61 +1,30 @@
 import React from "react";
-//import stlyed from "styled-components";
-
-/*let Settingstyle = stlyed.div`
-.button-design {
-    margin-left: 30px;
-}
-.keyboard-select {
-    margin-left: 10px;
-    width: 100px;
-}
-.sound-select {
-    margin-left: 38px;
-    width: 100px;
-}
-.tuning-select {
-    margin-left: 35px;
-    width: 100px;
-}`;*/
 
 function GuitarSettings(props) {
   return (
-    <>GuitarSettings
-      {/* <Settingstyle className="row">
-        <h5>Keyboard:</h5>
-        <div>
-          <select matNativeControl required className="keyboard-select">
-            <option value="default">Default</option>
+    <>
+      <div className="guitarSettings">
+        <div className="selectGroup">
+          Sound:
+          <select matnativecontrol="true" defaultValue={"Clean"} required>
+            <option value={"Clean"}>Clean</option>
+            <option value={"Distorted"}>Distorted</option>
           </select>
         </div>
-        <div>
-          <button type="button" className="btn btn-info btn-sm button-design">
-            Set custom keyboard layout
-          </button>
-        </div>
-      </Settingstyle>
-      <p></p>
-
-      <Settingstyle className="row">
-        <h5>Sound:</h5>
-        <div>
-          <select matNativeControl required className="sound-select">
-            <option value="clean">Clean</option>
-            <option value="heavy">Heavy</option>
+        <div className="selectGroup">
+          Tuning:
+          <select matnativecontrol="true" defaultValue={"Standard"} required>
+            <option value={"Standard"}>Standard E A D G B E</option>
+            <option value={"Eb Standard"}>D#/Eb Standard  Eb Ab Db Gb Bb Eb</option>
+            <option value={"D Standard"}>D Standard D G C F A D</option>
+            <option value={"Db Standard"}>C#/Db Standard  Db Gb B E AB DB</option>
+            <option value={"C Standard"}>C Standard C F Bb Eb G C</option>
+            <option value={"Drop D"}>Drop D   D A D G B E</option>
+            <option value={"Drop Db"}>Drop C#/Db  Db Ab Db Gb Bb Eb</option>
+            <option value={"Drop C"}>Drop C   C G C F A D</option>
           </select>
         </div>
-      </Settingstyle>
-      <p></p>
-
-      <Settingstyle className="row">
-        <h5>Tuning:</h5>
-        <div>
-          <select matNativeControl required className="tuning-select">
-            <option value="drop c">Drop C</option>
-            <option value="c standard">C Standard</option>
-          </select>
-        </div>
-      </Settingstyle> */}
+      </div>
     </>
   );
 }

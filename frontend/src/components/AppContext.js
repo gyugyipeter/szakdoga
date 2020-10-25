@@ -16,6 +16,7 @@ function AppContextProvider(props) {
   const [isKeyEventsDisabled, setIsKeyEventsDisabled] = useState(false);
   const [startRecording, setStartRecording] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [firstFretPos, setFirstFretPos] = useState(1);
 
   const addLog = (log) => {
     if (isRecording) {
@@ -79,6 +80,7 @@ function AppContextProvider(props) {
         range2,
         startRecording,
         isPlaying,
+        firstFretPos,
         setLogs,
         addLog,
         removeLog,
@@ -91,7 +93,8 @@ function AppContextProvider(props) {
         setRange1,
         setRange2,
         PlaySound,
-        playLogs
+        playLogs,
+        setFirstFretPos
       }}
     >
       {props.children}
