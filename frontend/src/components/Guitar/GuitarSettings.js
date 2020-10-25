@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AppContext } from "../AppContext";
 
 function GuitarSettings(props) {
+  const { setGuitarSound } = useContext(AppContext);
+
   return (
     <>
       <div className="guitarSettings">
         <div className="selectGroup">
           Sound:
-          <select matnativecontrol="true" defaultValue={"Clean"} required>
-            <option value={"Clean"}>Clean</option>
-            <option value={"Distorted"}>Distorted</option>
+          <select matnativecontrol="true" defaultValue={"Clean"} required
+            onChange={(e) => { setGuitarSound(e.target.value); e.target.blur();}}>
+            <option value={"clean"}>Clean</option>
+            <option value={"distorted"}>Distorted</option>
           </select>
         </div>
         <div className="selectGroup">

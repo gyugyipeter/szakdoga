@@ -16,6 +16,7 @@ function HandleKeyPress(props) {
     range1,
     isKeyEventsDisabled,
     PlaySound,
+    guitarSound
   } = useContext(AppContext);
 
   function chooseNote(index) {
@@ -23,10 +24,13 @@ function HandleKeyPress(props) {
     else return notes[index % 12] + (range1 + 1);
   }
 
-  function keyDownEvent(indexToAdd, keyPressed, querySelector, event, whichFirstNote, whichFunction, whichGuitarSound) {
+  function keyDownEvent(indexToAdd, keyPressed, querySelector, event, whichFirstNote, whichFunction) {
     if (!event.repeat) {
         addLog({ note: whichFunction(whichFirstNote + indexToAdd), key: keyPressed });
-        PlaySound(whichGuitarSound().get(whichFunction(whichFirstNote + indexToAdd)));
+        if(guitarSound === "clean")
+          PlaySound(getCleanGuitar().get(whichFunction(whichFirstNote + indexToAdd)));
+        if(guitarSound === "distorted")
+          PlaySound(getDistortedGuitar().get(whichFunction(whichFirstNote + indexToAdd)));
         document.querySelector(querySelector).classList.add("pressed");
     }
   }
@@ -40,13 +44,13 @@ function HandleKeyPress(props) {
       onKeyEvent={(key, e) => {
         switch (key) {
           case "y":
-            keyDownEvent(0, "y", "#string1Note1", e, firstNote1, chooseNote, getDistortedGuitar);
+            keyDownEvent(0, "y", "#string1Note1", e, firstNote1, chooseNote);
             break;
           case "s":
-            keyDownEvent(1, "s", "#string1Note2", e, firstNote1, chooseNote, getCleanGuitar);
+            keyDownEvent(1, "s", "#string1Note2", e, firstNote1, chooseNote);
             break;
           case "x":
-            keyDownEvent(2, "x", "#string1Note3", e, firstNote1, chooseNote, getDistortedGuitar);
+            keyDownEvent(2, "x", "#string1Note3", e, firstNote1, chooseNote);
             break;
           default:
         }

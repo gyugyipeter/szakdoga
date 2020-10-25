@@ -17,6 +17,7 @@ function AppContextProvider(props) {
   const [startRecording, setStartRecording] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [firstFretPos, setFirstFretPos] = useState(1);
+  const [guitarSound, setGuitarSound] = useState("clean");
 
   const addLog = (log) => {
     if (isRecording) {
@@ -81,6 +82,7 @@ function AppContextProvider(props) {
         startRecording,
         isPlaying,
         firstFretPos,
+        guitarSound,
         setLogs,
         addLog,
         removeLog,
@@ -94,7 +96,8 @@ function AppContextProvider(props) {
         setRange2,
         PlaySound,
         playLogs,
-        setFirstFretPos
+        setFirstFretPos,
+        setGuitarSound
       }}
     >
       {props.children}
