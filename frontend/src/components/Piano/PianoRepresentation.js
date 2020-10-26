@@ -2,42 +2,48 @@ import React from "react";
 import { getNotes } from "../../domain/NoteFilePairs";
 import "./PianoRepresentation.css";
 
+function WhiteButton(props) {
+  const {firstNote, id} = props;
+  return(
+    <div className="pianoKey whiteButton" id= {id}> {getNotes()[firstNote]} </div>
+  );
+}
+
+function BlackButton(props) {
+  const {firstNote, id} = props;
+  return(
+    <div className="blackButtonBox">
+      <div className="pianoKey blackButton" id= {id}> {getNotes()[firstNote]} </div>
+    </div>
+  );
+}
+
 function PianoRepresentation(props) {
   const {firstNote, id} = props;
 
   return (
     <div className="pianoBody">
-      <div className="pianoKey whiteButton" id= {id + "note-1" }> {getNotes()[firstNote]} </div>
+      <WhiteButton firstNote={firstNote} id={id + "note-1"}/>
       <span>
-        <div className="blackButtonBox">
-          <div className="pianoKey blackButton" id= {id + "note-2" }> {getNotes()[(firstNote + 1) % getNotes().length]} </div>
-        </div>
-        <div className="pianoKey whiteButton" id= {id + "note-3" }> {getNotes()[(firstNote + 2) % getNotes().length]} </div>
+        <BlackButton firstNote={(firstNote + 1) % getNotes().length} id={id + "note-2"}/>
+        <WhiteButton firstNote={(firstNote + 2) % getNotes().length} id={id + "note-3"}/>
       </span>
       <span>
-        <div className="blackButtonBox">
-          <div className="pianoKey blackButton" id= {id + "note-4"}> {getNotes()[(firstNote + 3) % getNotes().length]} </div>
-        </div>
-        <div className="pianoKey whiteButton" id= {id + "note-5"}> {getNotes()[(firstNote + 4) % getNotes().length]} </div>
+        <BlackButton firstNote={(firstNote + 3) % getNotes().length} id={id + "note-4"}/>
+        <WhiteButton firstNote={(firstNote + 4) % getNotes().length} id={id + "note-5"}/>
       </span>
-      <div className="pianoKey whiteButton" id= {id + "note-6"}> {getNotes()[(firstNote + 5) % getNotes().length]} </div>
+      <WhiteButton firstNote={(firstNote + 5) % getNotes().length} id={id + "note-6"}/>
       <span>
-        <div className="blackButtonBox">
-          <div className="pianoKey blackButton" id= {id + "note-7"}> {getNotes()[(firstNote + 6) % getNotes().length]} </div>
-        </div>
-        <div className="pianoKey whiteButton" id= {id + "note-8"}> {getNotes()[(firstNote + 7) % getNotes().length]} </div>
+        <BlackButton firstNote={(firstNote + 6) % getNotes().length} id={id + "note-7"}/>
+        <WhiteButton firstNote={(firstNote + 7) % getNotes().length} id={id + "note-8"}/>
       </span>
       <span>
-        <div className="blackButtonBox">
-          <div className="pianoKey blackButton" id= {id + "note-9"}> {getNotes()[(firstNote + 8) % getNotes().length]} </div>
-        </div>
-        <div className="pianoKey whiteButton" id= {id + "note-10"}> {getNotes()[(firstNote + 9) % getNotes().length]} </div>
+        <BlackButton firstNote={(firstNote + 8) % getNotes().length} id={id + "note-9"}/>
+        <WhiteButton firstNote={(firstNote + 9) % getNotes().length} id={id + "note-10"}/>
       </span>
       <span>
-        <div className="blackButtonBox">
-          <div className="pianoKey blackButton" id= {id + "note-11"}> {getNotes()[(firstNote + 10) % getNotes().length]} </div>
-        </div>
-        <div className="pianoKey whiteButton" id= {id + "note-12"}> {getNotes()[(firstNote + 11) % getNotes().length]} </div>
+        <BlackButton firstNote={(firstNote + 10) % getNotes().length} id={id + "note-11"}/>
+        <WhiteButton firstNote={(firstNote + 11) % getNotes().length} id={id + "note-12"}/>
       </span>
     </div>
   );
