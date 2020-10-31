@@ -11,7 +11,6 @@ import { GiGuitar } from "react-icons/gi";
 
 import Guitarbody from "./Guitar/GuitarBody";
 import Pianobody from "./Piano/PianoBody";
-import Bassbody from "./Bass/BassBody";
 import "./Sidebar.css";
 
 function Body(props) {
@@ -31,18 +30,12 @@ function Body(props) {
                 <FaGuitar className="sidebarIcon" /> <span>Guitar</span>
               </Link>
             </li>
-            <li>
-              <Link to="/bass">
-                <GiGuitar className="sidebarIcon" /> <span>Bass</span>
-              </Link>
-            </li>
           </ul>
         </nav>
         <div className="instrument">
           <Switch>
             <Route path={["/","/guitar"]} exact component={Guitarbody} />
             <Route path="/piano" exact component={Pianobody} />
-            <Route path="/bass" exact component={Bassbody} />
           </Switch>
         </div>
       </div>
