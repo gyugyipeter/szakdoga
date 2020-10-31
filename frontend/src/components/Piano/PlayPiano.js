@@ -222,7 +222,9 @@ function PlayPiano(props) {
     setFirstNote1,
     setFirstNote2,
     firstNote1,
-    firstNote2
+    firstNote2,
+    displayNotes,
+    setDisplayNotes
   } = useContext(AppContext);
 
   useEffect(() => {Howler.stop()}, [])  
@@ -235,7 +237,12 @@ function PlayPiano(props) {
         <table>
           <tbody>
             <tr>
-              <td className="firstColumn"></td>
+              <td className="noteDisplaySwitch">
+                <div>Show note on keys</div>
+                <input className="tgl" type="checkbox" id="switch" value={displayNotes}
+                  onClick={() => {setDisplayNotes(!displayNotes)}}/>
+                <label className="tgl-btn" for="switch" ></label>
+              </td>
               <td>
                 <div className="pianoGroup">
                   <button

@@ -26,6 +26,7 @@ function AppContextProvider(props) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [firstFretPos, setFirstFretPos] = useState(1);
   const [guitarTuning, setGuitarTuning] = useState("Standard");
+  const [displayNotes, setDisplayNotes] = useState(false);
   const LoggerRef = useRef(null);
 
   const instruments = {
@@ -122,6 +123,7 @@ function AppContextProvider(props) {
         instrumentSound,
         guitarTuning,
         LoggerRef,
+        displayNotes,
         addLog,
         removeLog,
         setIsRecording,
@@ -139,6 +141,7 @@ function AppContextProvider(props) {
         setGuitarTuning,
         setLogs,
         setCurrentInstrument,
+        setDisplayNotes
       }}
     >
       {props.children}

@@ -1,19 +1,24 @@
-import React from "react";
+import React, {useContext} from "react";
+import { AppContext } from "../AppContext";
 import { getNotes } from "../../domain/NoteFilePairs";
 import "./PianoRepresentation.css";
 
 function WhiteButton(props) {
   const {firstNote, id} = props;
+  const { displayNotes } = useContext(AppContext);
+
   return(
-    <div className="pianoKey whiteButton" id= {id}> {getNotes()[firstNote]} </div>
+    <div className="pianoKey whiteButton" id= {id}> {displayNotes && getNotes()[firstNote]} </div>
   );
 }
 
 function BlackButton(props) {
   const {firstNote, id} = props;
+  const { displayNotes } = useContext(AppContext);
+
   return(
     <div className="blackButtonBox">
-      <div className="pianoKey blackButton" id= {id}> {getNotes()[firstNote]} </div>
+      <div className="pianoKey blackButton" id= {id}> {displayNotes && getNotes()[firstNote]} </div>
     </div>
   );
 }
