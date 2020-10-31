@@ -14,7 +14,7 @@ function HandleKeyPress(props) {
     range1,
     isKeyEventsDisabled,
     PlaySound,
-    guitarSound
+    instrumentSound
   } = useContext(AppContext);
 
   function chooseNote(index) {
@@ -25,9 +25,9 @@ function HandleKeyPress(props) {
   function keyDownEvent(indexToAdd, keyPressed, querySelector, event, whichFirstNote) {
     if (!event.repeat) {
         addLog({ note: chooseNote(whichFirstNote + indexToAdd), key: keyPressed });
-        if(guitarSound === "clean")
+        if(instrumentSound.guitar === "clean")
           PlaySound(getCleanGuitar().get(chooseNote(whichFirstNote + indexToAdd)));
-        if(guitarSound === "distorted")
+        if(instrumentSound.guitar === "distorted")
           PlaySound(getDistortedGuitar().get(chooseNote(whichFirstNote + indexToAdd)));
         document.querySelector(querySelector).classList.add("pressed");
     }

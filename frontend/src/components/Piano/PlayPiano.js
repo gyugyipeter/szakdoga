@@ -16,7 +16,7 @@ function HandleKeyPress(props) {
     range1,
     range2,
     isKeyEventsDisabled,
-    PlaySound,
+    PlaySound
   } = useContext(AppContext);
 
   function chooseNote1(index) {

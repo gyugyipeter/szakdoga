@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { AppContext } from "../AppContext";
 
 function GuitarSettings(props) {
-  const { guitarTuning, setGuitarSound, setGuitarTuning } = useContext(AppContext);
+  const { guitarTuning, setGuitarTuning, instrumentSound, setInstrumentSound } = useContext(AppContext);
 
   return (
     <>
@@ -10,7 +10,7 @@ function GuitarSettings(props) {
         <div className="selectGroup">
           Sound:
           <select matnativecontrol="true" defaultValue={"Clean"} required
-            onChange={(e) => { setGuitarSound(e.target.value); e.target.blur();}}>
+            onChange={(e) => { setInstrumentSound({...instrumentSound, guitar: e.target.value}); e.target.blur();}}>
             <option value={"clean"}>Clean</option>
             <option value={"distorted"}>Distorted</option>
           </select>
