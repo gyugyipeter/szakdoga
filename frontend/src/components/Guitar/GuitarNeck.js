@@ -4,7 +4,8 @@ import { getNotesForTuning } from "../../domain/GuitarTunings";
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
 import { getNotes } from "../../domain/NoteFilePairs";
 import "./GuitarNeck.css";
-//import { FaCircle } from "react-icons/fa";
+
+const dottedFrets = [3, 5, 7, 9, 15, 17, 19, 21];
 
 function String(props) {
   const {ids, stringID } = props;
@@ -53,14 +54,14 @@ function GuitarNeck(props) {
           <th></th>
           <th></th>
           <th className="nullheader">0</th>
-          <th>{firstFretPos}</th>
-          <th>{firstFretPos + 1}</th>
-          <th>{firstFretPos + 2}</th>
-          <th>{firstFretPos + 3}</th>
-          <th>{firstFretPos + 4}</th>
-          <th>{firstFretPos + 5}</th>
-          <th>{firstFretPos + 6}</th>
-          <th>{firstFretPos + 7}</th>
+          <th className={(dottedFrets.includes(firstFretPos) && "dot") || (firstFretPos === 12 && "twelveFretDot twelveFretDot2")}>{firstFretPos}</th>
+          <th className={(dottedFrets.includes(firstFretPos + 1) && "dot") || (firstFretPos + 1 === 12 && "twelveFretDot twelveFretDot2")}>{firstFretPos + 1}</th>
+          <th className={(dottedFrets.includes(firstFretPos + 2) && "dot") || (firstFretPos + 2 === 12 && "twelveFretDot twelveFretDot2")}>{firstFretPos + 2}</th>
+          <th className={(dottedFrets.includes(firstFretPos + 3) && "dot") || (firstFretPos + 3 === 12 && "twelveFretDot twelveFretDot2")}>{firstFretPos + 3}</th>
+          <th className={(dottedFrets.includes(firstFretPos + 4) && "dot") || (firstFretPos + 4 === 12 && "twelveFretDot twelveFretDot2")}>{firstFretPos + 4}</th>
+          <th className={(dottedFrets.includes(firstFretPos + 5) && "dot") || (firstFretPos + 5 === 12 && "twelveFretDot twelveFretDot2")}>{firstFretPos + 5}</th>
+          <th className={(dottedFrets.includes(firstFretPos + 6) && "dot") || (firstFretPos + 6 === 12 && "twelveFretDot twelveFretDot2")}>{firstFretPos + 6}</th>
+          <th className={(dottedFrets.includes(firstFretPos + 7) && "dot") || (firstFretPos + 7 === 12 && "twelveFretDot twelveFretDot2")}>{firstFretPos + 7}</th>
         </tr>
       </thead>
       <tbody>

@@ -7,7 +7,6 @@ import {
 } from "react-router-dom";
 import { CgPiano } from "react-icons/cg";
 import { FaGuitar } from "react-icons/fa";
-import { GiGuitar } from "react-icons/gi";
 
 import Guitarbody from "./Guitar/GuitarBody";
 import Pianobody from "./Piano/PianoBody";

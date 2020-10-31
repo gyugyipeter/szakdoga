@@ -8,7 +8,7 @@
 
 .tuningColumn {
   width: 1%;
-  background-color:#11100e;
+  background-color: #11100e;
 }
 
 .string1,
@@ -92,7 +92,7 @@
 }
 
 .fretNumbers {
-  background-color:#11100e;
+  background-color: #11100e;
 }
 
 .tunerArrow {
@@ -130,7 +130,7 @@
 }
 
 .guitarNeckPosition button {
-  background-color:#11100e;
+  background-color: #11100e;
   border: none;
   color: white;
 }
@@ -139,6 +139,7 @@
   height: 2.32rem;
   margin-left: 0.1rem;
   margin-right: 0.1rem;
+  z-index: 10;
 }
 
 .leftNeckArrow {
@@ -162,4 +163,36 @@
 .guitarNeckPosition button:disabled {
   color: #11100e;
   cursor: default;
+}
+
+.dot:before {
+  content: "•";
+  position: absolute;
+  color: white;
+  top: 255%;
+  z-index: 5;
+  font-size: 5rem;
+}
+
+.twelveFretDot:before {
+  content: "•";
+  position: absolute;
+  color: white;
+  top: 20%;
+  z-index: 5;
+  font-size: 5rem;
+}
+
+.twelveFretDot2:after {
+  content: "•";
+  position: absolute;
+  color: white;
+  top: 485%;
+  z-index: 5;
+  font-size: 5rem;
+  left: 45%;
+}
+
+.fretNumbers th {
+  position: relative;
 }
