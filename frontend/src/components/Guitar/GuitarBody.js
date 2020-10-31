@@ -1,11 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { AppContext } from "../AppContext";
 import Logger from "../Logger";
 import PlayGuitar from "./PlayGuitar";
 
 function GuitarBody(props) {
   const { setCurrentInstrument } = useContext(AppContext);
-  setCurrentInstrument("guitar");
+  useEffect(() => {
+    setCurrentInstrument("guitar");
+  });
   return (
     <>
       <Logger />
