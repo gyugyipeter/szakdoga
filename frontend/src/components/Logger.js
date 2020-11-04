@@ -16,12 +16,12 @@ function Logger(props) {
     clearLogs,
     copyLogs,
     playLogs,
+    stopPlaying
   } = useContext(AppContext);
 
   return (
     <>
       <div className="row">
-        Log:
         <div ref={LoggerRef} className="logger">
           {logs[currentInstrument].length === 0 ? (
             <></>
@@ -44,6 +44,7 @@ function Logger(props) {
           <div>
             <button
               className="loggerButton"
+              title="Turn recording on/off"
               onClick={() => setIsRecording(!isRecording)}
               disabled={isPlaying}
             >
@@ -56,22 +57,31 @@ function Logger(props) {
             </button>
           </div>
           <div>
-            <button className="loggerButton" onClick={() => copyLogs()}>
+            <button
+              className="loggerButton"
+              title="Copy notes to clipboard"
+              onClick={() => copyLogs()}
+            >
               copy <MdContentCopy className="MdContentCopy" />
             </button>
           </div>
           <div>
-            <button className="loggerButton" onClick={() => clearLogs()}>
+            <button
+              className="loggerButton"
+              title="Delete your recording"
+              onClick={() => clearLogs()}
+            >
               clear <MdClear className="MdClear" />
             </button>
           </div>
           <div>
             <button
               className="loggerButton"
-              onClick={() => playLogs()}
+              title="Play/pause your recording"
+              onClick={isPlaying ? () => stopPlaying() : () => playLogs()}
               disabled={isRecording}
             >
-              play {isPlaying ? <BsPlayFill /> : <BsPlay />}
+              {isPlaying ? <>stop <BsPlayFill /></> : <>play <BsPlay /></> }
             </button>
           </div>
         </div>

@@ -7,26 +7,63 @@ import {
   getDistortedGuitar,
 } from "../domain/NoteFilePairs";
 
+let timeIds = [];
+
 export const AppContext = createContext();
 
 function AppContextProvider(props) {
   const [logs, setLogs] = useState({ piano: [], guitar: [] });
   const [currentInstrument, setCurrentInstrument] = useState("piano");
+  const [isRecording, setIsRecording] = useState(false);
   const [instrumentSound, setInstrumentSound] = useState({
     piano: "reverb",
     guitar: "clean",
   });
-  const [isRecording, setIsRecording] = useState(false);
-  const [range1, setRange1] = useState(3);
-  const [range2, setRange2] = useState(4);
+  const [guitarRange, setGuitarRange] = useState({
+    string1: 1,
+    string2: 1,
+    string3: 2,
+    string4: 2,
+    string5: 2,
+    string6: 3,
+  });
+  const [guitarFirstNote, setGuitarFirstNote] = useState({
+    string1: "E",
+    string2: "A",
+    string3: "D",
+    string4: "G",
+    string5: "B",
+    string6: "E",
+  });
+  const [guitarTuningNotes, setGuitarTuningNotes] = useState({
+    1: "E1",
+    2: "A1",
+    3: "D2",
+    4: "G2",
+    5: "B2",
+    6: "E3",
+  });
+  const [activeFrets, setActiveFrets] = useState({
+    1: 1,
+    2: 2,
+    3: 3,
+    4: 4,
+    5: 5,
+    6: 6,
+    7: 7,
+    8: 8,
+  });
+  const [guitarTuning, setGuitarTuning] = useState("Standard");
+  const [firstFretPos, setFirstFretPos] = useState(1);
+  const [pianoRange1, setpianoRange1] = useState(3);
+  const [pianoRange2, setpianoRange2] = useState(4);
   const [firstNote1, setFirstNote1] = useState(0);
   const [firstNote2, setFirstNote2] = useState(0);
   const [isKeyEventsDisabled, setIsKeyEventsDisabled] = useState(false);
   const [startRecording, setStartRecording] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [firstFretPos, setFirstFretPos] = useState(1);
-  const [guitarTuning, setGuitarTuning] = useState("Standard");
-  const [displayNotes, setDisplayNotes] = useState(false);
+  const [displayNotes, setDisplayNotes] = useState(true);
+  const [displayKeys, setDisplayKeys] = useState(true);
   const LoggerRef = useRef(null);
 
   const instruments = {
@@ -72,6 +109,7 @@ function AppContextProvider(props) {
 
   const clearLogs = () => {
     setLogs({ ...logs, [currentInstrument]: [] });
+    stopPlaying();
     setStartRecording(null);
   };
 
@@ -90,11 +128,19 @@ function AppContextProvider(props) {
     sound.play();
   };
 
+  const stopPlaying = () => {
+    setIsPlaying(false);
+    timeIds.forEach((id) => {
+      clearTimeout(id);
+    });
+    timeIds = [];
+  };
+
   const playLogs = () => {
     if (!isPlaying && logs[currentInstrument].length !== 0) {
       setIsPlaying(true);
       logs[currentInstrument].forEach((log, index) => {
-        setTimeout(() => {
+        let timeId = setTimeout(() => {
           if (index === logs[currentInstrument].length - 1) setIsPlaying(false);
           PlaySound(
             instruments[currentInstrument].sounds[
@@ -102,6 +148,7 @@ function AppContextProvider(props) {
             ]().get(log.note)
           );
         }, log.timing);
+        timeIds.push(timeId);
       });
     }
   };
@@ -112,18 +159,23 @@ function AppContextProvider(props) {
         logs,
         currentInstrument,
         isRecording,
+        guitarRange,
+        guitarFirstNote,
         firstNote1,
         firstNote2,
         isKeyEventsDisabled,
-        range1,
-        range2,
+        pianoRange1,
+        pianoRange2,
         startRecording,
         isPlaying,
         firstFretPos,
         instrumentSound,
         guitarTuning,
+        guitarTuningNotes,
+        activeFrets,
         LoggerRef,
         displayNotes,
+        displayKeys,
         addLog,
         removeLog,
         setIsRecording,
@@ -132,16 +184,22 @@ function AppContextProvider(props) {
         setFirstNote1,
         setFirstNote2,
         setIsKeyEventsDisabled,
-        setRange1,
-        setRange2,
+        setpianoRange1,
+        setpianoRange2,
+        setGuitarRange,
+        setGuitarFirstNote,
         PlaySound,
+        stopPlaying,
         playLogs,
         setFirstFretPos,
         setInstrumentSound,
         setGuitarTuning,
+        setGuitarTuningNotes,
+        setActiveFrets,
         setLogs,
         setCurrentInstrument,
-        setDisplayNotes
+        setDisplayNotes,
+        setDisplayKeys,
       }}
     >
       {props.children}
