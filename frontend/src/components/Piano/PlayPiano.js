@@ -13,20 +13,20 @@ function HandleKeyPress(props) {
     addLog,
     firstNote1,
     firstNote2,
-    range1,
-    range2,
+    pianoRange1,
+    pianoRange2,
     isKeyEventsDisabled,
     PlaySound
   } = useContext(AppContext);
 
   function chooseNote1(index) {
-    if (index < 12) return getNotes()[index] + range1;
-    else return getNotes()[index % 12] + (range1 + 1);
+    if (index < 12) return getNotes()[index] + pianoRange1;
+    else return getNotes()[index % 12] + (pianoRange1 + 1);
   }
 
   function chooseNote2(index) {
-    if (index < 12) return getNotes()[index] + range2;
-    else return getNotes()[index % 12] + (range2 + 1);
+    if (index < 12) return getNotes()[index] + pianoRange2;
+    else return getNotes()[index % 12] + (pianoRange2 + 1);
   }
 
   function keyDownEvent(indexToAdd, keyPressed, querySelector, event, whichFirstNote, whichFunction) {
@@ -215,19 +215,25 @@ function HandleKeyPress(props) {
 
 function PlayPiano(props) {
   const {
-    range1,
-    setRange1,
-    range2,
-    setRange2,
+    pianoRange1,
+    setpianoRange1,
+    pianoRange2,
+    setpianoRange2,
     setFirstNote1,
     setFirstNote2,
     firstNote1,
     firstNote2,
     displayNotes,
-    setDisplayNotes
+    displayKeys,
+    setDisplayNotes,
+    setDisplayKeys,
   } = useContext(AppContext);
 
-  useEffect(() => {Howler.stop()}, [])  
+  const keyBindingsLeft = ["y", "s", "x", "d", "c", "v", "g", "b", "h", "n", "j", "m"];
+  const keyBindingsRight = ["w", "3", "e", "4", "r", "t", "6", "z", "7", "u", "8", "i"];
+
+  useEffect(() => {Howler.stop()}, [])
+
   Howler.volume(1.0);
   return (
     <>
@@ -238,30 +244,36 @@ function PlayPiano(props) {
           <tbody>
             <tr>
               <td className="noteDisplaySwitch">
-                <div>Show note on keys</div>
-                <input className="tgl" type="checkbox" id="switch" value={displayNotes}
+                <div>Hide notes</div>
+                <input className="tgl" type="checkbox" id="noteSwitch" value={displayNotes}
                   onClick={() => {setDisplayNotes(!displayNotes)}}/>
-                <label className="tgl-btn" for="switch" ></label>
+                <label className="tgl-btn" htmlFor="noteSwitch" ></label>
+                <div>Hide keys</div>
+                <input className="tgl" type="checkbox" id="keySwitch" value={displayKeys}
+                  onClick={() => {setDisplayKeys(!displayKeys)}}/>
+                <label className="tgl-btn" htmlFor="keySwitch" ></label>
               </td>
               <td>
                 <div className="pianoGroup">
                   <button
                     className="arrow"
                     onClick={() => {
-                      setRange1(range1 - 1);
+                      setpianoRange1(pianoRange1 - 1);
                     }}
-                    disabled={range1 <= 1}
+                    disabled={pianoRange1 <= 1}
+                    title="Lower octave"
                   >
                     <MdKeyboardArrowLeft size={100} />
                   </button>
-                  <PianoRepresentation firstNote={firstNote1} id={"firstPiano"}/>
+                  <PianoRepresentation firstNote={firstNote1} id={"firstPiano"} keyBindings={keyBindingsLeft} />
                   <button
                     className="arrow"
                     onClick={() => {
-                      if (range1 + 1 === 6) setFirstNote1(0);
-                      setRange1(range1 + 1);
+                      if (pianoRange1 + 1 === 6) setFirstNote1(0);
+                      setpianoRange1(pianoRange1 + 1);
                     }}
-                    disabled={range1 >= 6}
+                    disabled={pianoRange1 >= 6}
+                    title="Higher octave"
                   >
                     <MdKeyboardArrowRight size={100} />
                   </button>
@@ -272,20 +284,22 @@ function PlayPiano(props) {
                   <button
                     className="arrow"
                     onClick={() => {
-                      setRange2(range2 - 1);
+                      setpianoRange2(pianoRange2 - 1);
                     }}
-                    disabled={range2 <= 1}
+                    disabled={pianoRange2 <= 1}
+                    title="Lower octave"
                   >
                     <MdKeyboardArrowLeft size={100} />
                   </button>
-                  <PianoRepresentation firstNote={firstNote2} id={"secondPiano"}/>
+                  <PianoRepresentation firstNote={firstNote2} id={"secondPiano"} keyBindings={keyBindingsRight} />
                   <button
                     className="arrow"
                     onClick={() => {
-                      if (range2 + 1 === 6) setFirstNote2(0);
-                      setRange2(range2 + 1);
+                      if (pianoRange2 + 1 === 6) setFirstNote2(0);
+                      setpianoRange2(pianoRange2 + 1);
                     }}
-                    disabled={range2 >= 6}
+                    disabled={pianoRange2 >= 6}
+                    title="Higher octave"
                   >
                     <MdKeyboardArrowRight size={100} />
                   </button>
@@ -293,9 +307,9 @@ function PlayPiano(props) {
               </td>
             </tr>
             <tr>
-              <td className="firstColumn">Octaves:</td>
-              <td>{range1}</td>
-              <td>{range2}</td>
+              <td className="firstColumn"></td>
+              <td>{pianoRange1}</td>
+              <td>{pianoRange2}</td>
             </tr>
           </tbody>
         </table>

@@ -3,22 +3,23 @@ import { AppContext } from "../AppContext";
 import "../Instrument.css";
 
 function PianoSettings(props) {
-  const { setFirstNote1, setFirstNote2, range1, range2 } = useContext(AppContext);
+  const { setFirstNote1, setFirstNote2, pianoRange1, pianoRange2 } = useContext(AppContext);
 
   return (
     <>
       <table>
         <tbody>
           <tr>
-            <td className="firstColumn">Starting Notes:</td>
+            <td className="firstColumn"></td>
             <td className="pianospace">
               <div>
                 <select
                   required
                   onChange={(e) => { setFirstNote1(parseInt(e.target.value)); e.target.blur();}}
-                  disabled={range1 === 6}
+                  disabled={pianoRange1 === 6}
+                  title="Select the first note to the left piano"
                 >
-                  <option selected={range1 === 6} value={0}>C</option>
+                  <option selected={pianoRange1 === 6} value={0}>C</option>
                   <option value={1}>C#/Db</option>
                   <option value={2}>D</option>
                   <option value={3}>D#/Eb</option>
@@ -36,9 +37,10 @@ function PianoSettings(props) {
                 <select
                   required
                   onChange={(e) => { setFirstNote2(parseInt(e.target.value)); e.target.blur();}}
-                  disabled={range2 === 6}
+                  disabled={pianoRange2 === 6}
+                  title="Select the first note to the right piano"
                 >
-                  <option selected={range2 === 6} value={0}>C</option>
+                  <option selected={pianoRange2 === 6} value={0}>C</option>
                   <option value={1}>C#/Db</option>
                   <option value={2}>D</option>
                   <option value={3}>D#/Eb</option>

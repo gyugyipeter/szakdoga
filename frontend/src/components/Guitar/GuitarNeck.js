@@ -1,50 +1,92 @@
 import React, { useContext } from "react";
 import { AppContext } from "../AppContext";
-import { getNotesForTuning } from "../../domain/GuitarTunings";
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
+import { getNotesForTuning } from "../../domain/GuitarTunings";
 import { getNotes } from "../../domain/NoteFilePairs";
 import "./GuitarNeck.css";
 
 const dottedFrets = [3, 5, 7, 9, 15, 17, 19, 21];
 
 function String(props) {
-  const {ids, stringID } = props;
-  const { guitarTuning, setGuitarTuning } = useContext(AppContext);
+  const {stringID, ids } = props;
+  const { guitarTuning, setGuitarTuning, guitarTuningNotes, setGuitarTuningNotes } = useContext(AppContext);
+
+  function datasForTuning(currString) {
+    const currentNote = guitarTuningNotes[currString];
+    const note = currentNote.substring(0, currentNote.length - 1);
+    const noteIndex = getNotes().indexOf(note);
+    const octave = currentNote.charAt(currentNote.length - 1);
+    return {note, noteIndex, octave};
+  }
+
+  function tuneDown(currentString) {
+    let {note, noteIndex, octave} = datasForTuning(currentString);
+    if(note === "C") setGuitarTuningNotes({...guitarTuningNotes, [currentString]: getNotes()[getNotes().length - 1] + --octave});
+    else setGuitarTuningNotes({...guitarTuningNotes, [currentString]: getNotes()[noteIndex - 1] + octave});
+  }
+
+  function tuneUp(currentString) {
+    let {note, noteIndex, octave} = datasForTuning(currentString);
+    if(note === "B") setGuitarTuningNotes({...guitarTuningNotes, [currentString]: getNotes()[0] + ++octave});
+    else setGuitarTuningNotes({...guitarTuningNotes, [currentString]: getNotes()[noteIndex + 1] + octave});
+  }
+
+  const stringNumber = stringID.charAt(stringID.length - 1);
+
+  function checkTuningTooLow() {
+    if((Object.values(guitarTuningNotes).indexOf("C1") === stringNumber - 1 )) return true;
+    return false;
+  }
+
+  function checkTuningTooHigh() {
+    if(Object.values(guitarTuningNotes).indexOf("C5") === stringNumber - 1 ) return true;
+    return false;
+  }
 
   return (
-    <tr>
+    <tr className="guitarRow">
       <td className="tuningColumn">
         <button className="tunerArrow"
         onClick={() => {
           setGuitarTuning("Custom");
-        }}>
+          tuneDown(stringNumber);
+        }}
+        disabled={checkTuningTooLow()}>
           <MdKeyboardArrowLeft />
         </button>
-      </td>
-      <td className="tuningColumn">{getNotesForTuning(guitarTuning)[stringID.charAt(stringID.length - 1) - 1]}</td>
+       </td>
+      <td className="tuningColumn">{ guitarTuningNotes[stringNumber] }</td>
       <td className="tuningColumn">
         <button className="tunerArrow"
         onClick={() => {
           setGuitarTuning("Custom");
-        }}>
+          tuneUp(stringNumber);
+        }}
+        disabled={checkTuningTooHigh()}>
           <MdKeyboardArrowRight />
         </button>
       </td>
-      <td className={`nullfret ${stringID}`} id={ids[0]}> {getNotes()[4]} </td>
-      <td className={stringID} id={ids[1]}> {getNotes()[5]} </td>
-      <td className={stringID} id={ids[2]}> {getNotes()[6]} </td>
-      <td className={stringID} id={ids[3]}> {getNotes()[7]} </td>
-      <td className={stringID} id={ids[4]}> {getNotes()[8]} </td>
-      <td className={stringID} id={ids[5]}> {getNotes()[9]} </td>
-      <td className={stringID} id={ids[6]}> {getNotes()[10]} </td>
-      <td className={stringID} id={ids[7]}> {getNotes()[11]} </td>
-      <td className={stringID} id={ids[8]}> {getNotes()[0]} </td>
+      <td className={`nullfret ${stringID}`} id={ids[0]}> <span>{getNotes()[4]}</span> </td>
+      <td className={stringID} id={ids[1]}> <span>{getNotes()[5]}</span> </td>
+      <td className={stringID} id={ids[2]}> <span>{getNotes()[6]}</span> </td>
+      <td className={stringID} id={ids[3]}> <span>{getNotes()[7]}</span> </td>
+      <td className={stringID} id={ids[4]}> <span>{getNotes()[8]}</span> </td>
+      <td className={stringID} id={ids[5]}> <span>{getNotes()[9]}</span> </td>
+      <td className={stringID} id={ids[6]}> <span>{getNotes()[10]}</span> </td>
+      <td className={stringID} id={ids[7]}> <span>{getNotes()[11]}</span> </td>
+      <td className={stringID} id={ids[8]}> <span>{getNotes()[0]}</span> </td>
     </tr>
   );
 }
 
 function GuitarNeck(props) {
   const { firstFretPos } = useContext(AppContext);
+
+  function headerStyle(index) {
+    if(dottedFrets.includes(index)) return "dot";
+    if(index === 12) return "twelveFretDot twelveFretDot2";
+    return "";
+  }
 
   return (
     <table className="guitarTable">
@@ -54,14 +96,14 @@ function GuitarNeck(props) {
           <th></th>
           <th></th>
           <th className="nullheader">0</th>
-          <th className={(dottedFrets.includes(firstFretPos) && "dot") || (firstFretPos === 12 && "twelveFretDot twelveFretDot2")}>{firstFretPos}</th>
-          <th className={(dottedFrets.includes(firstFretPos + 1) && "dot") || (firstFretPos + 1 === 12 && "twelveFretDot twelveFretDot2")}>{firstFretPos + 1}</th>
-          <th className={(dottedFrets.includes(firstFretPos + 2) && "dot") || (firstFretPos + 2 === 12 && "twelveFretDot twelveFretDot2")}>{firstFretPos + 2}</th>
-          <th className={(dottedFrets.includes(firstFretPos + 3) && "dot") || (firstFretPos + 3 === 12 && "twelveFretDot twelveFretDot2")}>{firstFretPos + 3}</th>
-          <th className={(dottedFrets.includes(firstFretPos + 4) && "dot") || (firstFretPos + 4 === 12 && "twelveFretDot twelveFretDot2")}>{firstFretPos + 4}</th>
-          <th className={(dottedFrets.includes(firstFretPos + 5) && "dot") || (firstFretPos + 5 === 12 && "twelveFretDot twelveFretDot2")}>{firstFretPos + 5}</th>
-          <th className={(dottedFrets.includes(firstFretPos + 6) && "dot") || (firstFretPos + 6 === 12 && "twelveFretDot twelveFretDot2")}>{firstFretPos + 6}</th>
-          <th className={(dottedFrets.includes(firstFretPos + 7) && "dot") || (firstFretPos + 7 === 12 && "twelveFretDot twelveFretDot2")}>{firstFretPos + 7}</th>
+          <th className={headerStyle(firstFretPos)}>{firstFretPos}</th>
+          <th className={headerStyle(firstFretPos + 1)}>{firstFretPos + 1}</th>
+          <th className={headerStyle(firstFretPos + 2)}>{firstFretPos + 2}</th>
+          <th className={headerStyle(firstFretPos + 3)}>{firstFretPos + 3}</th>
+          <th className={headerStyle(firstFretPos + 4)}>{firstFretPos + 4}</th>
+          <th className={headerStyle(firstFretPos + 5)}>{firstFretPos + 5}</th>
+          <th className={headerStyle(firstFretPos + 6)}>{firstFretPos + 6}</th>
+          <th className={headerStyle(firstFretPos + 7)}>{firstFretPos + 7}</th>
         </tr>
       </thead>
       <tbody>

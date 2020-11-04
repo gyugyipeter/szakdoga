@@ -11,15 +11,15 @@ function HandleKeyPress(props) {
   const {
     addLog,
     firstNote1,
-    range1,
+    pianoRange1,
     isKeyEventsDisabled,
     PlaySound,
     instrumentSound
   } = useContext(AppContext);
 
   function chooseNote(index) {
-    if (index < 12) return getNotes()[index] + range1;
-    else return getNotes()[index % 12] + (range1 + 1);
+    if (index < 12) return getNotes()[index] + pianoRange1;
+    else return getNotes()[index % 12] + (pianoRange1 + 1);
   }
 
   function keyDownEvent(indexToAdd, keyPressed, querySelector, event, whichFirstNote) {

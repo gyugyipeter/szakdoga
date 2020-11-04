@@ -35,7 +35,7 @@
   border-right: 0;
   border-bottom: 0.3rem solid #6e6e6e;
   color: rgb(206, 206, 206);
-  padding-top: 3rem;
+  padding-top: 2rem;
 }
 .whiteButton.pressed {
   box-shadow: 0rem 0.12rem 0.15rem 0rem rgba(0, 0, 0, 0.63);
@@ -47,6 +47,11 @@
   color: white;
 }
 
+.whiteButton.pressed .keyBinding,
+.blackButton.pressed .keyBinding {
+  opacity: 100%;
+}
+
 .whiteButton.pressed::before {
   left: 50%;
   transform: translateX(-0.5rem);
@@ -56,4 +61,19 @@
 }
 .next-whiteButton-pressed {
   box-shadow: 2px 0px 1.5px 0px rgba(0, 0, 0, 0.63);
+}
+
+.keyBinding {
+  font-style: italic;
+  opacity: 70%;
+  bottom: 0;
+  position: absolute;
+}
+
+.blackButton .keyBinding {
+  left: 25%;
+}
+
+.whiteButton .keyBinding {
+  left: 38%;
 }
