@@ -17,6 +17,7 @@
   display: flex;
   width: 100%;
   justify-content: space-around;
+  align-items: center;
 }
 
 .selectGroup {
@@ -98,4 +99,42 @@ select:disabled,
 select:disabled:hover,
 .select-css[aria-disabled="true"] {
   border-color: #aaa;
+}
+
+.infoIcon {
+  stroke: white;
+  fill: #2f89fc;
+  stroke-width: 0;
+  height: 1.5em;
+  width: 1.5em;
+  cursor: pointer;
+  
+}
+
+.tooltip:hover,
+.tooltip:focus {
+  transform: translateY(-0.1rem);
+}
+
+.tooltip .tooltiptext {
+  width: 20rem;
+  background-color: #212121;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #212121 transparent transparent transparent;
 }

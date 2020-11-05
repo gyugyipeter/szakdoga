@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { BsInfoCircleFill } from "react-icons/bs";
 import { AppContext } from "../AppContext";
 import { getNotesForTuning } from "../../domain/GuitarTunings";
 
@@ -8,6 +9,18 @@ function GuitarSettings(props) {
   return (
     <>
       <div className="guitarSettings">
+        <div className="tooltip">
+          <BsInfoCircleFill className="infoIcon" />
+          <span className="tooltiptext">
+            <div>Keybindings:</div>
+            <div>String 1: y x c v b n m , .</div>
+            <div>String 2: a s d f g h j k l</div>
+            <div>String 3: q w e r t z u i o</div>
+            <div>String 4: 1 2 3 4 5 6 7 8 9</div>
+            <div>String 5: shift + [q w e r t z u i o]</div>
+            <div>String 6: shift + [1 2 3 4 5 6 7 8 9]</div>
+          </span>
+        </div>
         <div className="selectGroup">
           <select
             matnativecontrol="true"

@@ -9,7 +9,7 @@ const dottedFrets = [3, 5, 7, 9, 15, 17, 19, 21];
 
 function String(props) {
   const {stringID, ids } = props;
-  const { guitarTuning, setGuitarTuning, guitarTuningNotes, setGuitarTuningNotes } = useContext(AppContext);
+  const { firstFretPos, setGuitarTuning, guitarTuningNotes, setGuitarTuningNotes } = useContext(AppContext);
 
   function datasForTuning(currString) {
     const currentNote = guitarTuningNotes[currString];
@@ -39,8 +39,13 @@ function String(props) {
   }
 
   function checkTuningTooHigh() {
-    if(Object.values(guitarTuningNotes).indexOf("C5") === stringNumber - 1 ) return true;
+    if(Object.values(guitarTuningNotes).indexOf("E3") === stringNumber - 1 ) return true;
     return false;
+  }
+
+  function displayIndex(toAdd) {
+    const index = getNotes().indexOf(datasForTuning(stringNumber).note) + toAdd;
+    return getNotes()[index % 12];
   }
 
   return (
@@ -66,15 +71,15 @@ function String(props) {
           <MdKeyboardArrowRight />
         </button>
       </td>
-      <td className={`nullfret ${stringID}`} id={ids[0]}> <span>{getNotes()[4]}</span> </td>
-      <td className={stringID} id={ids[1]}> <span>{getNotes()[5]}</span> </td>
-      <td className={stringID} id={ids[2]}> <span>{getNotes()[6]}</span> </td>
-      <td className={stringID} id={ids[3]}> <span>{getNotes()[7]}</span> </td>
-      <td className={stringID} id={ids[4]}> <span>{getNotes()[8]}</span> </td>
-      <td className={stringID} id={ids[5]}> <span>{getNotes()[9]}</span> </td>
-      <td className={stringID} id={ids[6]}> <span>{getNotes()[10]}</span> </td>
-      <td className={stringID} id={ids[7]}> <span>{getNotes()[11]}</span> </td>
-      <td className={stringID} id={ids[8]}> <span>{getNotes()[0]}</span> </td>
+      <td className={`nullfret ${stringID}`} id={ids[0]}> <span>{displayIndex(0)}</span> </td>
+      <td className={stringID} id={ids[1]}> <span>{displayIndex(1 + firstFretPos - 1)}</span> </td>
+      <td className={stringID} id={ids[2]}> <span>{displayIndex(2 + firstFretPos - 1)}</span> </td>
+      <td className={stringID} id={ids[3]}> <span>{displayIndex(3 + firstFretPos - 1)}</span> </td>
+      <td className={stringID} id={ids[4]}> <span>{displayIndex(4 + firstFretPos - 1)}</span> </td>
+      <td className={stringID} id={ids[5]}> <span>{displayIndex(5 + firstFretPos - 1)}</span> </td>
+      <td className={stringID} id={ids[6]}> <span>{displayIndex(6 + firstFretPos - 1)}</span> </td>
+      <td className={stringID} id={ids[7]}> <span>{displayIndex(7 + firstFretPos - 1)}</span> </td>
+      <td className={stringID} id={ids[8]}> <span>{displayIndex(8 + firstFretPos - 1)}</span> </td>
     </tr>
   );
 }
@@ -107,12 +112,12 @@ function GuitarNeck(props) {
         </tr>
       </thead>
       <tbody>
-        <String stringID={"string6"} ids={["string1Note1", "string1Note2", "string1Note3", "string1Note4", "string1Note5", "string1Note6", "string1Note7", "string1Note8", "string1Note9"] }/>
-        <String stringID={"string5"} ids={["string2Note1", "string2Note2", "string2Note3", "string2Note4", "string2Note5", "string2Note6", "string2Note7", "string2Note8", "string2Note9"] }/>
-        <String stringID={"string4"} ids={["string3Note1", "string3Note2", "string3Note3", "string3Note4", "string3Note5", "string3Note6", "string3Note7", "string3Note8", "string3Note9"] }/>
-        <String stringID={"string3"} ids={["string4Note1", "string4Note2", "string4Note3", "string4Note4", "string4Note5", "string4Note6", "string4Note7", "string4Note8", "string4Note9"] }/>
-        <String stringID={"string2"} ids={["string5Note1", "string5Note2", "string5Note3", "string5Note4", "string5Note5", "string5Note6", "string5Note7", "string5Note8", "string5Note9"] }/>
-        <String stringID={"string1"} ids={["string6Note1", "string6Note2", "string6Note3", "string6Note4", "string6Note5", "string6Note6", "string6Note7", "string6Note8", "string6Note9"] }/>
+        <String stringID={"string6"} ids={["string6Note1", "string6Note2", "string6Note3", "string6Note4", "string6Note5", "string6Note6", "string6Note7", "string6Note8", "string6Note9"] }/>
+        <String stringID={"string5"} ids={["string5Note1", "string5Note2", "string5Note3", "string5Note4", "string5Note5", "string5Note6", "string5Note7", "string5Note8", "string5Note9"] }/>
+        <String stringID={"string4"} ids={["string4Note1", "string4Note2", "string4Note3", "string4Note4", "string4Note5", "string4Note6", "string4Note7", "string4Note8", "string4Note9"] }/>
+        <String stringID={"string3"} ids={["string3Note1", "string3Note2", "string3Note3", "string3Note4", "string3Note5", "string3Note6", "string3Note7", "string3Note8", "string3Note9"] }/>
+        <String stringID={"string2"} ids={["string2Note1", "string2Note2", "string2Note3", "string2Note4", "string2Note5", "string2Note6", "string2Note7", "string2Note8", "string2Note9"] }/>
+        <String stringID={"string1"} ids={["string1Note1", "string1Note2", "string1Note3", "string1Note4", "string1Note5", "string1Note6", "string1Note7", "string1Note8", "string1Note9"] }/>
       </tbody>
     </table>
   );

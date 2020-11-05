@@ -27,14 +27,6 @@ function AppContextProvider(props) {
     string5: 2,
     string6: 3,
   });
-  const [guitarFirstNote, setGuitarFirstNote] = useState({
-    string1: "E",
-    string2: "A",
-    string3: "D",
-    string4: "G",
-    string5: "B",
-    string6: "E",
-  });
   const [guitarTuningNotes, setGuitarTuningNotes] = useState({
     1: "E1",
     2: "A1",
@@ -160,7 +152,6 @@ function AppContextProvider(props) {
         currentInstrument,
         isRecording,
         guitarRange,
-        guitarFirstNote,
         firstNote1,
         firstNote2,
         isKeyEventsDisabled,
@@ -187,7 +178,6 @@ function AppContextProvider(props) {
         setpianoRange1,
         setpianoRange2,
         setGuitarRange,
-        setGuitarFirstNote,
         PlaySound,
         stopPlaying,
         playLogs,
