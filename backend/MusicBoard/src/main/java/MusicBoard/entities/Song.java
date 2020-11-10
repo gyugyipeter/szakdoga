@@ -1,6 +1,5 @@
 package MusicBoard.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,29 +9,37 @@ import org.checkerframework.common.aliasing.qual.Unique;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
-@Table(name = "user")
+@Table(name = "song")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User implements Serializable {
+public class Song implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(unique=true)
+    public enum InstrumentType {
+        GUITAR,
+        PIANO
+    }
+
+    @Column//(unique=true)
     @NotNull
-    private String userName;
+    private String songName;
 
     @Column
     @NotNull
-    private String password;
+    private InstrumentType instrument;
 
-    @JsonIgnore
-    @OneToMany( mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Song> songs;
+    @Column
+    @NotNull
+    private String songObject;
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
 }

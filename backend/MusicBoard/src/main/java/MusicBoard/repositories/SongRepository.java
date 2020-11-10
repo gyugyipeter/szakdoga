@@ -4,9 +4,9 @@ import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import MusicBoard.entities.User;
+import MusicBoard.entities.Song;
 
 @Repository
-public interface UserRepository extends CrudRepository<User, Integer> {
-    Optional<User> findByUserName(String userName);
+public interface SongRepository extends CrudRepository<Song, Integer> {
+    Optional<Song> findBySongName(String songName);
 }

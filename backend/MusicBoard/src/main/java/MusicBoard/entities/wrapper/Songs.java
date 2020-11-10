@@ -1,18 +1,17 @@
 package MusicBoard.entities.wrapper;
 
-import java.util.List;
-
+import MusicBoard.entities.Song;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import MusicBoard.entities.User;
+import java.util.List;
 
-public class Users extends CollectionResource<User> {
+public class Songs extends CollectionResource<Song> {
 
     private static final long serialVersionUID = 1L;
 
     @JsonCreator
-    public Users(@JsonProperty("items") List<User> items) {
+    public Songs(@JsonProperty("items") List<Song> items) {
         super(items);
     }
 }

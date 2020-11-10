@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -19,30 +20,35 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private MyUserDetailsService myUserDetailsService;
 
+    @Bean
+    public PasswordEncoder encoder() {
+        return new BCryptPasswordEncoder();
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .cors()
+                .cors()
                 .and()
-            .csrf().disable()
+                .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/h2/**").permitAll()
-                .anyRequest().authenticated()
-            .and()
-            .httpBasic()
+                .antMatchers("/user/*").authenticated()
+                .anyRequest().permitAll()
                 .and()
-            .headers()
+                .httpBasic()
+                .and()
+                .headers()
                 .frameOptions().disable()
                 .and()
-            .sessionManagement()
+                .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
     @Autowired
     protected void configureAuthentication(AuthenticationManagerBuilder auth) throws Exception {
         auth
-            .userDetailsService(myUserDetailsService)
-            .passwordEncoder(passwordEncoder());
+                .userDetailsService(myUserDetailsService)
+                .passwordEncoder(passwordEncoder());
     }
 
     @Bean
