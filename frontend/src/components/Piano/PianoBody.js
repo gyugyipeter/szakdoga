@@ -5,9 +5,10 @@ import PlayPiano from "./PlayPiano";
 import "./PianoBody.css";
 
 function PianoBody(props) {
-  const { setCurrentInstrument } = useContext(AppContext);
+  const { setCurrentInstrument, setIsRecording } = useContext(AppContext);
   useEffect(() => {
     setCurrentInstrument("piano");
+    setIsRecording(false);
   }, [setCurrentInstrument]);
   return (
     <>

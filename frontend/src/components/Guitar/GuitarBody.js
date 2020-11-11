@@ -4,9 +4,10 @@ import Logger from "../Logger";
 import PlayGuitar from "./PlayGuitar";
 
 function GuitarBody(props) {
-  const { setCurrentInstrument } = useContext(AppContext);
+  const { setCurrentInstrument, setIsRecording } = useContext(AppContext);
   useEffect(() => {
     setCurrentInstrument("guitar");
+    setIsRecording(false);
   }, [setCurrentInstrument]);
   return (
     <>
