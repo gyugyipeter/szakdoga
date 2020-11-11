@@ -61,10 +61,7 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<User> getById(@PathVariable Integer id) {
         Optional<User> oUser = userRepository.findById(id);
-        if (!oUser.isPresent()) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(oUser.get());
+        return oUser.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     //list update
@@ -91,10 +88,7 @@ public class UserController {
     @GetMapping("/username/{userName}")
     public ResponseEntity<User> getByUserName(@PathVariable("userName") String userName) {
         Optional<User> oUser = userRepository.findByUserName(userName);
-        if (!oUser.isPresent()) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(oUser.get());
+        return oUser.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PutMapping("/username/{userName}")

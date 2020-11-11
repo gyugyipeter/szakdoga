@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.checkerframework.common.aliasing.qual.Unique;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -27,12 +26,13 @@ public class Song implements Serializable {
         PIANO
     }
 
-    @Column//(unique=true)
+    @Column(unique=true)
     @NotNull
     private String songName;
 
     @Column
     @NotNull
+    @Enumerated(EnumType.STRING)
     private InstrumentType instrument;
 
     @Column

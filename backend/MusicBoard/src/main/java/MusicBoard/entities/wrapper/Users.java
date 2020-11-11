@@ -12,7 +12,5 @@ public class Users extends CollectionResource<User> {
     private static final long serialVersionUID = 1L;
 
     @JsonCreator
-    public Users(@JsonProperty("items") List<User> items) {
-        super(items);
-    }
+    public Users(@JsonProperty("items") List<User> items) { super(items); }
 }
