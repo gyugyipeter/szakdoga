@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useCallback, useContext, useEffect } from "react";
 import { Howler } from "howler";
 import { getPiano, getNotes } from "../../domain/NoteFilePairs";
 import KeyboardEventHandler from "react-keyboard-event-handler";
@@ -227,14 +227,17 @@ function PlayPiano(props) {
     displayKeys,
     setDisplayNotes,
     setDisplayKeys,
+    stopPlaying
   } = useContext(AppContext);
 
   const keyBindingsLeft = ["y", "s", "x", "d", "c", "v", "g", "b", "h", "n", "j", "m"];
   const keyBindingsRight = ["w", "3", "e", "4", "r", "t", "6", "z", "7", "u", "8", "i"];
 
-  useEffect(() => {Howler.stop()}, [])
-
   Howler.volume(1.0);
+
+  const callBack =  useCallback(()=>stopPlaying(), []);
+  useEffect(()=> callBack(), [callBack])
+
   return (
     <>
       <HandleKeyPress />

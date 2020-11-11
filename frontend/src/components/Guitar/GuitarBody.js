@@ -7,7 +7,7 @@ function GuitarBody(props) {
   const { setCurrentInstrument } = useContext(AppContext);
   useEffect(() => {
     setCurrentInstrument("guitar");
-  });
+  }, [setCurrentInstrument]);
   return (
     <>
       <Logger />

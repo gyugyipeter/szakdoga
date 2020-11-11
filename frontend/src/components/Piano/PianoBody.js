@@ -8,7 +8,7 @@ function PianoBody(props) {
   const { setCurrentInstrument } = useContext(AppContext);
   useEffect(() => {
     setCurrentInstrument("piano");
-  });
+  }, [setCurrentInstrument]);
   return (
     <>
       <Logger />

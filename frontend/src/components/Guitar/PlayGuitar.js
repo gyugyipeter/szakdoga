@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useCallback, useContext, useEffect } from "react";
 import { AppContext } from "../AppContext";
 import { Howler } from "howler";
 import KeyboardEventHandler from "react-keyboard-event-handler";
@@ -22,7 +22,6 @@ function HandleKeyPress(props) {
     const noteIndex = getNotes().indexOf(note);
     let newIndex = noteIndex + indexToAdd;
     if(indexToAdd !== 0) newIndex += firstFretPos - 1;
-    console.log(newIndex);
     const octave = firstNote.charAt(firstNote.length - 1);
     if (newIndex < 12) return getNotes()[newIndex] + octave;
     else if (newIndex < 24) return getNotes()[newIndex % 12] + (parseInt(octave) + 1);
@@ -165,7 +164,6 @@ function HandleKeyPress(props) {
             break;
           //string5
           case "shift+q":
-            console.log("fuk");
             keyDownEvent(0, "shift+q", "#string5Note1", e, guitarTuningNotes[5]);
             break;
           case "shift+w":
@@ -410,8 +408,11 @@ function HandleKeyPress(props) {
 }
 
 function PlayGuitar(props) {
-  const { firstFretPos, setFirstFretPos } = useContext(AppContext);
+  const { firstFretPos, setFirstFretPos, stopPlaying } = useContext(AppContext);
   Howler.volume(0.1);
+
+  const callBack =  useCallback(()=>stopPlaying(), []);
+  useEffect(()=> callBack(), [callBack])
 
   return (
     <>

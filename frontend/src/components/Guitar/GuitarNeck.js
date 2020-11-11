@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { AppContext } from "../AppContext";
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
-import { getNotesForTuning } from "../../domain/GuitarTunings";
 import { getNotes } from "../../domain/NoteFilePairs";
 import "./GuitarNeck.css";
 
