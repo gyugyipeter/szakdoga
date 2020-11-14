@@ -28,14 +28,14 @@ public class SongController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Song> getById(@PathVariable Integer id) {
+    public ResponseEntity<Song> getById(@PathVariable Long id) {
         Optional<Song> oSong = songRepository.findById(id);
         return oSong.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     //list update
     @PutMapping("/{id}")
-    public ResponseEntity<Song> updateById(@PathVariable Integer id, @RequestBody Song song) {
+    public ResponseEntity<Song> updateById(@PathVariable Long id, @RequestBody Song song) {
         Optional<Song> oSong = songRepository.findById(id);
         if (oSong.isPresent()) {
             song.setId(id);
@@ -45,7 +45,7 @@ public class SongController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Song> deleteById(@PathVariable Integer id) {
+    public ResponseEntity<Song> deleteById(@PathVariable Long id) {
         Optional<Song> oSong = songRepository.findById(id);
         if (!oSong.isPresent()) {
             return ResponseEntity.notFound().build();

@@ -2,10 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a17e664a-f454-4e93-9a5f-74b252060415" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MusicBoard/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/MusicBoard/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MusicBoard/src/main/java/MusicBoard/controllers/SongController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MusicBoard/src/main/java/MusicBoard/controllers/SongController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MusicBoard/src/main/java/MusicBoard/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MusicBoard/src/main/java/MusicBoard/controllers/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MusicBoard/src/main/java/MusicBoard/entities/Song.java" beforeDir="false" afterPath="$PROJECT_DIR$/MusicBoard/src/main/java/MusicBoard/entities/Song.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MusicBoard/src/main/java/MusicBoard/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/MusicBoard/src/main/java/MusicBoard/entities/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MusicBoard/src/main/java/MusicBoard/repositories/SongRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/MusicBoard/src/main/java/MusicBoard/repositories/SongRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MusicBoard/src/main/java/MusicBoard/repositories/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/MusicBoard/src/main/java/MusicBoard/repositories/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MusicBoard/src/main/java/MusicBoard/security/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/MusicBoard/src/main/java/MusicBoard/security/WebSecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MusicBoard/src/main/java/MusicBoard/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/MusicBoard/src/main/java/MusicBoard/services/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MusicBoard/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/MusicBoard/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MusicBoard/src/main/resources/import.sql" beforeDir="false" afterPath="$PROJECT_DIR$/MusicBoard/src/main/resources/import.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/AppContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/AppContext.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/src/components/Body.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Body.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/components/GuitarSettings.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/GuitarSettings.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Header.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Header.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Header.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/src/components/Instrument.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Instrument.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/components/PianoRepresentation.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/PianoRepresentation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Logger.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Logger.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Logger.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Logger.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/domain/Api.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/domain/Api.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +46,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/MusicBoard" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/MusicBoard/pom.xml" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -44,9 +60,10 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1603396673951">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="592" y="218" key="FileChooserDialogImpl" timestamp="1605294375337">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="592" y="218" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1605294375337" />
     <state x="740" y="275" key="FileChooserDialogImpl/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1603396673951" />
   </component>
 </project>

@@ -2,11 +2,9 @@ package MusicBoard.repositories;
 
 import java.util.Optional;
 
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import MusicBoard.entities.User;
 
-@Repository
-public interface UserRepository extends CrudRepository<User, Integer> {
-    Optional<User> findByUserName(String userName);
+public interface UserRepository extends JpaRepository<User,Long> {
+    Optional<User> findByUserName(String userName); //optional yo?
 }

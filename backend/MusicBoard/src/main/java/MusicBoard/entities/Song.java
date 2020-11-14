@@ -19,7 +19,7 @@ public class Song implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     public enum InstrumentType {
         GUITAR,
@@ -37,6 +37,7 @@ public class Song implements Serializable {
 
     @Column
     @NotNull
+    @Lob
     private String songObject;
 
     @NotNull

@@ -5,9 +5,13 @@ import java.util.Optional;
 
 import MusicBoard.security.AuthenticatedUser;
 import MusicBoard.services.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,16 +21,15 @@ import MusicBoard.entities.User;
 import MusicBoard.entities.wrapper.Users;
 import MusicBoard.repositories.UserRepository;
 
+import javax.servlet.http.HttpServletResponse;
+
 @CrossOrigin
 @RestController
 @RequestMapping("user")
+@RequiredArgsConstructor
 public class UserController {
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private UserService userService;
+    private final UserRepository userRepository;
+    private final UserService userService;
 
     @Autowired
     AuthenticatedUser authenticatedUser;
@@ -35,21 +38,28 @@ public class UserController {
     public ResponseEntity whoami() { return ResponseEntity.ok(authenticatedUser.getUser());
     }
 
-    @PostMapping("/login")
+    /*@PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody User user) {
         return new ResponseEntity(HttpStatus.OK);
+    }*/
+
+    @PostMapping("/login")
+    public ResponseEntity<User> login(@RequestBody User user/*, HttpServletResponse response*/) {
+        //return ResponseEntity.ok().body(user);
+        return new ResponseEntity(user.getId(), HttpStatus.OK);
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> register(@RequestBody User user) {
-        return ResponseEntity.ok(userService.register(user));
+    public ResponseEntity<User> register(@RequestBody User user){
+        userService.register(user);
+        return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
 
-    @PostMapping("/logout")
+    /*@PostMapping("/logout")
     public ResponseEntity<User> logout() {
         SecurityContextHolder.getContext().setAuthentication(null);
         return new ResponseEntity("Successfully logged out", HttpStatus.OK);
-    }
+    }*/
 
     @GetMapping("")
     public ResponseEntity<Users> getAll() {
@@ -59,14 +69,14 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getById(@PathVariable Integer id) {
+    public ResponseEntity<User> getById(@PathVariable Long id) {
         Optional<User> oUser = userRepository.findById(id);
         return oUser.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     //list update
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateById(@PathVariable Integer id, @RequestBody User user) {
+    public ResponseEntity<User> updateById(@PathVariable Long id, @RequestBody User user) {
         Optional<User> oUser = userRepository.findById(id);
         if (oUser.isPresent()) {
             user.setId(id);
@@ -76,7 +86,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<User> deleteById(@PathVariable Integer id) {
+    public ResponseEntity<User> deleteById(@PathVariable Long id) {
         Optional<User> oUser = userRepository.findById(id);
         if (!oUser.isPresent()) {
             return ResponseEntity.notFound().build();
