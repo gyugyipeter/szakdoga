@@ -33,8 +33,8 @@ function Body(props) {
         </nav>
         <div className="instrument">
           <Switch>
-            <Route path={["/","/guitar"]} exact component={Guitarbody} />
-            <Route path="/piano" exact component={Pianobody} />
+            <Route path="/guitar" exact component={Guitarbody} />
+            <Route path={["/","/piano"]} exact component={Pianobody} />
           </Switch>
         </div>
       </div>
