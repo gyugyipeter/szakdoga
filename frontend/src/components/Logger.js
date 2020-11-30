@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
 import { AppContext } from "./AppContext";
+import { ApiContext } from "./ApiContext";
+import SongHandler from "./SongHandler";
 import { MdContentCopy, MdFiberManualRecord, MdClear } from "react-icons/md";
 import { BsPlay, BsPlayFill } from "react-icons/bs";
 import "./Logger.css";
@@ -18,20 +20,22 @@ function Logger(props) {
     playLogs,
     stopPlaying
   } = useContext(AppContext);
+  const { isLoggedIn } = useContext(ApiContext)
 
   return (
     <>
       <div className="row">
+        {isLoggedIn ? <SongHandler /> : null}
         <div ref={LoggerRef} className="logger">
           {logs[currentInstrument].length === 0 ? (
             <></>
           ) : (
-            logs[currentInstrument].map((log) => {
+            logs[currentInstrument].map((log, index) => {
               return (
                 <div
                   onClick={() => removeLog(log)}
                   className="log"
-                  key={log.id}
+                  key={index}
                 >
                   <div className="note">{log.note}</div>
                   <div className="key">{log.key}</div>
@@ -46,9 +50,9 @@ function Logger(props) {
               className="loggerButton"
               title="Turn recording on/off"
               onClick={() => setIsRecording(!isRecording)}
-              disabled={isPlaying}
+              disabled={logs[currentInstrument].length !== 0 && !isRecording}
             >
-              record{" "}
+              record
               <MdFiberManualRecord
                 className={`MdFiberManualRecord ${
                   isRecording ? "recording" : ""
@@ -81,7 +85,15 @@ function Logger(props) {
               onClick={isPlaying ? () => stopPlaying() : () => playLogs()}
               disabled={isRecording}
             >
-              {isPlaying ? <>stop <BsPlayFill /></> : <>play <BsPlay /></> }
+              {isPlaying ? (
+                <>
+                  stop <BsPlayFill />
+                </>
+              ) : (
+                <>
+                  play <BsPlay />
+                </>
+              )}
             </button>
           </div>
         </div>

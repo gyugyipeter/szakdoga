@@ -4,6 +4,7 @@
   background-color: #343a40;
   justify-content: space-between;
   font-family: "Muli";
+  height: 5rem;
 }
 
 .title {
@@ -24,9 +25,13 @@
   background-color:#007bff;
   color: white;
   border-radius: 0.3rem;
-  padding: 0.8rem 1rem;
+  padding: 0.6rem 0.6rem;
   outline: none;
   border: none;
+}
+
+.logout-btn {
+  background-color:#e03d3d;
 }
 
 .login-form {
@@ -63,13 +68,7 @@
   font-size: medium;
 }
 
-.form-buttons {
-  display: flex;
-  justify-content: space-between;
-  width: 120%;
-}
-
-.form-buttons button {
+.login-button {
   border: none;
   outline: none;
   width: 80px;
@@ -89,9 +88,6 @@
   position: relative;
   transition-property: color;
   transition-duration: 0.5s;
-}
-
-.login-button {
   background: #47cf73;
 }
 
@@ -99,10 +95,26 @@
   height: 1rem;
 }
 
-.register-button {
-  background: #ae3c33;
-}
-
 .show {
   display: flex;
+}
+
+.navbar {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.navButton {
+  border: 0;
+  background: 0;
+  outline: 0;
+  cursor: pointer;
+  font-size: 1.2rem;
+  opacity: 50%;
+}
+
+.selected {
+  opacity: 100%;
+  border-bottom: 1px solid black;
 }

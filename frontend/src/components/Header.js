@@ -1,16 +1,32 @@
 import React, { useState, useContext } from "react";
 import { AppContext } from "./AppContext";
+import { ApiContext } from "./ApiContext";
 import ClickAwayListener from "react-click-away-listener";
 import { BsFillCaretDownFill } from "react-icons/bs";
 import "./Header.css";
 
 function Header(props) {
   const { setIsKeyEventsDisabled } = useContext(AppContext);
+  const { isLoggedIn, login, logout, register } = useContext(ApiContext);
   const [showForm, setShowForm] = useState(false);
   const handleClickAway = () => {
-    setShowForm(false);
-    setIsKeyEventsDisabled(false);
+    if(showForm) {
+      setShowForm(false);
+      setIsKeyEventsDisabled(false);
+    }
   };
+  const displayForm = () => {
+    setShowForm(true);
+    setIsKeyEventsDisabled(true)
+  }
+
+  const [user, setUser] = useState({ username: "", password: "" });
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setUser({ ...user, [name]: value });
+  };
+
+  const [isLogging, setIsLogging] = useState(true);
 
   return (
     <>
@@ -18,33 +34,68 @@ function Header(props) {
         <h1 className="title">MusicBoard</h1>
         <div className="login">
           <ClickAwayListener onClickAway={handleClickAway}>
-            <button
-              className="login-btn"
-              onClick={() => {
-                setShowForm(!showForm);
-                setIsKeyEventsDisabled(true);
-              }}
-            >
-              Login <BsFillCaretDownFill />
-            </button>
-            <div>
-              <form className={`login-form ${showForm ? "show" : ""}`}>
+            {isLoggedIn ? (
+              <button
+                className="login-btn logout-btn"
+                onClick={() => {
+                  logout();
+                  // window.onbeforeunload = function () {
+                  //   return false;
+                  // }; //rerender for test
+                }}
+              >
+                Log out
+              </button>
+            ) : (
+              <button
+                className="login-btn"
+                onClick={displayForm}
+              >
+                Login <BsFillCaretDownFill />
+              </button>
+            )}
+            <div className={`login-form ${showForm ? "show" : ""}`}>
+              <div className="navbar">
+                <button className={`navButton ${isLogging && "selected"}`} onClick={() => setIsLogging(true)}>Login</button>
+                <button className={`navButton ${!isLogging && "selected"}`} onClick={() => setIsLogging(false)}>Register</button>
+              </div>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault()
+                  setShowForm(!showForm);
+                  isLogging ? login(user.username, user.password) : register(user.username, user.password);
+                  // window.onbeforeunload = function () {
+                  //   return false;
+                  // }; //rerender for test
+                }}
+              >
                 <div className="form-wrapper">
-                  <label>Username</label>
-                  <input type="text" className="form-control"></input>
+                  <label htmlFor="username">Username</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="username"
+                    required
+                    minLength="5"
+                    maxLength="16"
+                    onChange={handleInputChange}
+                  ></input>
                 </div>
                 <div className="form-wrapper">
-                  <label>Password</label>
-                  <input type="password" className="form-control"></input>
+                  <label htmlFor="password">Password</label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    name="password"
+                    required
+                    minLength="5"
+                    maxLength="16"
+                    onChange={handleInputChange}
+                  ></input>
                 </div>
-                <div className="form-buttons">
                   <button type="submit" className="login-button">
-                    Login
+                    Submit
                   </button>
-                  <button type="submit" className="register-button">
-                    Register
-                  </button>
-                </div>
               </form>
             </div>
           </ClickAwayListener>

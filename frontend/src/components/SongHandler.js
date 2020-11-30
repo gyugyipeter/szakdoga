@@ -1,0 +1,210 @@
+import React, { useContext, useState } from "react";
+import { AppContext } from "../components/AppContext";
+import { ApiContext } from "../components/ApiContext";
+import ClickAwayListener from "react-click-away-listener";
+import { TiDeleteOutline } from "react-icons/ti";
+import { BiCheckCircle, BiXCircle } from "react-icons/bi";
+import "reactjs-popup/dist/index.css";
+import "./SongHandler.css";
+import Modal from "./Modal";
+
+function SongListElement(props) {
+  const { id, name, menuCloser } = props;
+  const { setIsRecording, setIsKeyEventsDisabled } = useContext(AppContext);
+  const { getSong, deleteSong } = useContext(ApiContext);
+  const [showModal, setShowModal] = useState(false);
+  const handleClose = () => {
+    setIsKeyEventsDisabled(false);
+    setShowModal(false);
+  };
+  const displayModal = () => {
+    setIsKeyEventsDisabled(true);
+    setIsRecording(false);
+    setShowModal(true);
+  };
+  const handleChooseSong = () => {
+    setIsRecording(false);
+    getSong(id);
+    menuCloser(false);
+  }
+  const handleDeleteSong = () => {
+    deleteSong(id);
+    handleClose();
+    menuCloser(false);
+  }
+
+  return (
+    <>
+      <div className="songLine songLineAlign">
+        <button
+          className="selectSongButton"
+          onClick={handleChooseSong}
+        >
+          {name}
+        </button>
+        <button className="deleteSong" onClick={displayModal}>
+          <TiDeleteOutline />
+        </button>
+        <Modal show={showModal} handleClose={handleClose}>
+          <div>
+            <p>Are you sure you'd like delete your song?</p>
+            <div className="modalButtons">
+              <button
+                className="modalIcon check"
+                onClick={handleDeleteSong}
+              >
+                <BiCheckCircle />
+              </button>
+              <button className="modalIcon exit" onClick={handleClose}>
+                <BiXCircle />
+              </button>
+            </div>
+          </div>
+        </Modal>
+      </div>
+    </>
+  );
+}
+
+function SongSelector(setShowList) {
+  const { songList } = useContext(ApiContext);
+  const { currentInstrument } = useContext(AppContext);
+
+  return songList.map((e) => (
+    <div className="songListElement" key={e.id}>
+      {e.instrument.toLowerCase() === currentInstrument ? (
+        <SongListElement id={e.id} name={e.songName} menuCloser={setShowList} />
+      ) : null}
+    </div>
+  ));
+}
+
+function SongHandler() {
+  const { logs, currentInstrument, setIsRecording, setIsKeyEventsDisabled } = useContext(
+    AppContext
+  );
+  const { addSong, updateSong, selectedSongName } = useContext(ApiContext);
+  const [songName, setSongName] = useState(null);
+  const [showList, setShowList] = useState(false);
+  const [showModalAdd, setShowModalAdd] = useState(false);
+  const [showModalSave, setShowModalSave] = useState(false);
+  const handleCloseAdd = () => {
+    setIsKeyEventsDisabled(false);
+    setShowModalAdd(false);
+  };
+  const displayModalAdd = () => {
+    setIsKeyEventsDisabled(true);
+    setIsRecording(false);
+    setShowModalAdd(true);
+  };
+  const handleCloseSave = () => {
+    setIsKeyEventsDisabled(false);
+    setShowModalSave(false);
+  };
+  const displayModalSave = () => {
+    setIsKeyEventsDisabled(true);
+    setIsRecording(false);
+    setShowModalSave(true);
+  };
+  
+  const addNewSong = (songName) => {
+    let newSong = { notes: logs[currentInstrument] };
+    addSong(songName, JSON.stringify(newSong));
+    handleCloseAdd();
+  }
+
+  const overwriteSong = () => {
+    let updatedNotes = { notes: logs[currentInstrument] };
+    updateSong(JSON.stringify(updatedNotes));
+    handleCloseSave();
+  }
+
+  return (
+    <div className="songHandler">
+    <ClickAwayListener onClickAway={() => setShowList(false)}>
+      <div className="songSelector">
+        <div className="songLine">
+          <div className="selectorTitle">Songs:</div>
+          <button
+                className="loggerButton saveButton addButton"
+                onClick={displayModalAdd}
+              >
+                Add
+          </button>
+          <Modal show={showModalAdd} handleClose={handleCloseAdd}>
+            {logs[currentInstrument].length === 0 ? (
+              <div>
+                <p>There's nothing to save, please record some notes first!</p>
+              </div>
+            ) : (
+              <>
+                <p>What's the name of your song?</p>
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    addNewSong(songName);
+                  }}
+                >
+                  <div className="addModal">
+                    <input
+                      className="form-control"
+                      name="songName"
+                      type="text"
+                      required
+                      maxLength="50"
+                      onChange={(event) => {setSongName(event.target.value)}}
+                    />
+                    <button
+                      className="modalIcon check"
+                      type="submit"
+                    >
+                      <BiCheckCircle />
+                    </button>
+                  </div>
+                </form>
+              </>
+            )}
+          </Modal>
+          <button
+                className="loggerButton saveButton"
+                onClick={displayModalSave}
+              >
+                Save
+              </button>
+          <Modal show={showModalSave} handleClose={handleCloseSave}>
+            <div>
+              <p>Are you sure you'd like to save your song?</p>
+              <div className="modalButtons">
+                <button className="modalIcon check" onClick={() => overwriteSong()}>
+                  <BiCheckCircle />
+                </button>
+                <button className="modalIcon exit" onClick={handleCloseSave}>
+                  <BiXCircle />
+                </button>
+              </div>
+            </div>
+          </Modal>
+        </div>
+        <div className="selectorField">
+          <button
+            className="selectorDropdownButton"
+            onClick={() => {
+              setShowList(!showList);
+            }}
+          >
+            {selectedSongName[currentInstrument]}
+            <i className="selectorArrow"></i>
+          </button>
+        </div>
+        <div>
+          <div className={`selectorDropdown ${showList ? "show" : ""}`}>
+            {SongSelector(setShowList)}
+          </div>
+        </div>
+      </div>
+    </ClickAwayListener>
+    </div>
+  );
+}
+
+export default SongHandler;

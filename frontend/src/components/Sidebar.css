@@ -1,25 +1,20 @@
 .sidebar {
-  margin: 0;
-  padding: 0;
-  margin-bottom: -5000px;
-  padding-bottom: 5000px;
-  overflow: hidden;
   background-color: #212121;
   color: #fff;
   border-right: 0.05rem solid black;
   transition: all 0.3s;
   position: relative;
   text-decoration: none;
+  height: calc(100vh - 5rem);
 }
 
 .sidebarHeader {
-  margin-top: 0;
   display: block;
   line-height: 1.5;
   margin-bottom: 1rem;
   font-weight: 700;
   font-size: 1.5rem;
-  padding: 10% 10%;
+  padding: 10% 5%;
   box-sizing: border-box;
   font-family: "Poppins", Arial, sans-serif;
   color: #fff;
@@ -60,11 +55,4 @@
   display: grid;
   grid-template-columns: 10% auto;
   font-size: 1.3rem;
-}
-
-@media screen and (max-width: 650px) {
-  .sidebar ul li span,
-  .sidebarHeader {
-    display: none;
-  }
 }

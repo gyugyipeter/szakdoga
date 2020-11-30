@@ -21,6 +21,7 @@
   box-shadow: 0rem 0.3rem 0.3rem -0.05rem rgba(0, 0, 0, 0.63);
   padding-top: 7rem;
   color: rgb(116, 116, 116);
+  text-align: center;
 }
 .blackButton {
   box-sizing: border-box;

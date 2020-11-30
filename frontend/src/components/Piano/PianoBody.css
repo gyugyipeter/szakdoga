@@ -11,14 +11,18 @@ tr {
 }
 
 .firstColumn {
-  width: 20%;
+  width: 12%;
   text-align: left;
 }
 
 .noteDisplaySwitch {
   font-size: 1rem;
   text-align: -webkit-center;
-  width: 20%;
+  width: 10%;
+}
+
+.octavesRow {
+  display: flex;
 }
 
 .pianotr {
@@ -26,6 +30,10 @@ tr {
 }
 
 .pianoGroup {
+  margin-right: 3rem;
+}
+
+.singlePianoGroup {
   display: flex;
   align-items: center;
 }

@@ -1,0 +1,126 @@
+.selectorField {
+  display: flex;
+}
+
+.selectorDropdownButton {
+  height: 2rem;
+  width: 15rem;
+  background: white;
+  border: 1px solid #bababa;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: inherit;
+  justify-content: space-around;
+  cursor: pointer;
+}
+
+.selectorDropdown {
+  display: none;
+  z-index: 5;
+  width: 15rem;
+  position: absolute;
+  padding: 1.3rem 2rem;
+  background-color: white;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.show {
+  display: flex;
+}
+
+.songListElement {
+  width: 100%;
+}
+
+.selectorArrow {
+  border: solid black;
+  border-width: 0 1px 1px 0;
+  display: inline-block;
+  padding: 2.5px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+.songLine {
+  display: flex;
+  margin-bottom: 2%;
+  width: 100%;
+}
+
+.saveButton {
+  width: 25% !important;
+  margin-left: 1%;
+}
+
+.addButton {
+  margin-left: auto;
+}
+
+.deleteSong,
+.selectSongButton {
+  background: 0;
+  border: 0;
+  cursor: pointer;
+}
+
+.selectSongButton {
+  font-size: inherit;
+}
+
+.deleteSong {
+  font-size: 2rem;
+}
+
+.deleteSong:hover {
+  color: #e03d3d;
+}
+
+.songLineAlign {
+	justify-content: space-between;
+}
+
+.popup-content {
+  font-size: 1.5rem;
+  border-radius: 0.25rem;
+  text-align: -webkit-center;
+  height: 8rem;
+  width: 30rem;
+}
+
+.popup-content input {
+  width: 20rem;
+}
+
+.modalButtons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.addModal {
+  display: flex;
+  justify-content: center;
+}
+
+.modalIcon {
+  border: 0;
+  outline: 0;
+  background: 0;
+  cursor: pointer;
+}
+
+.modalIcon svg {
+  font-size: 2.5rem;
+}
+
+.check svg {
+  color: green;
+}
+
+.exit svg {
+  color: red;
+}

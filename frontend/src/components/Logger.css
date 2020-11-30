@@ -1,6 +1,5 @@
 .logger {
-  margin-left: 15%;
-  margin-right: auto;
+  margin-left: 1%;
   margin-top: 1%;
   padding: 0.3rem 1rem;
   display: flex;
@@ -94,6 +93,7 @@
   flex-direction: row;
   align-items: center;
   margin-bottom: 2rem;
+  justify-content: center;
 }
 
 @keyframes recording {
