@@ -21,7 +21,7 @@ public class SongService {
     private final SongStorage songStorage;
     private final UserStorage userStorage;
 
-    public Song addSong(SongDTO songDTO) {
+    public Long addSong(SongDTO songDTO) {
         Optional<User> Ouser = userStorage.findById(songDTO.getUserID());
         User user = null;
         if(Ouser.isPresent())
@@ -31,7 +31,12 @@ public class SongService {
                 .songObject(songDTO.getSongObject())
                 .user(user)
                 .build();
-        return songStorage.add(song);
+        songStorage.add(song);
+        return song.getId();
+    }
+
+    public void updateSong(Long id, String notes) {
+        songStorage.update(id, notes);
     }
 
     public List<Song> findSongsByUser(Long id) {

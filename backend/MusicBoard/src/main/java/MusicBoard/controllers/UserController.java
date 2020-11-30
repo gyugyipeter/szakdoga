@@ -1,16 +1,11 @@
 package MusicBoard.controllers;
 
-import java.rmi.ServerError;
-import java.rmi.ServerException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
+import MusicBoard.entities.User;
+import MusicBoard.entities.wrapper.Users;
+import MusicBoard.repositories.UserRepository;
 import MusicBoard.security.AuthenticatedUser;
 import MusicBoard.services.UserService;
-import javassist.NotFoundException;
-import lombok.Getter;
+import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,17 +15,11 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-
-import com.google.common.collect.Lists;
-
-import MusicBoard.entities.User;
-import MusicBoard.entities.wrapper.Users;
-import MusicBoard.repositories.UserRepository;
 import org.springframework.web.client.HttpServerErrorException;
 
-import javax.servlet.http.HttpServletResponse;
+import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -81,7 +70,6 @@ public class UserController {
         return oUser.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    //list update
     @PutMapping("/{id}")
     public ResponseEntity<User> updateById(@PathVariable Long id, @RequestBody User user) {
         Optional<User> oUser = userRepository.findById(id);

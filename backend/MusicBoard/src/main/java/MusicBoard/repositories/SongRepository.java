@@ -13,8 +13,7 @@ import javax.transaction.Transactional;
 
 @Transactional
 public interface SongRepository extends JpaRepository<Song, Long> {
-    Optional<Song> findBySongName(String songName);
+    List<Song> findByUserId(Long id);
     @Query("select s from Song s where s.user = :userid")
     List<Song> getAllSongsByUserId(@Param("userid") Long id);
-    List<Song> findByUserId(Long id);
 }

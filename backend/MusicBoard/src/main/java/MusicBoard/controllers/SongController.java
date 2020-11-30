@@ -50,19 +50,17 @@ public class SongController {
     @PostMapping("")
     public ResponseEntity<String> addNewSong(@RequestBody SongDTO song) {
         try {
-            songService.addSong(song);
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body("Song added");
+            Long newId = songService.addSong(song);
+            return ResponseEntity.status(HttpStatus.OK).body(newId.toString());
         } catch (Exception e) {
-            System.out.println(e);
             throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateById(@PathVariable Long id, @RequestBody Song song) {
+    public ResponseEntity<String> updateById(@PathVariable Long id, @RequestBody String updatedNotes) {
         try {
-            Optional<Song> oSong = songRepository.findById(id);
-            song.setId(id);
+            songService.updateSong(id, updatedNotes);
             return ResponseEntity.status(HttpStatus.ACCEPTED).body("Song updated");
         } catch (Exception e) {
             throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR);
