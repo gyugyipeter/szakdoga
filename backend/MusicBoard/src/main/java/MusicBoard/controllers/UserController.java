@@ -1,17 +1,25 @@
 package MusicBoard.controllers;
 
+import java.rmi.ServerError;
+import java.rmi.ServerException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import MusicBoard.security.AuthenticatedUser;
 import MusicBoard.services.UserService;
+import javassist.NotFoundException;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +28,7 @@ import com.google.common.collect.Lists;
 import MusicBoard.entities.User;
 import MusicBoard.entities.wrapper.Users;
 import MusicBoard.repositories.UserRepository;
+import org.springframework.web.client.HttpServerErrorException;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -28,38 +37,36 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("user")
 @RequiredArgsConstructor
 public class UserController {
+    private final AuthenticationManager authenticationManager;
     private final UserRepository userRepository;
     private final UserService userService;
 
     @Autowired
     AuthenticatedUser authenticatedUser;
 
-    @GetMapping("/who_am_i")
-    public ResponseEntity whoami() { return ResponseEntity.ok(authenticatedUser.getUser());
-    }
-
-    /*@PostMapping("/login")
-    public ResponseEntity<User> login(@RequestBody User user) {
-        return new ResponseEntity(HttpStatus.OK);
-    }*/
-
     @PostMapping("/login")
-    public ResponseEntity<User> login(@RequestBody User user/*, HttpServletResponse response*/) {
-        //return ResponseEntity.ok().body(user);
-        return new ResponseEntity(user.getId(), HttpStatus.OK);
+    public ResponseEntity<Optional<User>> login(@RequestBody User user) {
+        try {
+            Optional<User> oUser = userRepository.findByUserName(user.getUserName());
+            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                    user.getUserName(), user.getPassword()));
+            return ResponseEntity.ok(oUser);
+        } catch (AuthenticationException e) {
+            throw new BadCredentialsException("Invalid username/password supplied");
+        } catch (Exception e) {
+            throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> register(@RequestBody User user){
-        userService.register(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(user);
+    public ResponseEntity<String> register(@RequestBody User user) {
+        try {
+            userService.register(user);
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body("Registration was successful");
+        } catch (Exception e) {
+            throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
-
-    /*@PostMapping("/logout")
-    public ResponseEntity<User> logout() {
-        SecurityContextHolder.getContext().setAuthentication(null);
-        return new ResponseEntity("Successfully logged out", HttpStatus.OK);
-    }*/
 
     @GetMapping("")
     public ResponseEntity<Users> getAll() {

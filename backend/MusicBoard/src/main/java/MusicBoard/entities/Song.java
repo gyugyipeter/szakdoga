@@ -26,7 +26,6 @@ public class Song implements Serializable {
         PIANO
     }
 
-    @Column(unique=true)
     @NotNull
     private String songName;
 
@@ -41,6 +40,6 @@ public class Song implements Serializable {
     private String songObject;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private User user;
 }

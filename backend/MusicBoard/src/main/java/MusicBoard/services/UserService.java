@@ -16,8 +16,8 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public User register(User user) {
+    public void register(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userStorage.registerReturnUser(user);
+        userStorage.registerReturnUser(user);
     }
 }

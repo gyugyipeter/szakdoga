@@ -13,8 +13,12 @@ public class UserStorage {
     @Autowired
     private UserRepository userRepository;
 
-    public User registerReturnUser(User user) {
-        return userRepository.save(user);
+    public Optional<User> findById (Long id) {
+        return userRepository.findById(id);
+    }
+
+    public void registerReturnUser(User user) {
+        userRepository.save(user);
     }
 
     public Optional<User> findUsrByUsername(String username) {
@@ -24,9 +28,5 @@ public class UserStorage {
     public String getUsernameById(Long id) {
         User user = userRepository.findById(id).get();
         return user.getUserName();
-    }
-
-    public void save(User user) {
-        userRepository.save(user);
     }
 }

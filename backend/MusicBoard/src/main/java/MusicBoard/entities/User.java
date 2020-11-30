@@ -1,6 +1,8 @@
 package MusicBoard.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,7 +33,7 @@ public class User implements Serializable {
     @NotNull
     private String password;
 
-    @JsonIgnore
-    @OneToMany( mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany( mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<Song> songs;
 }
