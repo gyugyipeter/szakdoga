@@ -8,6 +8,7 @@ public class SongDTO {
         GUITAR,
         PIANO
     }
+
     private String songName;
     private Song.InstrumentType instrument;
     private String songObject;

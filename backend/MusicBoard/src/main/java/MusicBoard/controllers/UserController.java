@@ -1,13 +1,10 @@
 package MusicBoard.controllers;
 
 import MusicBoard.entities.User;
-import MusicBoard.entities.wrapper.Users;
 import MusicBoard.repositories.UserRepository;
-import MusicBoard.security.AuthenticatedUser;
 import MusicBoard.services.UserService;
 import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -30,13 +27,10 @@ public class UserController {
     private final UserRepository userRepository;
     private final UserService userService;
 
-    @Autowired
-    AuthenticatedUser authenticatedUser;
-
     @PostMapping("/login")
     public ResponseEntity<Optional<User>> login(@RequestBody User user) {
         try {
-            Optional<User> oUser = userRepository.findByUserName(user.getUserName());
+            Optional<User> oUser = userService.findUserByUsername(user.getUserName());
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     user.getUserName(), user.getPassword()));
             return ResponseEntity.ok(oUser);
@@ -58,12 +52,17 @@ public class UserController {
     }
 
     @GetMapping("")
-    public ResponseEntity<Users> getAll() {
-        final List<User> result = Lists.newArrayList();
-        userRepository.findAll().iterator().forEachRemaining(result::add);
-        return new ResponseEntity(result, HttpStatus.OK);
+    public ResponseEntity<List<User>> getAll() {
+        try {
+            final List<User> result = Lists.newArrayList();
+            userRepository.findAll().iterator().forEachRemaining(result::add);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
+    /* have not used these endpoints, but they might get handy in the future
     @GetMapping("/{id}")
     public ResponseEntity<User> getById(@PathVariable Long id) {
         Optional<User> oUser = userRepository.findById(id);
@@ -115,5 +114,5 @@ public class UserController {
         }
         userRepository.delete(oUser.get());
         return ResponseEntity.ok().build();
-    }
+    }*/
 }

@@ -20,11 +20,16 @@ public class SongStorage {
 
     public void update(Long id, String notes) {
         Optional<Song> currentVersion = songRepository.findById(id);
-        if(currentVersion.isPresent()) {
+        if (currentVersion.isPresent()) {
             currentVersion.get().setSongObject(notes);
             Song updatedVersion = currentVersion.get();
             songRepository.save(updatedVersion);
         }
+    }
+
+    public void delete(Long id) {
+        Optional<Song> oSong = songRepository.findById(id);
+        songRepository.deleteById(id);
     }
 
     public List<Song> findByUserId(Long id) {

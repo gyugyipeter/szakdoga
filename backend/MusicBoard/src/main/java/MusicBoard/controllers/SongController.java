@@ -2,11 +2,8 @@ package MusicBoard.controllers;
 
 import MusicBoard.entities.Song;
 import MusicBoard.entities.SongDTO;
-import MusicBoard.entities.User;
-import MusicBoard.entities.wrapper.Songs;
 import MusicBoard.repositories.SongRepository;
 import MusicBoard.services.SongService;
-import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,10 +25,10 @@ public class SongController {
     private SongRepository songRepository;
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<List> getByUser(@PathVariable Long id) {
+    public ResponseEntity<List<Song>> getByUser(@PathVariable Long id) {
         try {
             final List<Song> songs = songService.findSongsByUser(id);
-            return new ResponseEntity<List>(songs, HttpStatus.OK);
+            return new ResponseEntity<>(songs, HttpStatus.OK);
         } catch (Exception e) {
             throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -70,8 +67,7 @@ public class SongController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteById(@PathVariable Long id) {
         try {
-            Optional<Song> oSong = songRepository.findById(id);
-            songRepository.deleteById(id);
+            songService.deleteSong(id);
             return ResponseEntity.status(HttpStatus.ACCEPTED).body("Song deleted");
         } catch (Exception e) {
             throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR);

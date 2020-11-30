@@ -6,11 +6,8 @@ import MusicBoard.entities.Song;
 import MusicBoard.entities.SongDTO;
 import MusicBoard.entities.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +21,7 @@ public class SongService {
     public Long addSong(SongDTO songDTO) {
         Optional<User> Ouser = userStorage.findById(songDTO.getUserID());
         User user = null;
-        if(Ouser.isPresent())
+        if (Ouser.isPresent())
             user = Ouser.get();
         Song song = Song.builder().songName(songDTO.getSongName())
                 .instrument(songDTO.getInstrument())
@@ -37,6 +34,10 @@ public class SongService {
 
     public void updateSong(Long id, String notes) {
         songStorage.update(id, notes);
+    }
+
+    public void deleteSong(Long id) {
+        songStorage.delete(id);
     }
 
     public List<Song> findSongsByUser(Long id) {
