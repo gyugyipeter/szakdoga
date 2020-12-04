@@ -9,7 +9,7 @@ function WhiteButton(props) {
 
   return(
     <div className="pianoKey whiteButton" id= {id}>
-      <div>{displayNotes && getNotes()[firstNote] }</div>
+      <div className="noteToCenter">{displayNotes && getNotes()[firstNote] }</div>
       <div className="keyBinding">{displayKeys && keyPressed}</div>
     </div>
   );
@@ -22,7 +22,7 @@ function BlackButton(props) {
   return(
     <div className="blackButtonBox">
       <div className="pianoKey blackButton" id= {id}>
-        <div>{displayNotes && getNotes()[firstNote]}</div>
+        <div className="noteToCenter">{displayNotes && getNotes()[firstNote]}</div>
         <div className="keyBinding">{displayKeys && keyPressed}</div>
       </div>
     </div>

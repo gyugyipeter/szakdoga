@@ -34,7 +34,7 @@ public class MyUserDetailsService implements UserDetailsService {
         User user = oUser.get();
         authenticatedUser.setUser(user);
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        grantedAuthorities.add(new SimpleGrantedAuthority("USER")); //ki kene szedni
+        grantedAuthorities.add(new SimpleGrantedAuthority("USER"));
 
         return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(), grantedAuthorities);
     }

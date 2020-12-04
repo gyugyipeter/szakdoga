@@ -10,8 +10,8 @@ import Modal from "./Modal";
 
 function SongListElement(props) {
   const { id, name, menuCloser } = props;
-  const { setIsRecording, setIsKeyEventsDisabled } = useContext(AppContext);
-  const { getSong, deleteSong } = useContext(ApiContext);
+  const { setIsRecording, setIsKeyEventsDisabled, currentInstrument } = useContext(AppContext);
+  const { selectedSongID, getSong, deleteSong } = useContext(ApiContext);
   const [showModal, setShowModal] = useState(false);
   const handleClose = () => {
     setIsKeyEventsDisabled(false);
@@ -37,7 +37,7 @@ function SongListElement(props) {
     <>
       <div className="songLine songLineAlign">
         <button
-          className="selectSongButton"
+          className={`selectSongButton ${selectedSongID[currentInstrument] === id ? "highlight" : ""}`}
           onClick={handleChooseSong}
         >
           {name}
@@ -70,13 +70,21 @@ function SongSelector(setShowList) {
   const { songList } = useContext(ApiContext);
   const { currentInstrument } = useContext(AppContext);
 
-  return songList.map((e) => (
-    <div className="songListElement" key={e.id}>
-      {e.instrument.toLowerCase() === currentInstrument ? (
-        <SongListElement id={e.id} name={e.songName} menuCloser={setShowList} />
-      ) : null}
-    </div>
-  ));
+  return (
+    <>
+      {songList.map((e) =>
+        e.instrument.toLowerCase() === currentInstrument ? (
+          <div className="songListElement" key={e.id}>
+            <SongListElement
+              id={e.id}
+              name={e.songName}
+              menuCloser={setShowList}
+            />
+          </div>
+        ) : null
+      )}
+    </>
+  );
 }
 
 function SongHandler() {
@@ -128,46 +136,42 @@ function SongHandler() {
           <button
                 className="loggerButton saveButton addButton"
                 onClick={displayModalAdd}
+                disabled={logs[currentInstrument].length === 0}
               >
                 Add
           </button>
           <Modal show={showModalAdd} handleClose={handleCloseAdd}>
-            {logs[currentInstrument].length === 0 ? (
-              <div>
-                <p>There's nothing to save, please record some notes first!</p>
-              </div>
-            ) : (
-              <>
-                <p>What's the name of your song?</p>
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    addNewSong(songName);
-                  }}
-                >
-                  <div className="addModal">
-                    <input
-                      className="form-control"
-                      name="songName"
-                      type="text"
-                      required
-                      maxLength="50"
-                      onChange={(event) => {setSongName(event.target.value)}}
-                    />
-                    <button
-                      className="modalIcon check"
-                      type="submit"
-                    >
-                      <BiCheckCircle />
-                    </button>
-                  </div>
-                </form>
-              </>
-            )}
+            <div>
+              <p>What's the name of your song?</p>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  addNewSong(songName);
+                }}
+              >
+                <div className="addModal">
+                  <input
+                    className="form-control"
+                    name="songName"
+                    type="text"
+                    required
+                    maxLength="50"
+                    onChange={(event) => {setSongName(event.target.value)}}
+                  />
+                  <button
+                    className="modalIcon check"
+                    type="submit"
+                  >
+                    <BiCheckCircle />
+                  </button>
+                </div>
+              </form>
+            </div>
           </Modal>
           <button
                 className="loggerButton saveButton"
                 onClick={displayModalSave}
+                disabled={selectedSongName[currentInstrument] === null}
               >
                 Save
               </button>

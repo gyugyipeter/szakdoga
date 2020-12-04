@@ -9,7 +9,7 @@ function PianoBody(props) {
   useEffect(() => {
     setCurrentInstrument("piano");
     setIsRecording(false);
-  }, [setCurrentInstrument]);
+  }, [setCurrentInstrument, setIsRecording]);
   return (
     <>
       <Logger />

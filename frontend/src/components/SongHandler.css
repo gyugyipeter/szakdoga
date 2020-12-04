@@ -35,6 +35,11 @@
 
 .songListElement {
   width: 100%;
+  border-bottom: 1px solid lightgray;
+}
+
+.songListElement:last-of-type {
+  border-bottom: 0;
 }
 
 .selectorArrow {
@@ -44,6 +49,10 @@
   padding: 2.5px;
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
+}
+
+.highlight {
+  color: #60a3bc;
 }
 
 .songLine {
@@ -70,6 +79,11 @@
 
 .selectSongButton {
   font-size: inherit;
+  transition: transform .2s;
+}
+
+.selectSongButton:hover {
+  transform: translateX(0.5rem);
 }
 
 .deleteSong {
@@ -81,7 +95,8 @@
 }
 
 .songLineAlign {
-	justify-content: space-between;
+  justify-content: space-between;
+  margin: 0;
 }
 
 .popup-content {

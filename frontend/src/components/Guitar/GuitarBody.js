@@ -8,7 +8,7 @@ function GuitarBody(props) {
   useEffect(() => {
     setCurrentInstrument("guitar");
     setIsRecording(false);
-  }, [setCurrentInstrument]);
+  }, [setCurrentInstrument, setIsRecording]);
   return (
     <>
       <Logger />

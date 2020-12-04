@@ -15,6 +15,7 @@ function Header(props) {
       setIsKeyEventsDisabled(false);
     }
   };
+
   const displayForm = () => {
     setShowForm(true);
     setIsKeyEventsDisabled(true)
@@ -39,9 +40,6 @@ function Header(props) {
                 className="login-btn logout-btn"
                 onClick={() => {
                   logout();
-                  // window.onbeforeunload = function () {
-                  //   return false;
-                  // }; //rerender for test
                 }}
               >
                 Log out
@@ -64,9 +62,7 @@ function Header(props) {
                   e.preventDefault()
                   setShowForm(!showForm);
                   isLogging ? login(user.username, user.password) : register(user.username, user.password);
-                  // window.onbeforeunload = function () {
-                  //   return false;
-                  // }; //rerender for test
+                  e.target.reset()
                 }}
               >
                 <div className="form-wrapper">

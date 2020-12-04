@@ -235,7 +235,7 @@ function PlayPiano(props) {
 
   Howler.volume(1.0);
 
-  const callBack = useCallback(() => stopPlaying(), []);
+  const callBack = useCallback(() => stopPlaying(), [stopPlaying]);
   useEffect(() => callBack(), [callBack]);
 
   return (
@@ -329,7 +329,7 @@ function PlayPiano(props) {
             </div>
           </div>
         </div>
-          <div className="pianospace">
+          <div className="pianospace octaves">
               <div>{pianoRange1}</div>
               <div>{pianoRange2}</div>
             </div>

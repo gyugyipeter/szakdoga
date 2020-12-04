@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AppContext } from "./AppContext";
 
@@ -43,26 +43,37 @@ function ApiContextProvider(props) {
       setIsLoggedIn(true);
       setIsKeyEventsDisabled(false);
     } catch (e) {
-      alert(e);
+      if(e.response.status === 401)
+        alert("Invalid username/password supplied");
+      else
+        alert(e);
     }
   };
 
   const logout = () => {
     localStorage.removeItem("userID");
     setIsLoggedIn(false);
+    setSelectedSongID({ piano: null, guitar: null });
+    setSelectedSongName({ piano: null, guitar: null });
+    setLogs({piano: [], guitar: []})
   };
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      try {
-        http
-          .get(`/songs/user/${localStorage.getItem("userID")}`)
-          .then((response) => setSongList(response.data));
-      } catch (e) {
-        alert(e);
-      }
+  const getAllSongsByUser = useCallback(() => {
+    try {
+      axios
+        .get(
+          `http://localhost:8080/songs/user/${localStorage.getItem("userID")}`
+        )
+        .then((response) => setSongList(response.data));
+    } catch (e) {
+      alert(e);
     }
   }, []);
+
+  useEffect(() => {
+    if (isLoggedIn)
+      getAllSongsByUser();
+  }, [isLoggedIn, getAllSongsByUser]);
 
   const getSong = async (id) => {
     try {
@@ -84,7 +95,8 @@ function ApiContextProvider(props) {
         userID: localStorage.getItem("userID"),
       });
       setSelectedSongName({ ...selectedSongName, [currentInstrument]: name });
-      setSelectedSongID({ ...selectedSongID, [currentInstrument]: response.data.id });
+      setSelectedSongID({ ...selectedSongID, [currentInstrument]: response.data });
+      getAllSongsByUser();
     } catch (e) {
       alert(e);
     }
@@ -92,7 +104,7 @@ function ApiContextProvider(props) {
 
   const updateSong = async (notes) => {
     try {
-      const response = await http.put(`/songs/${selectedSongID[currentInstrument]}`, notes);
+      await http.put(`/songs/${selectedSongID[currentInstrument]}`, notes);
     } catch (e) {
       alert(e);
     }
@@ -100,11 +112,12 @@ function ApiContextProvider(props) {
 
   const deleteSong = async (id) => {
     try {
-      const response = await http.delete(`/songs/${id}`);
+      await http.delete(`/songs/${id}`);
       if(selectedSongID[currentInstrument] === id) {
         setSelectedSongName({ ...selectedSongName, [currentInstrument]: null });
         setSelectedSongID({ ...selectedSongID, [currentInstrument]: null });
       }
+      getAllSongsByUser();
     } catch (e) {
       alert(e);
     }
@@ -115,6 +128,7 @@ function ApiContextProvider(props) {
       value={{
         isLoggedIn,
         songList,
+        selectedSongID,
         selectedSongName,
         setIsLoggedIn,
         register,

@@ -11,7 +11,13 @@
   display: flex;
   width: 100%;
   margin-bottom: 1.5rem;
-  margin-left: 32.5%;
+  place-content: center;
+  grid-gap: 30rem;
+  margin-left: 5rem;
+}
+
+.octaves {
+  grid-gap: 35rem
 }
 
 .guitarSettings {
