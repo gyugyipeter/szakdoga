@@ -1,6 +1,6 @@
 import React, { createContext, useState, useRef } from "react";
 import Copy from "copy-to-clipboard";
-import { Howl, Howler } from "howler";
+import { Howl } from "howler";
 import {
   getPiano,
   getCleanGuitar,
@@ -8,6 +8,14 @@ import {
 } from "../domain/NoteFilePairs";
 
 let timeIds = [];
+let lastNotesOnString = {
+  1: null,
+  2: null,
+  3: null,
+  4: null,
+  5: null,
+  6: null,
+}
 
 export const AppContext = createContext();
 
@@ -19,22 +27,6 @@ function AppContextProvider(props) {
     piano: "reverb",
     guitar: "clean",
   });
-  const [lastNoteOnString, setLastNoteOnString] = useState({
-    1: null,
-    2: null,
-    3: null,
-    4: null,
-    5: null,
-    6: null,
-  });
-  /*const [guitarRange, setGuitarRange] = useState({
-    string1: 1,
-    string2: 1,
-    string3: 2,
-    string4: 2,
-    string5: 2,
-    string6: 3,
-  });*/
   const [guitarTuningNotes, setGuitarTuningNotes] = useState({
     1: "E1",
     2: "A1",
@@ -43,16 +35,6 @@ function AppContextProvider(props) {
     5: "B2",
     6: "E3",
   });
-  // const [activeFrets, setActiveFrets] = useState({
-  //   1: 1,
-  //   2: 2,
-  //   3: 3,
-  //   4: 4,
-  //   5: 5,
-  //   6: 6,
-  //   7: 7,
-  //   8: 8,
-  // });
   const [guitarTuning, setGuitarTuning] = useState("Standard");
   const [firstFretPos, setFirstFretPos] = useState(1);
   const [pianoRange1, setpianoRange1] = useState(3);
@@ -129,11 +111,12 @@ function AppContextProvider(props) {
   };
 
   const PlayGuitarSound = (src, stringNumber) => {
-    Howler.stop([lastNoteOnString[stringNumber]]);
-    const sound = new Howl({
+    if(lastNotesOnString[stringNumber])
+      lastNotesOnString[stringNumber].stop();
+    lastNotesOnString[stringNumber] = new Howl({
       src,
     });
-    setLastNoteOnString({...lastNoteOnString, [stringNumber]: sound.play()});
+    lastNotesOnString[stringNumber].play();
   };
 
   const stopPlaying = () => {
@@ -167,7 +150,6 @@ function AppContextProvider(props) {
         logs,
         currentInstrument,
         isRecording,
-        //guitarRange,
         firstNote1,
         firstNote2,
         isKeyEventsDisabled,
@@ -178,11 +160,9 @@ function AppContextProvider(props) {
         instrumentSound,
         guitarTuning,
         guitarTuningNotes,
-        //activeFrets,
         LoggerRef,
         displayNotes,
         displayKeys,
-        lastNoteOnString,
         addLog,
         removeLog,
         setIsRecording,
@@ -193,7 +173,6 @@ function AppContextProvider(props) {
         setIsKeyEventsDisabled,
         setpianoRange1,
         setpianoRange2,
-        //setGuitarRange,
         PlaySound,
         PlayGuitarSound,
         stopPlaying,
@@ -202,12 +181,10 @@ function AppContextProvider(props) {
         setInstrumentSound,
         setGuitarTuning,
         setGuitarTuningNotes,
-        //setActiveFrets,
         setLogs,
         setCurrentInstrument,
         setDisplayNotes,
-        setDisplayKeys,
-        setLastNoteOnString
+        setDisplayKeys
       }}
     >
       {props.children}

@@ -142,7 +142,7 @@ function SongHandler() {
           </button>
           <Modal show={showModalAdd} handleClose={handleCloseAdd}>
             <div>
-              <p>What's the name of your song?</p>
+              <p>What's the title of your song?</p>
               <form
                 onSubmit={(e) => {
                   e.preventDefault();

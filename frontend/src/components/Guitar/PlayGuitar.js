@@ -411,7 +411,7 @@ function PlayGuitar(props) {
   const { firstFretPos, setFirstFretPos, stopPlaying } = useContext(AppContext);
   Howler.volume(0.1);
 
-  const callBack =  useCallback(() => stopPlaying(), [stopPlaying]);
+  const callBack =  useCallback(() => stopPlaying(), []);
   useEffect(() => callBack(), [callBack])
 
   return (

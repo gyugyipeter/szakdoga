@@ -23,19 +23,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .cors()
+                .cors() // enable CORS
                 .and()
-                .csrf().disable()
+                .csrf().disable()   // disable csrf to simplify interactions between client and server
                 .authorizeRequests()
-                .antMatchers("/*").permitAll()
+                .antMatchers("/*").permitAll()  // permission to links
                 .and()
-                .httpBasic()
+                .httpBasic()    // basic authentication
                 .and()
                 .headers()
                 .frameOptions().disable()
                 .and()
                 .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);    // no session will be created by Spring Security
     }
 
     @Autowired

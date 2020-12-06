@@ -235,7 +235,7 @@ function PlayPiano(props) {
 
   Howler.volume(1.0);
 
-  const callBack = useCallback(() => stopPlaying(), [stopPlaying]);
+  const callBack = useCallback(() => stopPlaying(), []);
   useEffect(() => callBack(), [callBack]);
 
   return (
