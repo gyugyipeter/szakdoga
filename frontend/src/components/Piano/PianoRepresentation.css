@@ -10,11 +10,13 @@
   transition: box-shadow 0.125s ease, border-width 0.125s ease;
   box-sizing: border-box;
 }
+
 .blackButtonBox {
   width: 0;
   margin: 0;
   position: relative;
 }
+
 .whiteButton {
   height: 12rem;
   width: 3rem;
@@ -23,6 +25,7 @@
   color: rgb(116, 116, 116);
   text-align: center;
 }
+
 .blackButton {
   box-sizing: border-box;
   z-index: 1;
@@ -38,10 +41,12 @@
   color: rgb(206, 206, 206);
   padding-top: 2rem;
 }
+
 .whiteButton.pressed {
   box-shadow: 0rem 0.12rem 0.15rem 0rem rgba(0, 0, 0, 0.63);
   color: black;
 }
+
 .blackButton.pressed {
   box-shadow: 0.25rem 0rem 0.18rem 0rem rgba(0, 0, 0, 0.63);
   border-bottom-width: 0.15rem;
@@ -57,9 +62,11 @@
   left: 50%;
   transform: translateX(-0.5rem);
 }
+
 .blackButton.pressed::before {
   transform: translateX(-0.5rem);
 }
+
 .next-whiteButton-pressed {
   box-shadow: 2px 0px 1.5px 0px rgba(0, 0, 0, 0.63);
 }

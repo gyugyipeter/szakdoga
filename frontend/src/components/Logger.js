@@ -37,8 +37,8 @@ function Logger(props) {
                   className="log"
                   key={index}
                 >
-                  <div className="note">{log.note}</div>
-                  <div className="key">{log.key}</div>
+                  <div>{log.note}</div>
+                  <div>{log.key}</div>
                 </div>
               );
             })
@@ -66,7 +66,7 @@ function Logger(props) {
               title="Copy notes to clipboard"
               onClick={() => copyLogs()}
             >
-              copy <MdContentCopy className="MdContentCopy" />
+              copy <MdContentCopy />
             </button>
           </div>
           <div>

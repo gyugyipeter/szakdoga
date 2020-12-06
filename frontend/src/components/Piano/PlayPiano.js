@@ -6,6 +6,7 @@ import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
 import { AppContext } from "../AppContext";
 import PianoRepresentation from "./PianoRepresentation";
 import PianoSettings from "./PianoSettings";
+import "./PlayPiano.css";
 import "../Instrument.css";
 
 function HandleKeyPress(props) {
@@ -339,20 +340,3 @@ function PlayPiano(props) {
 }
 
 export default PlayPiano;
-
-/*
-
-A# 3
-G# 4
-
-V N 6
-Y N Z
-N E U
-            I
-            E
-X V N 6
-Z
-Y N 6
-C E B
-Y V N
-*/

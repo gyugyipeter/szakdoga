@@ -1,3 +1,4 @@
+/* these properties can be used on more than one component for instruments */
 .instrument {
   margin-left: 0.5%;
   user-select: none;
@@ -5,19 +6,6 @@
 
 .instrument button {
   outline: 0;
-}
-
-.pianospace {
-  display: flex;
-  width: 100%;
-  margin-bottom: 1.5rem;
-  place-content: center;
-  grid-gap: 30rem;
-  margin-left: 5rem;
-}
-
-.octaves {
-  grid-gap: 35rem
 }
 
 .guitarSettings {
@@ -34,21 +22,6 @@
 .selectGroup select {
   margin-left: 5%;
   width: auto;
-}
-
-.arrow {
-  background: none;
-  border: 0;
-  border-radius: 100%;
-  padding: 0;
-  height: fit-content;
-  margin: 0.5rem;
-}
-
-.arrow:not(:disabled):hover {
-  background-color: rgba(70, 70, 70, 0.15);
-  color: white;
-  cursor: pointer;
 }
 
 select {

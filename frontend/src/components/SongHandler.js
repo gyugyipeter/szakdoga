@@ -128,11 +128,9 @@ function SongHandler() {
   }
 
   return (
-    <div className="songHandler">
     <ClickAwayListener onClickAway={() => setShowList(false)}>
-      <div className="songSelector">
         <div className="songLine">
-          <div className="selectorTitle">Songs:</div>
+          <div>Songs:</div>
           <button
                 className="loggerButton saveButton addButton"
                 onClick={displayModalAdd}
@@ -205,9 +203,7 @@ function SongHandler() {
             {SongSelector(setShowList)}
           </div>
         </div>
-      </div>
     </ClickAwayListener>
-    </div>
   );
 }
 

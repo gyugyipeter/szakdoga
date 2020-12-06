@@ -135,6 +135,20 @@
   max-width: 90%;
 }
 
+.guitarNeckPosition button svg {
+  width: 2rem;
+  height: 1.5rem;
+}
+
+.guitarNeckPosition button:hover {
+  cursor: pointer;
+}
+
+.guitarNeckPosition button:disabled {
+  color: #11100e;
+  cursor: default;
+}
+
 .guitarNeckPosition button {
   background-color: #11100e;
   border: none;
@@ -155,20 +169,6 @@
 
 .rightNeckArrow {
   margin-left: -3rem;
-}
-
-.guitarNeckPosition button svg {
-  width: 2rem;
-  height: 1.5rem;
-}
-
-.guitarNeckPosition button:hover {
-  cursor: pointer;
-}
-
-.guitarNeckPosition button:disabled {
-  color: #11100e;
-  cursor: default;
 }
 
 .dot:before {

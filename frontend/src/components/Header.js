@@ -89,7 +89,7 @@ function Header(props) {
                     onChange={handleInputChange}
                   ></input>
                 </div>
-                  <button type="submit" className="login-button">
+                  <button type="submit" className="submit-button">
                     Submit
                   </button>
               </form>
