@@ -7,13 +7,12 @@ import { AppContext } from "../AppContext";
 import PianoRepresentation from "./PianoRepresentation";
 import PianoSettings from "./PianoSettings";
 import "./PlayPiano.css";
-import "../Instrument.css";
 
 function HandleKeyPress(props) {
   const {
     addLog,
-    firstNote1,
-    firstNote2,
+    firstPianoNote1,
+    firstPianoNote2,
     pianoRange1,
     pianoRange2,
     isKeyEventsDisabled,
@@ -48,78 +47,78 @@ function HandleKeyPress(props) {
         switch (key) {
           //low
           case "y":
-            keyDownEvent(0, "y", "#firstPianonote-1", e, firstNote1, chooseNote1);
+            keyDownEvent(0, "y", "#firstPianonote-1", e, firstPianoNote1, chooseNote1);
             break;
           case "s":
-            keyDownEvent(1, "s", "#firstPianonote-2", e, firstNote1, chooseNote1);
+            keyDownEvent(1, "s", "#firstPianonote-2", e, firstPianoNote1, chooseNote1);
             break;
           case "x":
-            keyDownEvent(2, "x", "#firstPianonote-3", e, firstNote1, chooseNote1);
+            keyDownEvent(2, "x", "#firstPianonote-3", e, firstPianoNote1, chooseNote1);
             break;
           case "d":
-            keyDownEvent(3, "d", "#firstPianonote-4", e, firstNote1, chooseNote1);
+            keyDownEvent(3, "d", "#firstPianonote-4", e, firstPianoNote1, chooseNote1);
             break;
           case "c":
-            keyDownEvent(4, "c", "#firstPianonote-5", e, firstNote1, chooseNote1);
+            keyDownEvent(4, "c", "#firstPianonote-5", e, firstPianoNote1, chooseNote1);
             break;
           case "v":
-            keyDownEvent(5, "v", "#firstPianonote-6", e, firstNote1, chooseNote1);
+            keyDownEvent(5, "v", "#firstPianonote-6", e, firstPianoNote1, chooseNote1);
             break;
           case "g":
-            keyDownEvent(6, "g", "#firstPianonote-7", e, firstNote1, chooseNote1);
+            keyDownEvent(6, "g", "#firstPianonote-7", e, firstPianoNote1, chooseNote1);
             break;
           case "b":
-            keyDownEvent(7, "b", "#firstPianonote-8", e, firstNote1, chooseNote1);
+            keyDownEvent(7, "b", "#firstPianonote-8", e, firstPianoNote1, chooseNote1);
             break;
           case "h":
-            keyDownEvent(8, "h", "#firstPianonote-9", e, firstNote1, chooseNote1);
+            keyDownEvent(8, "h", "#firstPianonote-9", e, firstPianoNote1, chooseNote1);
             break;
           case "n":
-            keyDownEvent(9, "n", "#firstPianonote-10", e, firstNote1, chooseNote1);
+            keyDownEvent(9, "n", "#firstPianonote-10", e, firstPianoNote1, chooseNote1);
             break;
           case "j":
-            keyDownEvent(10, "j", "#firstPianonote-11", e, firstNote1, chooseNote1);
+            keyDownEvent(10, "j", "#firstPianonote-11", e, firstPianoNote1, chooseNote1);
             break;
           case "m":
-            keyDownEvent(11, "m", "#firstPianonote-12", e, firstNote1, chooseNote1);
+            keyDownEvent(11, "m", "#firstPianonote-12", e, firstPianoNote1, chooseNote1);
             break;
 
           //high
           case "w":
-            keyDownEvent(0, "w", "#secondPianonote-1", e, firstNote2, chooseNote2);
+            keyDownEvent(0, "w", "#secondPianonote-1", e, firstPianoNote2, chooseNote2);
             break;
           case "3":
-            keyDownEvent(1, "3", "#secondPianonote-2", e, firstNote2, chooseNote2);
+            keyDownEvent(1, "3", "#secondPianonote-2", e, firstPianoNote2, chooseNote2);
             break;
           case "e":
-            keyDownEvent(2, "e", "#secondPianonote-3", e, firstNote2, chooseNote2);
+            keyDownEvent(2, "e", "#secondPianonote-3", e, firstPianoNote2, chooseNote2);
             break;
           case "4":
-            keyDownEvent(3, "4", "#secondPianonote-4", e, firstNote2, chooseNote2);
+            keyDownEvent(3, "4", "#secondPianonote-4", e, firstPianoNote2, chooseNote2);
             break;
           case "r":
-            keyDownEvent(4, "r", "#secondPianonote-5", e, firstNote2, chooseNote2);
+            keyDownEvent(4, "r", "#secondPianonote-5", e, firstPianoNote2, chooseNote2);
             break;
           case "t":
-            keyDownEvent(5, "t", "#secondPianonote-6", e, firstNote2, chooseNote2);
+            keyDownEvent(5, "t", "#secondPianonote-6", e, firstPianoNote2, chooseNote2);
             break;
           case "6":
-            keyDownEvent(6, "6", "#secondPianonote-7", e, firstNote2, chooseNote2);
+            keyDownEvent(6, "6", "#secondPianonote-7", e, firstPianoNote2, chooseNote2);
             break;
           case "z":
-            keyDownEvent(7, "z", "#secondPianonote-8", e, firstNote2, chooseNote2);
+            keyDownEvent(7, "z", "#secondPianonote-8", e, firstPianoNote2, chooseNote2);
             break;
           case "7":
-            keyDownEvent(8, "7", "#secondPianonote-9", e, firstNote2, chooseNote2);
+            keyDownEvent(8, "7", "#secondPianonote-9", e, firstPianoNote2, chooseNote2);
             break;
           case "u":
-            keyDownEvent(9, "u", "#secondPianonote-10", e, firstNote2, chooseNote2);
+            keyDownEvent(9, "u", "#secondPianonote-10", e, firstPianoNote2, chooseNote2);
             break;
           case "8":
-            keyDownEvent(10, "8", "#secondPianonote-11", e, firstNote2, chooseNote2);
+            keyDownEvent(10, "8", "#secondPianonote-11", e, firstPianoNote2, chooseNote2);
             break;
           case "i":
-            keyDownEvent(11, "i", "#secondPianonote-12", e, firstNote2, chooseNote2);
+            keyDownEvent(11, "i", "#secondPianonote-12", e, firstPianoNote2, chooseNote2);
             break;
           default:
         }
@@ -220,14 +219,14 @@ function PlayPiano(props) {
     setpianoRange1,
     pianoRange2,
     setpianoRange2,
-    setFirstNote1,
-    setFirstNote2,
-    firstNote1,
-    firstNote2,
-    displayNotes,
-    displayKeys,
-    setDisplayNotes,
-    setDisplayKeys,
+    setFirstPianoNote1,
+    setFirstPianoNote2,
+    firstPianoNote1,
+    firstPianoNote2,
+    displayPianoNotes,
+    displayPianoKeys,
+    setDisplayPianoNotes,
+    setDisplayPianoKeys,
     stopPlaying,
   } = useContext(AppContext);
 
@@ -251,9 +250,9 @@ function PlayPiano(props) {
               className="tgl"
               type="checkbox"
               id="noteSwitch"
-              value={displayNotes}
+              value={displayPianoNotes}
               onClick={() => {
-                setDisplayNotes(!displayNotes);
+                setDisplayPianoNotes(!displayPianoNotes);
               }}
             />
             <label className="tgl-btn" htmlFor="noteSwitch"></label>
@@ -262,9 +261,9 @@ function PlayPiano(props) {
               className="tgl"
               type="checkbox"
               id="keySwitch"
-              value={displayKeys}
+              value={displayPianoKeys}
               onClick={() => {
-                setDisplayKeys(!displayKeys);
+                setDisplayPianoKeys(!displayPianoKeys);
               }}
             />
             <label className="tgl-btn" htmlFor="keySwitch"></label>
@@ -282,14 +281,14 @@ function PlayPiano(props) {
                 <MdKeyboardArrowLeft size={100} />
               </button>
               <PianoRepresentation
-                firstNote={firstNote1}
+                firstNote={firstPianoNote1}
                 id={"firstPiano"}
                 keyBindings={keyBindingsLeft}
               />
               <button
                 className="arrow"
                 onClick={() => {
-                  if (pianoRange1 + 1 === 6) setFirstNote1(0);
+                  if (pianoRange1 + 1 === 6) setFirstPianoNote1(0);
                   setpianoRange1(pianoRange1 + 1);
                 }}
                 disabled={pianoRange1 >= 6}
@@ -312,14 +311,14 @@ function PlayPiano(props) {
                 <MdKeyboardArrowLeft size={100} />
               </button>
               <PianoRepresentation
-                firstNote={firstNote2}
+                firstNote={firstPianoNote2}
                 id={"secondPiano"}
                 keyBindings={keyBindingsRight}
               />
               <button
                 className="arrow"
                 onClick={() => {
-                  if (pianoRange2 + 1 === 6) setFirstNote2(0);
+                  if (pianoRange2 + 1 === 6) setFirstPianoNote2(0);
                   setpianoRange2(pianoRange2 + 1);
                 }}
                 disabled={pianoRange2 >= 6}

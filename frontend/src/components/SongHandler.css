@@ -79,7 +79,7 @@
 
 .selectSongButton {
   font-size: inherit;
-  transition: transform .2s;
+  transition: transform 0.2s;
 }
 
 .selectSongButton:hover {

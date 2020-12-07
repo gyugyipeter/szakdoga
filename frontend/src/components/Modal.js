@@ -8,7 +8,9 @@ function Modal(props) {
   return (
     <div className={showHideClassName}>
       <section className="modal-main">
-        <button className="modalExitButton" onClick={handleClose}><BsX/></button>
+        <button className="modalExitButton" onClick={handleClose}>
+          <BsX />
+        </button>
         {children}
       </section>
     </div>

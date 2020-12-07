@@ -1,16 +1,11 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { CgPiano } from "react-icons/cg";
 import { FaGuitar } from "react-icons/fa";
-
 import Guitarbody from "./Guitar/GuitarBody";
 import Pianobody from "./Piano/PianoBody";
 import "./Sidebar.css";
+import "./Instrument.css";
 
 function Body(props) {
   return (
@@ -33,8 +28,8 @@ function Body(props) {
         </nav>
         <div className="instrument">
           <Switch>
+            <Route path={["/", "/piano"]} exact component={Pianobody} />
             <Route path="/guitar" exact component={Guitarbody} />
-            <Route path={["/","/piano"]} exact component={Pianobody} />
           </Switch>
         </div>
       </div>

@@ -1,4 +1,10 @@
-import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import axios from "axios";
 import { AppContext } from "./AppContext";
 
@@ -9,9 +15,20 @@ function ApiContextProvider(props) {
     localStorage.getItem("userID") ? true : false
   );
   const [songList, setSongList] = useState([]);
-  const [selectedSongName, setSelectedSongName] = useState({ piano: null, guitar: null });
-  const [selectedSongID, setSelectedSongID] = useState({ piano: null, guitar: null });
-  const { setIsKeyEventsDisabled, currentInstrument, logs, setLogs } = useContext(AppContext);
+  const [selectedSongName, setSelectedSongName] = useState({
+    piano: null,
+    guitar: null,
+  });
+  const [selectedSongID, setSelectedSongID] = useState({
+    piano: null,
+    guitar: null,
+  });
+  const {
+    setIsKeyEventsDisabled,
+    currentInstrument,
+    logs,
+    setLogs,
+  } = useContext(AppContext);
 
   const http = axios.create({
     baseURL: "http://localhost:8080",
@@ -43,10 +60,9 @@ function ApiContextProvider(props) {
       setIsLoggedIn(true);
       setIsKeyEventsDisabled(false);
     } catch (e) {
-      if(e.response.status === 401)
+      if (e.response.status === 401)
         alert("Invalid username/password supplied");
-      else
-        alert(e);
+      else alert(e);
     }
   };
 
@@ -55,7 +71,7 @@ function ApiContextProvider(props) {
     setIsLoggedIn(false);
     setSelectedSongID({ piano: null, guitar: null });
     setSelectedSongName({ piano: null, guitar: null });
-    setLogs({piano: [], guitar: []})
+    setLogs({ piano: [], guitar: [] });
   };
 
   const getAllSongsByUser = useCallback(() => {
@@ -71,16 +87,24 @@ function ApiContextProvider(props) {
   }, []);
 
   useEffect(() => {
-    if (isLoggedIn)
-      getAllSongsByUser();
+    if (isLoggedIn) getAllSongsByUser();
   }, [isLoggedIn, getAllSongsByUser]);
 
   const getSong = async (id) => {
     try {
       const response = await http.get(`/songs/${id}`);
-      setSelectedSongID({ ...selectedSongID, [currentInstrument]: response.data.id });
-      setSelectedSongName({ ...selectedSongName, [currentInstrument]: response.data.songName });
-      setLogs({ ...logs, [currentInstrument]: JSON.parse(response.data.songObject).notes });
+      setSelectedSongID({
+        ...selectedSongID,
+        [currentInstrument]: response.data.id,
+      });
+      setSelectedSongName({
+        ...selectedSongName,
+        [currentInstrument]: response.data.songName,
+      });
+      setLogs({
+        ...logs,
+        [currentInstrument]: JSON.parse(response.data.songObject).notes,
+      });
     } catch (e) {
       alert(e);
     }
@@ -95,7 +119,10 @@ function ApiContextProvider(props) {
         userID: localStorage.getItem("userID"),
       });
       setSelectedSongName({ ...selectedSongName, [currentInstrument]: name });
-      setSelectedSongID({ ...selectedSongID, [currentInstrument]: response.data });
+      setSelectedSongID({
+        ...selectedSongID,
+        [currentInstrument]: response.data,
+      });
       getAllSongsByUser();
     } catch (e) {
       alert(e);
@@ -108,12 +135,12 @@ function ApiContextProvider(props) {
     } catch (e) {
       alert(e);
     }
-  }
+  };
 
   const deleteSong = async (id) => {
     try {
       await http.delete(`/songs/${id}`);
-      if(selectedSongID[currentInstrument] === id) {
+      if (selectedSongID[currentInstrument] === id) {
         setSelectedSongName({ ...selectedSongName, [currentInstrument]: null });
         setSelectedSongID({ ...selectedSongID, [currentInstrument]: null });
       }

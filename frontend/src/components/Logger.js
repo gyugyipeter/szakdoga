@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
+import { MdContentCopy, MdFiberManualRecord, MdClear } from "react-icons/md";
+import { BsPlay, BsPlayFill } from "react-icons/bs";
 import { AppContext } from "./AppContext";
 import { ApiContext } from "./ApiContext";
 import SongHandler from "./SongHandler";
-import { MdContentCopy, MdFiberManualRecord, MdClear } from "react-icons/md";
-import { BsPlay, BsPlayFill } from "react-icons/bs";
 import "./Logger.css";
 
 function Logger(props) {
@@ -18,9 +18,9 @@ function Logger(props) {
     clearLogs,
     copyLogs,
     playLogs,
-    stopPlaying
+    stopPlaying,
   } = useContext(AppContext);
-  const { isLoggedIn } = useContext(ApiContext)
+  const { isLoggedIn } = useContext(ApiContext);
 
   return (
     <>
@@ -32,11 +32,7 @@ function Logger(props) {
           ) : (
             logs[currentInstrument].map((log, index) => {
               return (
-                <div
-                  onClick={() => removeLog(log)}
-                  className="log"
-                  key={index}
-                >
+                <div className="log" onClick={() => removeLog(log)} key={index}>
                   <div>{log.note}</div>
                   <div>{log.key}</div>
                 </div>

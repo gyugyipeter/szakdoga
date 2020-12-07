@@ -10,7 +10,7 @@ function Header(props) {
   const { isLoggedIn, login, logout, register } = useContext(ApiContext);
   const [showForm, setShowForm] = useState(false);
   const handleClickAway = () => {
-    if(showForm) {
+    if (showForm) {
       setShowForm(false);
       setIsKeyEventsDisabled(false);
     }
@@ -18,8 +18,8 @@ function Header(props) {
 
   const displayForm = () => {
     setShowForm(true);
-    setIsKeyEventsDisabled(true)
-  }
+    setIsKeyEventsDisabled(true);
+  };
 
   const [user, setUser] = useState({ username: "", password: "" });
   const handleInputChange = (event) => {
@@ -45,24 +45,33 @@ function Header(props) {
                 Log out
               </button>
             ) : (
-              <button
-                className="login-btn"
-                onClick={displayForm}
-              >
+              <button className="login-btn" onClick={displayForm}>
                 Login <BsFillCaretDownFill />
               </button>
             )}
             <div className={`login-form ${showForm ? "show" : ""}`}>
               <div className="navbar">
-                <button className={`navButton ${isLogging && "selected"}`} onClick={() => setIsLogging(true)}>Login</button>
-                <button className={`navButton ${!isLogging && "selected"}`} onClick={() => setIsLogging(false)}>Register</button>
+                <button
+                  className={`navButton ${isLogging && "selected"}`}
+                  onClick={() => setIsLogging(true)}
+                >
+                  Login
+                </button>
+                <button
+                  className={`navButton ${!isLogging && "selected"}`}
+                  onClick={() => setIsLogging(false)}
+                >
+                  Register
+                </button>
               </div>
               <form
                 onSubmit={(e) => {
-                  e.preventDefault()
+                  e.preventDefault(); // prevent user data getting displayed in link
                   setShowForm(!showForm);
-                  isLogging ? login(user.username, user.password) : register(user.username, user.password);
-                  e.target.reset()
+                  isLogging
+                    ? login(user.username, user.password)
+                    : register(user.username, user.password);
+                  e.target.reset(); // to clear the inputs after submit
                 }}
               >
                 <div className="form-wrapper">
@@ -89,9 +98,9 @@ function Header(props) {
                     onChange={handleInputChange}
                   ></input>
                 </div>
-                  <button type="submit" className="submit-button">
-                    Submit
-                  </button>
+                <button type="submit" className="submit-button">
+                  Submit
+                </button>
               </form>
             </div>
           </ClickAwayListener>

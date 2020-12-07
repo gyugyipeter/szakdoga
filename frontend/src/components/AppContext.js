@@ -20,13 +20,14 @@ let lastNotesOnString = {
 export const AppContext = createContext();
 
 function AppContextProvider(props) {
-  const [logs, setLogs] = useState({ piano: [], guitar: [] });
+  const [isKeyEventsDisabled, setIsKeyEventsDisabled] = useState(false);
+  // instruments
   const [currentInstrument, setCurrentInstrument] = useState("piano");
-  const [isRecording, setIsRecording] = useState(false);
   const [instrumentSound, setInstrumentSound] = useState({
     piano: "reverb",
     guitar: "clean",
   });
+  // guitar
   const [guitarTuningNotes, setGuitarTuningNotes] = useState({
     1: "E1",
     2: "A1",
@@ -37,16 +38,20 @@ function AppContextProvider(props) {
   });
   const [guitarTuning, setGuitarTuning] = useState("Standard");
   const [firstFretPos, setFirstFretPos] = useState(1);
+  // piano
   const [pianoRange1, setpianoRange1] = useState(3);
   const [pianoRange2, setpianoRange2] = useState(4);
-  const [firstNote1, setFirstNote1] = useState(0);
-  const [firstNote2, setFirstNote2] = useState(0);
-  const [isKeyEventsDisabled, setIsKeyEventsDisabled] = useState(false);
+  const [firstPianoNote1, setFirstPianoNote1] = useState(0);
+  const [firstPianoNote2, setFirstPianoNote2] = useState(0);
+  const [displayPianoNotes, setDisplayPianoNotes] = useState(true);
+  const [displayPianoKeys, setDisplayPianoKeys] = useState(true);
+  // logger
+  const [logs, setLogs] = useState({ piano: [], guitar: [] });
+  const [isRecording, setIsRecording] = useState(false);
   const [startRecording, setStartRecording] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [displayNotes, setDisplayNotes] = useState(true);
-  const [displayKeys, setDisplayKeys] = useState(true);
   const LoggerRef = useRef(null);
+  
   const instruments = {
     piano: {
       logs: logs.piano,
@@ -106,7 +111,6 @@ function AppContextProvider(props) {
     const sound = new Howl({
       src,
     });
-    console.log(sound.play());
     sound.play();
   };
 
@@ -150,8 +154,8 @@ function AppContextProvider(props) {
         logs,
         currentInstrument,
         isRecording,
-        firstNote1,
-        firstNote2,
+        firstPianoNote1,
+        firstPianoNote2,
         isKeyEventsDisabled,
         pianoRange1,
         pianoRange2,
@@ -161,15 +165,15 @@ function AppContextProvider(props) {
         guitarTuning,
         guitarTuningNotes,
         LoggerRef,
-        displayNotes,
-        displayKeys,
+        displayPianoNotes,
+        displayPianoKeys,
         addLog,
         removeLog,
         setIsRecording,
         clearLogs,
         copyLogs,
-        setFirstNote1,
-        setFirstNote2,
+        setFirstPianoNote1,
+        setFirstPianoNote2,
         setIsKeyEventsDisabled,
         setpianoRange1,
         setpianoRange2,
@@ -183,8 +187,8 @@ function AppContextProvider(props) {
         setGuitarTuningNotes,
         setLogs,
         setCurrentInstrument,
-        setDisplayNotes,
-        setDisplayKeys
+        setDisplayPianoNotes,
+        setDisplayPianoKeys
       }}
     >
       {props.children}

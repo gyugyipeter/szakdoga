@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
 import { AppContext } from "../AppContext";
-import "../Instrument.css";
 
 function PianoSettings(props) {
-  const { setFirstNote1, setFirstNote2, pianoRange1, pianoRange2 } = useContext(
+  const { setFirstPianoNote1, setFirstPianoNote2, pianoRange1, pianoRange2 } = useContext(
     AppContext
   );
 
@@ -13,8 +12,8 @@ function PianoSettings(props) {
         <select
           required
           onChange={(e) => {
-            setFirstNote1(parseInt(e.target.value));
-            e.target.blur();
+            setFirstPianoNote1(parseInt(e.target.value));
+            e.target.blur();  // to unfocus after selecting
           }}
           disabled={pianoRange1 === 6}
           title="Select the first note to the left piano"
@@ -39,7 +38,7 @@ function PianoSettings(props) {
         <select
           required
           onChange={(e) => {
-            setFirstNote2(parseInt(e.target.value));
+            setFirstPianoNote2(parseInt(e.target.value));
             e.target.blur();
           }}
           disabled={pianoRange2 === 6}
