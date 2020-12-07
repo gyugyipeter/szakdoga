@@ -29,13 +29,19 @@ function HandleKeyPress(props) {
     else return getNotes()[index % 12] + (pianoRange2 + 1);
   }
 
-  function keyDownEvent(indexToAdd, keyPressed, querySelector, event, whichFirstNote, whichFunction) {
+  function keyDownEvent(indexToAdd, keyPressed, querySelector, event, firstNote, noteChooser) {
+    // disables repeating events when key is continuously pressed
     if (!event.repeat) {
-        addLog({ note: whichFunction(whichFirstNote + indexToAdd), key: keyPressed });
-        PlaySound(getPiano().get(whichFunction(whichFirstNote + indexToAdd)));
-        document.querySelector(querySelector).classList.add("pressed");
+      addLog({
+        note: noteChooser(firstNote + indexToAdd),
+        key: keyPressed,
+      });
+      PlaySound(getPiano().get(noteChooser(firstNote + indexToAdd)));
+      document.querySelector(querySelector).classList.add("pressed");
     }
   }
+
+  useEffect(() => {Howler.stop()}, [])
 
   return (
     <>
@@ -45,7 +51,7 @@ function HandleKeyPress(props) {
       handleKeys={["alphanumeric"]}
       onKeyEvent={(key, e) => {
         switch (key) {
-          //low
+          //first piano
           case "y":
             keyDownEvent(0, "y", "#firstPianonote-1", e, firstPianoNote1, chooseNote1);
             break;
@@ -83,7 +89,7 @@ function HandleKeyPress(props) {
             keyDownEvent(11, "m", "#firstPianonote-12", e, firstPianoNote1, chooseNote1);
             break;
 
-          //high
+          //second piano
           case "w":
             keyDownEvent(0, "w", "#secondPianonote-1", e, firstPianoNote2, chooseNote2);
             break;
@@ -124,6 +130,8 @@ function HandleKeyPress(props) {
         }
       }}
     />
+
+    {/* this handler removes "pressed" from classname on keyup events */}
     <KeyboardEventHandler
       handleFocusableElements
       isDisabled={isKeyEventsDisabled}
@@ -131,7 +139,7 @@ function HandleKeyPress(props) {
       handleKeys={["alphanumeric"]}
       onKeyEvent={(key, e) => {
         switch (key) {
-          
+          //first piano
           case "y":
             document.querySelector("#firstPianonote-1").classList.remove("pressed");
             break;
@@ -168,7 +176,8 @@ function HandleKeyPress(props) {
           case "m":
             document.querySelector("#firstPianonote-12").classList.remove("pressed");
             break;
-            
+
+          //second piano
           case "w":
             document.querySelector("#secondPianonote-1").classList.remove("pressed");
             break;
@@ -235,6 +244,8 @@ function PlayPiano(props) {
 
   Howler.volume(1.0);
 
+  // empty array generates warning,
+  // but addig stopPlaying as dependency would result malfunction
   const callBack = useCallback(() => stopPlaying(), []);
   useEffect(() => callBack(), [callBack]);
 
@@ -329,10 +340,10 @@ function PlayPiano(props) {
             </div>
           </div>
         </div>
-          <div className="pianospace octaves">
-              <div>{pianoRange1}</div>
-              <div>{pianoRange2}</div>
-            </div>
+        <div className="pianospace octaves">
+          <div>{pianoRange1}</div>
+          <div>{pianoRange2}</div>
+        </div>
       </div>
     </>
   );

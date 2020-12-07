@@ -14,28 +14,39 @@ function HandleKeyPress(props) {
     PlayGuitarSound,
     instrumentSound,
     guitarTuningNotes,
-    firstFretPos
+    firstFretPos,
   } = useContext(AppContext);
 
+  // generates the name of the audio file
   function chooseNote(firstNote, indexToAdd) {
     const note = firstNote.slice(0, -1);
     const noteIndex = getNotes().indexOf(note);
+    // fret number
     let newIndex = noteIndex + indexToAdd;
-    if(indexToAdd !== 0) newIndex += firstFretPos - 1;
+    // hand position on neck
+    if (indexToAdd !== 0) newIndex += firstFretPos - 1;
     const octave = firstNote.charAt(firstNote.length - 1);
+    // decides how many octaves to add to the note
     if (newIndex < 12) return getNotes()[newIndex] + octave;
-    else if (newIndex < 24) return getNotes()[newIndex % 12] + (parseInt(octave) + 1);
+    else if (newIndex < 24)
+      return getNotes()[newIndex % 12] + (parseInt(octave) + 1);
     else return getNotes()[newIndex % 12] + (parseInt(octave) + 2);
   }
 
   function keyDownEvent(indexToAdd, keyPressed, querySelector, event, firstNote, stringNumber) {
     if (!event.repeat) {
-        addLog({ note: chooseNote(firstNote, indexToAdd), key: keyPressed });
-        if(instrumentSound.guitar === "clean")
-          PlayGuitarSound(getCleanGuitar().get(chooseNote(firstNote, indexToAdd)), stringNumber);
-        if(instrumentSound.guitar === "distorted")
-          PlayGuitarSound(getDistortedGuitar().get(chooseNote(firstNote, indexToAdd)), stringNumber);
-        document.querySelector(querySelector).classList.add("pressed");
+      addLog({ note: chooseNote(firstNote, indexToAdd), key: keyPressed });
+      if (instrumentSound.guitar === "clean")
+        PlayGuitarSound(
+          getCleanGuitar().get(chooseNote(firstNote, indexToAdd)),
+          stringNumber
+        );
+      if (instrumentSound.guitar === "distorted")
+        PlayGuitarSound(
+          getDistortedGuitar().get(chooseNote(firstNote, indexToAdd)),
+          stringNumber
+        );
+      document.querySelector(querySelector).classList.add("pressed");
     }
   }
 
@@ -411,8 +422,8 @@ function PlayGuitar(props) {
   const { firstFretPos, setFirstFretPos, stopPlaying } = useContext(AppContext);
   Howler.volume(0.1);
 
-  const callBack =  useCallback(() => stopPlaying(), []);
-  useEffect(() => callBack(), [callBack])
+  const callBack = useCallback(() => stopPlaying(), []);
+  useEffect(() => callBack(), [callBack]);
 
   return (
     <>
@@ -421,7 +432,7 @@ function PlayGuitar(props) {
       <div className="guitarNeckPosition">
         <button
           className="guitarNeckPositionArrow leftNeckArrow"
-          disabled= {firstFretPos === 1}
+          disabled={firstFretPos === 1}
           onClick={() => {
             setFirstFretPos(firstFretPos - 1);
           }}
@@ -431,7 +442,7 @@ function PlayGuitar(props) {
         <GuitarNeck />
         <button
           className="guitarNeckPositionArrow rightNeckArrow"
-          disabled= {firstFretPos === 15}
+          disabled={firstFretPos === 15}
           onClick={() => {
             setFirstFretPos(firstFretPos + 1);
           }}

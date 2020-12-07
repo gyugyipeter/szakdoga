@@ -15,7 +15,7 @@ let lastNotesOnString = {
   4: null,
   5: null,
   6: null,
-}
+};
 
 export const AppContext = createContext();
 
@@ -51,7 +51,7 @@ function AppContextProvider(props) {
   const [startRecording, setStartRecording] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const LoggerRef = useRef(null);
-  
+
   const instruments = {
     piano: {
       logs: logs.piano,
@@ -63,6 +63,8 @@ function AppContextProvider(props) {
     },
   };
 
+  // timing stores how much time has passed since the first note,
+  // so the timings will be on point when you play it back
   const addLog = (log) => {
     if (isRecording) {
       if (logs[currentInstrument].length === 0) {
@@ -114,9 +116,10 @@ function AppContextProvider(props) {
     sound.play();
   };
 
+  // stops the last sound played on the same string
+  // and overwrites it with the current one
   const PlayGuitarSound = (src, stringNumber) => {
-    if(lastNotesOnString[stringNumber])
-      lastNotesOnString[stringNumber].stop();
+    if (lastNotesOnString[stringNumber]) lastNotesOnString[stringNumber].stop();
     lastNotesOnString[stringNumber] = new Howl({
       src,
     });
@@ -188,7 +191,7 @@ function AppContextProvider(props) {
         setLogs,
         setCurrentInstrument,
         setDisplayPianoNotes,
-        setDisplayPianoKeys
+        setDisplayPianoKeys,
       }}
     >
       {props.children}

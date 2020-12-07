@@ -1,44 +1,69 @@
 import React, { useContext } from "react";
-import { AppContext } from "../AppContext";
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
+import { AppContext } from "../AppContext";
 import { getNotes } from "../../domain/NoteFilePairs";
 import "./GuitarNeck.css";
 
 const dottedFrets = [3, 5, 7, 9, 15, 17, 19, 21];
 
 function String(props) {
-  const {stringID, ids } = props;
-  const { firstFretPos, setGuitarTuning, guitarTuningNotes, setGuitarTuningNotes } = useContext(AppContext);
+  const { stringID, ids } = props;
+  const {
+    firstFretPos,
+    setGuitarTuning,
+    guitarTuningNotes,
+    setGuitarTuningNotes,
+  } = useContext(AppContext);
 
   function datasForTuning(currString) {
     const currentNote = guitarTuningNotes[currString];
     const note = currentNote.substring(0, currentNote.length - 1);
     const noteIndex = getNotes().indexOf(note);
     const octave = currentNote.charAt(currentNote.length - 1);
-    return {note, noteIndex, octave};
+    return { note, noteIndex, octave };
   }
 
+  // have to jump down an octave in case note is C
   function tuneDown(currentString) {
-    let {note, noteIndex, octave} = datasForTuning(currentString);
-    if(note === "C") setGuitarTuningNotes({...guitarTuningNotes, [currentString]: getNotes()[getNotes().length - 1] + --octave});
-    else setGuitarTuningNotes({...guitarTuningNotes, [currentString]: getNotes()[noteIndex - 1] + octave});
+    let { note, noteIndex, octave } = datasForTuning(currentString);
+    if (note === "C")
+      setGuitarTuningNotes({
+        ...guitarTuningNotes,
+        [currentString]: getNotes()[getNotes().length - 1] + --octave,
+      });
+    else
+      setGuitarTuningNotes({
+        ...guitarTuningNotes,
+        [currentString]: getNotes()[noteIndex - 1] + octave,
+      });
   }
 
+  // have to jump up an octave in case note is B
   function tuneUp(currentString) {
-    let {note, noteIndex, octave} = datasForTuning(currentString);
-    if(note === "B") setGuitarTuningNotes({...guitarTuningNotes, [currentString]: getNotes()[0] + ++octave});
-    else setGuitarTuningNotes({...guitarTuningNotes, [currentString]: getNotes()[noteIndex + 1] + octave});
+    let { note, noteIndex, octave } = datasForTuning(currentString);
+    if (note === "B")
+      setGuitarTuningNotes({
+        ...guitarTuningNotes,
+        [currentString]: getNotes()[0] + ++octave,
+      });
+    else
+      setGuitarTuningNotes({
+        ...guitarTuningNotes,
+        [currentString]: getNotes()[noteIndex + 1] + octave,
+      });
   }
 
   const stringNumber = stringID.charAt(stringID.length - 1);
 
   function checkTuningTooLow() {
-    if((Object.values(guitarTuningNotes).indexOf("C1") === stringNumber - 1 )) return true;
+    if (Object.values(guitarTuningNotes).indexOf("C1") === stringNumber - 1)
+      return true;
     return false;
   }
 
   function checkTuningTooHigh() {
-    if(Object.values(guitarTuningNotes).indexOf("E3") === stringNumber - 1 ) return true;
+    if (Object.values(guitarTuningNotes).indexOf("E3") === stringNumber - 1)
+      return true;
     return false;
   }
 
@@ -50,35 +75,57 @@ function String(props) {
   return (
     <tr className="guitarRow">
       <td className="tuningColumn">
-        <button className="tunerArrow"
-        onClick={() => {
-          setGuitarTuning("Custom");
-          tuneDown(stringNumber);
-        }}
-        disabled={checkTuningTooLow()}>
+        <button
+          className="tunerArrow"
+          disabled={checkTuningTooLow()}
+          onClick={() => {
+            setGuitarTuning("Custom");
+            tuneDown(stringNumber);
+          }}
+        >
           <MdKeyboardArrowLeft />
         </button>
-       </td>
-      <td className="tuningColumn">{ guitarTuningNotes[stringNumber] }</td>
+      </td>
+      <td className="tuningColumn">{guitarTuningNotes[stringNumber]}</td>
       <td className="tuningColumn">
-        <button className="tunerArrow"
-        onClick={() => {
-          setGuitarTuning("Custom");
-          tuneUp(stringNumber);
-        }}
-        disabled={checkTuningTooHigh()}>
+        <button
+          className="tunerArrow"
+          disabled={checkTuningTooHigh()}
+          onClick={() => {
+            setGuitarTuning("Custom");
+            tuneUp(stringNumber);
+          }}
+        >
           <MdKeyboardArrowRight />
         </button>
       </td>
-      <td className={`nullfret ${stringID}`} id={ids[0]}> <span>{displayIndex(0)}</span> </td>
-      <td className={stringID} id={ids[1]}> <span>{displayIndex(1 + firstFretPos - 1)}</span> </td>
-      <td className={stringID} id={ids[2]}> <span>{displayIndex(2 + firstFretPos - 1)}</span> </td>
-      <td className={stringID} id={ids[3]}> <span>{displayIndex(3 + firstFretPos - 1)}</span> </td>
-      <td className={stringID} id={ids[4]}> <span>{displayIndex(4 + firstFretPos - 1)}</span> </td>
-      <td className={stringID} id={ids[5]}> <span>{displayIndex(5 + firstFretPos - 1)}</span> </td>
-      <td className={stringID} id={ids[6]}> <span>{displayIndex(6 + firstFretPos - 1)}</span> </td>
-      <td className={stringID} id={ids[7]}> <span>{displayIndex(7 + firstFretPos - 1)}</span> </td>
-      <td className={stringID} id={ids[8]}> <span>{displayIndex(8 + firstFretPos - 1)}</span> </td>
+      <td className={`nullfret ${stringID}`} id={ids[0]}>
+        <span>{displayIndex(0)}</span>
+      </td>
+      <td className={stringID} id={ids[1]}>
+        <span>{displayIndex(1 + firstFretPos - 1)}</span>
+      </td>
+      <td className={stringID} id={ids[2]}>
+        <span>{displayIndex(2 + firstFretPos - 1)}</span>
+      </td>
+      <td className={stringID} id={ids[3]}>
+        <span>{displayIndex(3 + firstFretPos - 1)}</span>
+      </td>
+      <td className={stringID} id={ids[4]}>
+        <span>{displayIndex(4 + firstFretPos - 1)}</span>
+      </td>
+      <td className={stringID} id={ids[5]}>
+        <span>{displayIndex(5 + firstFretPos - 1)}</span>
+      </td>
+      <td className={stringID} id={ids[6]}>
+        <span>{displayIndex(6 + firstFretPos - 1)}</span>
+      </td>
+      <td className={stringID} id={ids[7]}>
+        <span>{displayIndex(7 + firstFretPos - 1)}</span>
+      </td>
+      <td className={stringID} id={ids[8]}>
+        <span>{displayIndex(8 + firstFretPos - 1)}</span>
+      </td>
     </tr>
   );
 }
@@ -86,9 +133,10 @@ function String(props) {
 function GuitarNeck(props) {
   const { firstFretPos } = useContext(AppContext);
 
+  // position of dots on the neck
   function headerStyle(index) {
-    if(dottedFrets.includes(index)) return "dot";
-    if(index === 12) return "twelveFretDot twelveFretDot2";
+    if (dottedFrets.includes(index)) return "dot";
+    if (index === 12) return "twelveFretDot twelveFretDot2";
     return "";
   }
 
@@ -111,6 +159,7 @@ function GuitarNeck(props) {
         </tr>
       </thead>
       <tbody>
+        { /* every position needs a unique id for displaying its note on keydown events */ }
         <String stringID={"string6"} ids={["string6Note1", "string6Note2", "string6Note3", "string6Note4", "string6Note5", "string6Note6", "string6Note7", "string6Note8", "string6Note9"] }/>
         <String stringID={"string5"} ids={["string5Note1", "string5Note2", "string5Note3", "string5Note4", "string5Note5", "string5Note6", "string5Note7", "string5Note8", "string5Note9"] }/>
         <String stringID={"string4"} ids={["string4Note1", "string4Note2", "string4Note3", "string4Note4", "string4Note5", "string4Note6", "string4Note7", "string4Note8", "string4Note9"] }/>
