@@ -2,21 +2,24 @@ import React, { useContext } from "react";
 import { AppContext } from "../AppContext";
 
 function PianoSettings(props) {
-  const { setFirstPianoNote1, setFirstPianoNote2, pianoRange1, pianoRange2 } = useContext(
-    AppContext
-  );
+  const {
+    setFirstPianoNote1,
+    setFirstPianoNote2,
+    pianoRange1,
+    pianoRange2,
+  } = useContext(AppContext);
 
   return (
     <div className="pianospace">
       <div>
         <select
           required
-          onChange={(e) => {
-            setFirstPianoNote1(parseInt(e.target.value));
-            e.target.blur();  // to unfocus after selecting
-          }}
           disabled={pianoRange1 === 6}
           title="Select the first note to the left piano"
+          onChange={(e) => {
+            setFirstPianoNote1(parseInt(e.target.value));
+            e.target.blur(); // to unfocus after selecting
+          }}
         >
           <option selected={pianoRange1 === 6} value={0}>
             C
@@ -37,12 +40,12 @@ function PianoSettings(props) {
       <div>
         <select
           required
+          disabled={pianoRange2 === 6}
+          title="Select the first note to the right piano"
           onChange={(e) => {
             setFirstPianoNote2(parseInt(e.target.value));
             e.target.blur();
           }}
-          disabled={pianoRange2 === 6}
-          title="Select the first note to the right piano"
         >
           <option selected={pianoRange2 === 6} value={0}>
             C
