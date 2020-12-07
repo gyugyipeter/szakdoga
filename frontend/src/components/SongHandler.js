@@ -43,6 +43,7 @@ function SongListElement(props) {
           className={`selectSongButton ${
             selectedSongID[currentInstrument] === id ? "highlight" : ""
           }`}
+          title={name}
           onClick={handleChooseSong}
         >
           {name}
@@ -154,7 +155,7 @@ function SongHandler() {
             >
               <div className="addModal">
                 <input
-                  className="form-control"
+                  className="form-control inputWidth"
                   name="songName"
                   type="text"
                   required
@@ -201,7 +202,7 @@ function SongHandler() {
             setShowList(!showList);
           }}
         >
-          {selectedSongName[currentInstrument]}
+          <div className="songTitle">{selectedSongName[currentInstrument]}</div>
           <i className="selectorArrow"></i>
         </button>
       </div>

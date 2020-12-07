@@ -1,4 +1,4 @@
-import React, { createContext, useState, useRef } from "react";
+import React, { createContext, useState, useRef, useCallback } from "react";
 import Copy from "copy-to-clipboard";
 import { Howl } from "howler";
 import {
@@ -126,13 +126,13 @@ function AppContextProvider(props) {
     lastNotesOnString[stringNumber].play();
   };
 
-  const stopPlaying = () => {
+  const stopPlaying = useCallback(() => {
     setIsPlaying(false);
     timeIds.forEach((id) => {
       clearTimeout(id);
     });
     timeIds = [];
-  };
+  }, []);
 
   const playLogs = () => {
     if (!isPlaying && logs[currentInstrument].length !== 0) {

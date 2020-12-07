@@ -38,6 +38,8 @@ public class SongController {
     public ResponseEntity<Optional<Song>> getById(@PathVariable Long id) {
         try {
             Optional<Song> oSong = songRepository.findById(id);
+            if(!oSong.isPresent())
+                throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR);
             return ResponseEntity.ok(oSong);
         } catch (Exception e) {
             throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -57,6 +59,8 @@ public class SongController {
     @PutMapping("/{id}")
     public ResponseEntity<String> updateById(@PathVariable Long id, @RequestBody String updatedNotes) {
         try {
+            if(!songRepository.findById(id).isPresent())
+                throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR);
             songService.updateSong(id, updatedNotes);
             return ResponseEntity.status(HttpStatus.ACCEPTED).body("Song updated");
         } catch (Exception e) {

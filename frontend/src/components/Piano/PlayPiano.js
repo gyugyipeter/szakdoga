@@ -244,9 +244,7 @@ function PlayPiano(props) {
 
   Howler.volume(1.0);
 
-  // empty array generates warning,
-  // but addig stopPlaying as dependency would result malfunction
-  const callBack = useCallback(() => stopPlaying(), []);
+  const callBack = useCallback(() => stopPlaying(), [stopPlaying]);
   useEffect(() => callBack(), [callBack]);
 
   return (

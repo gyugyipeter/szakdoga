@@ -1,14 +1,15 @@
 .selectorDropdownButton {
-  height: 2rem;
+  height: 3rem;
   width: 15rem;
   background: white;
   border: 1px solid #bababa;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   font-family: inherit;
-  justify-content: space-around;
   cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .selectorDropdown {
@@ -23,6 +24,8 @@
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+  max-height: 60vh;
+  overflow-y: auto;
 }
 
 .selectorField {
@@ -80,6 +83,9 @@
 .selectSongButton {
   font-size: inherit;
   transition: transform 0.2s;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .selectSongButton:hover {
@@ -138,4 +144,14 @@
 
 .exit svg {
   color: red;
+}
+
+.inputWidth {
+  width: 50%;
+}
+
+.songTitle {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 1rem;
 }
