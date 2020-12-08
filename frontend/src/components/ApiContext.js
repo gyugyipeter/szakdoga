@@ -31,7 +31,7 @@ function ApiContextProvider(props) {
   } = useContext(AppContext);
 
   const http = axios.create({
-    baseURL: "http://localhost:8080",
+    baseURL: "https://music-board-app.herokuapp.com",
     headers: {
       "Content-type": "application/json",
     },
@@ -78,7 +78,7 @@ function ApiContextProvider(props) {
     try {
       axios
         .get(
-          `http://localhost:8080/songs/user/${localStorage.getItem("userID")}`
+          `https://music-board-app.herokuapp.com/songs/user/${localStorage.getItem("userID")}`
         )
         .then((response) => setSongList(response.data));
     } catch (e) {

@@ -147,23 +147,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>test</phase>
-                        <configuration>
-                            <target>
-                                <replace file="target/jacoco-ut/jacoco.xml" token="MusicBoard"
-                                         value="BackEnd/MusicBoard/src/main/java/MusicBoard/"/>
-                            </target>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
 
