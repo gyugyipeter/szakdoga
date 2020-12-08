@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { BsInfoCircleFill } from "react-icons/bs";
 import { AppContext } from "../AppContext";
-import { getNotesForTuning } from "../../domain/GuitarTunings";
+import { getNotesForTuning } from "../../domain/GuitarHelper";
 
 function GuitarSettings(props) {
   const {
@@ -29,9 +29,9 @@ function GuitarSettings(props) {
         </div>
         <div className="selectGroup">
           <select
-            defaultValue={"Clean"}
-            required
             title="Sound"
+            required
+            value={instrumentSound.guitar}
             onChange={(e) => {
               setInstrumentSound({
                 ...instrumentSound,

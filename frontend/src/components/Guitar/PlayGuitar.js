@@ -3,6 +3,7 @@ import { AppContext } from "../AppContext";
 import { Howler } from "howler";
 import KeyboardEventHandler from "react-keyboard-event-handler";
 import { getDistortedGuitar, getCleanGuitar, getNotes } from "../../domain/NoteFilePairs";
+import { getStringNumber } from "../../domain/GuitarHelper";
 import GuitarSettings from "./GuitarSettings";
 import GuitarNeck from "./GuitarNeck";
 import { AiOutlineArrowLeft, AiOutlineArrowRight} from "react-icons/ai";
@@ -33,18 +34,18 @@ function HandleKeyPress(props) {
     else return getNotes()[newIndex % 12] + (parseInt(octave) + 2);
   }
 
-  function keyDownEvent(indexToAdd, keyPressed, querySelector, event, firstNote, stringNumber) {
+  function keyDownEvent(indexToAdd, keyPressed, querySelector, event, firstNote) {
     if (!event.repeat) {
       addLog({ note: chooseNote(firstNote, indexToAdd), key: keyPressed });
       if (instrumentSound.guitar === "clean")
         PlayGuitarSound(
           getCleanGuitar().get(chooseNote(firstNote, indexToAdd)),
-          stringNumber
+          getStringNumber(keyPressed)
         );
       if (instrumentSound.guitar === "distorted")
         PlayGuitarSound(
           getDistortedGuitar().get(chooseNote(firstNote, indexToAdd)),
-          stringNumber
+          getStringNumber(keyPressed)
         );
       document.querySelector(querySelector).classList.add("pressed");
     }
@@ -63,171 +64,171 @@ function HandleKeyPress(props) {
         switch (key) {
           //string1
           case "y":
-            keyDownEvent(0, "y", "#string1Note1", e, guitarTuningNotes[1], 1);
+            keyDownEvent(0, "y", "#string1Note1", e, guitarTuningNotes[1]);
             break;
           case "x":
-            keyDownEvent(1, "x", "#string1Note2", e, guitarTuningNotes[1], 1);
+            keyDownEvent(1, "x", "#string1Note2", e, guitarTuningNotes[1]);
             break;
           case "c":
-            keyDownEvent(2, "c", "#string1Note3", e, guitarTuningNotes[1], 1);
+            keyDownEvent(2, "c", "#string1Note3", e, guitarTuningNotes[1]);
             break;
           case "v":
-            keyDownEvent(3, "v", "#string1Note4", e, guitarTuningNotes[1], 1);
+            keyDownEvent(3, "v", "#string1Note4", e, guitarTuningNotes[1]);
             break;
           case "b":
-            keyDownEvent(4, "b", "#string1Note5", e, guitarTuningNotes[1], 1);
+            keyDownEvent(4, "b", "#string1Note5", e, guitarTuningNotes[1]);
             break;
           case "n":
-            keyDownEvent(5, "n", "#string1Note6", e, guitarTuningNotes[1], 1);
+            keyDownEvent(5, "n", "#string1Note6", e, guitarTuningNotes[1]);
             break;
           case "m":
-            keyDownEvent(6, "m", "#string1Note7", e, guitarTuningNotes[1], 1);
+            keyDownEvent(6, "m", "#string1Note7", e, guitarTuningNotes[1]);
             break;
           case ",":
-            keyDownEvent(7, ",", "#string1Note8", e, guitarTuningNotes[1], 1);
+            keyDownEvent(7, ",", "#string1Note8", e, guitarTuningNotes[1]);
             break;
           case ".":
-            keyDownEvent(8, ".", "#string1Note9", e, guitarTuningNotes[1], 1);
+            keyDownEvent(8, ".", "#string1Note9", e, guitarTuningNotes[1]);
             break;
           //string2
           case "a":
-            keyDownEvent(0, "a", "#string2Note1", e, guitarTuningNotes[2], 2);
+            keyDownEvent(0, "a", "#string2Note1", e, guitarTuningNotes[2]);
             break;
           case "s":
-            keyDownEvent(1, "s", "#string2Note2", e, guitarTuningNotes[2], 2);
+            keyDownEvent(1, "s", "#string2Note2", e, guitarTuningNotes[2]);
             break;
           case "d":
-            keyDownEvent(2, "d", "#string2Note3", e, guitarTuningNotes[2], 2);
+            keyDownEvent(2, "d", "#string2Note3", e, guitarTuningNotes[2]);
             break;
           case "f":
-            keyDownEvent(3, "f", "#string2Note4", e, guitarTuningNotes[2], 2);
+            keyDownEvent(3, "f", "#string2Note4", e, guitarTuningNotes[2]);
             break;
           case "g":
-            keyDownEvent(4, "g", "#string2Note5", e, guitarTuningNotes[2], 2);
+            keyDownEvent(4, "g", "#string2Note5", e, guitarTuningNotes[2]);
             break;
           case "h":
-            keyDownEvent(5, "h", "#string2Note6", e, guitarTuningNotes[2], 2);
+            keyDownEvent(5, "h", "#string2Note6", e, guitarTuningNotes[2]);
             break;
           case "j":
-            keyDownEvent(6, "j", "#string2Note7", e, guitarTuningNotes[2], 2);
+            keyDownEvent(6, "j", "#string2Note7", e, guitarTuningNotes[2]);
             break;
           case "k":
-            keyDownEvent(7, "k", "#string2Note8", e, guitarTuningNotes[2], 2);
+            keyDownEvent(7, "k", "#string2Note8", e, guitarTuningNotes[2]);
             break;
           case "l":
-            keyDownEvent(8, "l", "#string2Note9", e, guitarTuningNotes[2], 2);
+            keyDownEvent(8, "l", "#string2Note9", e, guitarTuningNotes[2]);
             break;
           //string3
           case "q":
-            keyDownEvent(0, "q", "#string3Note1", e, guitarTuningNotes[3], 3);
+            keyDownEvent(0, "q", "#string3Note1", e, guitarTuningNotes[3]);
             break;
           case "w":
-            keyDownEvent(1, "w", "#string3Note2", e, guitarTuningNotes[3], 3);
+            keyDownEvent(1, "w", "#string3Note2", e, guitarTuningNotes[3]);
             break;
           case "e":
-            keyDownEvent(2, "e", "#string3Note3", e, guitarTuningNotes[3], 3);
+            keyDownEvent(2, "e", "#string3Note3", e, guitarTuningNotes[3]);
             break;
           case "r":
-            keyDownEvent(3, "r", "#string3Note4", e, guitarTuningNotes[3], 3);
+            keyDownEvent(3, "r", "#string3Note4", e, guitarTuningNotes[3]);
             break;
           case "t":
-            keyDownEvent(4, "t", "#string3Note5", e, guitarTuningNotes[3], 3);
+            keyDownEvent(4, "t", "#string3Note5", e, guitarTuningNotes[3]);
             break;
           case "z":
-            keyDownEvent(5, "z", "#string3Note6", e, guitarTuningNotes[3], 3);
+            keyDownEvent(5, "z", "#string3Note6", e, guitarTuningNotes[3]);
             break;
           case "u":
-            keyDownEvent(6, "u", "#string3Note7", e, guitarTuningNotes[3], 3);
+            keyDownEvent(6, "u", "#string3Note7", e, guitarTuningNotes[3]);
             break;
           case "i":
-            keyDownEvent(7, "i", "#string3Note8", e, guitarTuningNotes[3], 3);
+            keyDownEvent(7, "i", "#string3Note8", e, guitarTuningNotes[3]);
             break;
           case "o":
-            keyDownEvent(8, "o", "#string3Note9", e, guitarTuningNotes[3], 3);
+            keyDownEvent(8, "o", "#string3Note9", e, guitarTuningNotes[3]);
             break;
           //string4
           case "1":
-            keyDownEvent(0, "1", "#string4Note1", e, guitarTuningNotes[4], 4);
+            keyDownEvent(0, "1", "#string4Note1", e, guitarTuningNotes[4]);
             break;
           case "2":
-            keyDownEvent(1, "2", "#string4Note2", e, guitarTuningNotes[4], 4);
+            keyDownEvent(1, "2", "#string4Note2", e, guitarTuningNotes[4]);
             break;
           case "3":
-            keyDownEvent(2, "3", "#string4Note3", e, guitarTuningNotes[4], 4);
+            keyDownEvent(2, "3", "#string4Note3", e, guitarTuningNotes[4]);
             break;
           case "4":
-            keyDownEvent(3, "4", "#string4Note4", e, guitarTuningNotes[4], 4);
+            keyDownEvent(3, "4", "#string4Note4", e, guitarTuningNotes[4]);
             break;
           case "5":
-            keyDownEvent(4, "5", "#string4Note5", e, guitarTuningNotes[4], 4);
+            keyDownEvent(4, "5", "#string4Note5", e, guitarTuningNotes[4]);
             break;
           case "6":
-            keyDownEvent(5, "6", "#string4Note6", e, guitarTuningNotes[4], 4);
+            keyDownEvent(5, "6", "#string4Note6", e, guitarTuningNotes[4]);
             break;
           case "7":
-            keyDownEvent(6, "7", "#string4Note7", e, guitarTuningNotes[4], 4);
+            keyDownEvent(6, "7", "#string4Note7", e, guitarTuningNotes[4]);
             break;
           case "8":
-            keyDownEvent(7, "8", "#string4Note8", e, guitarTuningNotes[4], 4);
+            keyDownEvent(7, "8", "#string4Note8", e, guitarTuningNotes[4]);
             break;
           case "9":
-            keyDownEvent(8, "9", "#string4Note9", e, guitarTuningNotes[4], 4);
+            keyDownEvent(8, "9", "#string4Note9", e, guitarTuningNotes[4]);
             break;
           //string5
           case "shift+q":
-            keyDownEvent(0, "shift+q", "#string5Note1", e, guitarTuningNotes[5], 5);
+            keyDownEvent(0, "shift+q", "#string5Note1", e, guitarTuningNotes[5]);
             break;
           case "shift+w":
-            keyDownEvent(1, "shift+w", "#string5Note2", e, guitarTuningNotes[5], 5);
+            keyDownEvent(1, "shift+w", "#string5Note2", e, guitarTuningNotes[5]);
             break;
           case "shift+e":
-            keyDownEvent(2, "shift+e", "#string5Note3", e, guitarTuningNotes[5], 5);
+            keyDownEvent(2, "shift+e", "#string5Note3", e, guitarTuningNotes[5]);
             break;
           case "shift+r":
-            keyDownEvent(3, "shift+r", "#string5Note4", e, guitarTuningNotes[5], 5);
+            keyDownEvent(3, "shift+r", "#string5Note4", e, guitarTuningNotes[5]);
             break;
           case "shift+t":
-            keyDownEvent(4, "shift+t", "#string5Note5", e, guitarTuningNotes[5], 5);
+            keyDownEvent(4, "shift+t", "#string5Note5", e, guitarTuningNotes[5]);
             break;
           case "shift+z":
-            keyDownEvent(5, "shift+z", "#string5Note6", e, guitarTuningNotes[5], 5);
+            keyDownEvent(5, "shift+z", "#string5Note6", e, guitarTuningNotes[5]);
             break;
           case "shift+u":
-            keyDownEvent(6, "shift+u", "#string5Note7", e, guitarTuningNotes[5], 5);
+            keyDownEvent(6, "shift+u", "#string5Note7", e, guitarTuningNotes[5]);
             break;
           case "shift+i":
-            keyDownEvent(7, "shift+i", "#string5Note8", e, guitarTuningNotes[5], 5);
+            keyDownEvent(7, "shift+i", "#string5Note8", e, guitarTuningNotes[5]);
             break;
           case "shift+o":
-            keyDownEvent(8, "shift+o", "#string5Note9", e, guitarTuningNotes[5], 5);
+            keyDownEvent(8, "shift+o", "#string5Note9", e, guitarTuningNotes[5]);
             break;
           //string6
           case "shift+1":
-            keyDownEvent(0, "shift+1", "#string6Note1", e, guitarTuningNotes[6], 6);
+            keyDownEvent(0, "shift+1", "#string6Note1", e, guitarTuningNotes[6]);
             break;
           case "shift+2":
-            keyDownEvent(1, "shift+2", "#string6Note2", e, guitarTuningNotes[6], 6);
+            keyDownEvent(1, "shift+2", "#string6Note2", e, guitarTuningNotes[6]);
             break;
           case "shift+3":
-            keyDownEvent(2, "shift+3", "#string6Note3", e, guitarTuningNotes[6], 6);
+            keyDownEvent(2, "shift+3", "#string6Note3", e, guitarTuningNotes[6]);
             break;
           case "shift+4":
-            keyDownEvent(3, "shift+4", "#string6Note4", e, guitarTuningNotes[6], 6);
+            keyDownEvent(3, "shift+4", "#string6Note4", e, guitarTuningNotes[6]);
             break;
           case "shift+5":
-            keyDownEvent(4, "shift+5", "#string6Note5", e, guitarTuningNotes[6], 6);
+            keyDownEvent(4, "shift+5", "#string6Note5", e, guitarTuningNotes[6]);
             break;
           case "shift+6":
-            keyDownEvent(5, "shift+6", "#string6Note6", e, guitarTuningNotes[6], 6);
+            keyDownEvent(5, "shift+6", "#string6Note6", e, guitarTuningNotes[6]);
             break;
           case "shift+7":
-            keyDownEvent(6, "shift+7", "#string6Note7", e, guitarTuningNotes[6], 6);
+            keyDownEvent(6, "shift+7", "#string6Note7", e, guitarTuningNotes[6]);
             break;
           case "shift+8":
-            keyDownEvent(7, "shift+8", "#string6Note8", e, guitarTuningNotes[6], 6);
+            keyDownEvent(7, "shift+8", "#string6Note8", e, guitarTuningNotes[6]);
             break;
           case "shift+9":
-            keyDownEvent(8, "shift+9", "#string6Note9", e, guitarTuningNotes[6], 6);
+            keyDownEvent(8, "shift+9", "#string6Note9", e, guitarTuningNotes[6]);
             break;
           default:
         }

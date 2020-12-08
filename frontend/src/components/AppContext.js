@@ -1,6 +1,7 @@
 import React, { createContext, useState, useRef, useCallback } from "react";
 import Copy from "copy-to-clipboard";
 import { Howl } from "howler";
+import { getStringNumber } from "../domain/GuitarHelper";
 import {
   getPiano,
   getCleanGuitar,
@@ -140,11 +141,20 @@ function AppContextProvider(props) {
       logs[currentInstrument].forEach((log, index) => {
         let timeId = setTimeout(() => {
           if (index === logs[currentInstrument].length - 1) setIsPlaying(false);
-          PlaySound(
-            instruments[currentInstrument].sounds[
-              instrumentSound[currentInstrument]
-            ]().get(log.note)
-          );
+          if (currentInstrument === "guitar") {
+            PlayGuitarSound(
+              instruments[currentInstrument].sounds[
+                instrumentSound[currentInstrument]
+              ]().get(log.note),
+              getStringNumber(log.key)
+            );
+          } else {
+            PlaySound(
+              instruments[currentInstrument].sounds[
+                instrumentSound[currentInstrument]
+              ]().get(log.note)
+            );
+          }
         }, log.timing);
         timeIds.push(timeId);
       });
