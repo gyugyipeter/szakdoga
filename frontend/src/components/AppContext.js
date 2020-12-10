@@ -8,6 +8,22 @@ import {
   getDistortedGuitar,
 } from "../domain/NoteFilePairs";
 
+const initializeHowl = (src) => {
+  new Howl({
+    src,
+  });
+};
+
+getPiano().forEach(function (value) {
+  initializeHowl(value);
+});
+getCleanGuitar().forEach(function (value) {
+  initializeHowl(value);
+});
+getDistortedGuitar().forEach(function (value) {
+  initializeHowl(value);
+});
+
 let timeIds = [];
 let lastNotesOnString = {
   1: null,
