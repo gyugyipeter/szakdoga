@@ -1,0 +1,15 @@
+play button hoverelje a log nodeokat (useref)
+
+
+A# 3
+G# 4
+
+V N 6
+Y N Z
+N E U
+            I
+X V N 6
+Z
+Y N 6
+C E B
+Y V N
